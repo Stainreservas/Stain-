@@ -215,11 +215,14 @@ $("loginForm").addEventListener("submit",async e=>{
  button.disabled=true;button.textContent="Entrando…";error.textContent="";
  try{
   const loginEmail=username==="stain"?"stain@gmail.com":username+"@stain.local";
-  const result=await supabaseClient.auth.signInWithPassword({email:loginEmail,password});
+  const result=await Promise.race([supabaseClient.auth.signInWithPassword({email:loginEmail,password}),new Promise((_,reject)=>setTimeout(()=>reject(new Error("La conexión está tardando demasiado. Revisa tu internet e inténtalo otra vez.")),15000))]);
   if(result.error)throw result.error;
   currentUser=result.data.user;
-  await loadCloudData();
   showAuthenticatedApp();
+  setCloudStatus("Cargando tus datos…");
+  try{
+   await Promise.race([loadCloudData(),new Promise((_,reject)=>setTimeout(()=>reject(new Error("La sesión abrió, pero la carga de datos está tardando. Recarga la página en un momento.")),20000))]);
+  }catch(loadErr){console.error("STAIN data loading error:",loadErr);setCloudStatus("No se pudieron cargar los datos");alert(loadErr?.message||"No se pudieron cargar tus datos.")}
  }catch(err){console.error("STAIN login error:",err);error.textContent="Error: "+(err?.message||"No se pudo iniciar sesión")+(err?.code?" ("+err.code+")":"")}
  finally{button.disabled=false;button.textContent="Entrar a STAIN"}
 });
