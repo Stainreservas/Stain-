@@ -219,7 +219,7 @@ $("loginForm").addEventListener("submit",async e=>{
   currentUser=result.data.user;
   await loadCloudData();
   showAuthenticatedApp();
- }catch(err){console.error(err);error.textContent="No pudimos entrar. Revisa usuario y contraseña, y confirma que el usuario esté activado en Supabase."}
+ }catch(err){console.error("STAIN login error:",err);error.textContent="Error: "+(err?.message||"No se pudo iniciar sesión")+(err?.code?" ("+err.code+")":"")}
  finally{button.disabled=false;button.textContent="Entrar a STAIN"}
 });
 $("logoutBtn").addEventListener("click",async()=>{
@@ -295,7 +295,7 @@ function exportData(){const data={bookings,workshops,guides,groups,pieces:pieces
 function renderHome(){ $("statBookings").textContent=bookings.length;$("statWorkshops").textContent=workshops.length;$("statPieces").textContent=pieces.length;$("statInventory").textContent=inventory.length;const today=dateToday(),arr=bookings.filter(b=>b.date===today);$("homeBookings").innerHTML=arr.map(b=>'<div class="row"><div><b>'+esc(b.client)+'</b><p class="muted">'+esc(b.time)+' · '+esc(SPACES[b.space].name)+'</p></div><span class="pill">'+b.people+' pers.</span></div>').join("")||'<div class="empty">No hay reservas para hoy. Un espacio listo para crear ✿</div>'}
 function renderAll(){renderHome();renderCalendar();renderAgenda();renderBookings();renderWorkshops();renderGroups();renderPieces();renderInventory();renderGuides()}
 refreshSelects();capacityCheck();calcMoney();renderAll();
-bootAuth().catch(err=>{console.error(err);$("loginError").textContent="No se pudo conectar con la nube. Inténtalo de nuevo.";});
+bootAuth().catch(err=>{console.error("STAIN cloud startup error:",err);$("loginError").textContent="Error de conexión: "+(err?.message||"No se pudo conectar con la nube")+(err?.code?" ("+err.code+")":"");});
 </script>
 </body>
 </html>
