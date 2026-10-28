@@ -21,7 +21,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <body>
 <div id="loginScreen">
  <div class="login-card"><h1>STAIN</h1><p>Tu espacio creativo, organizado y sincronizado.</p>
- <form id="loginForm"><label for="loginUsername">Usuario</label><input id="loginUsername" name="username" autocomplete="username" required placeholder="Tu usuario">
+ <form id="loginForm" onsubmit="return false;"><label for="loginUsername">Usuario</label><input id="loginUsername" name="username" autocomplete="username" required placeholder="Tu usuario">
  <label for="loginPassword">Contraseña</label><input id="loginPassword" name="password" type="password" autocomplete="current-password" required placeholder="Tu contraseña">
  <button id="loginButton" type="submit">Entrar a STAIN</button><p id="loginError" class="login-error" role="status"></p></form></div>
 </div>
