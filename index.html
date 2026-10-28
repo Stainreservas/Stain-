@@ -80,8 +80,8 @@ main{max-width:1050px;margin:auto;padding:18px 15px 95px}.view{display:none}.vie
 <section id="piezas" class="view">
 <div class="headrow"><div><div class="eyebrow">Del taller a la entrega</div><h2 class="heading">Seguimiento de piezas</h2><p class="desc">Registra fotos y controla cada etapa hasta la entrega.</p></div></div>
 <form id="pieceForm" class="card">
-<h3>＋ Registrar pieza</h3><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si el número es internacional.</p></div></div><div class="field"><label>Fecha</label><input id="pieceDate" type="date"></div>
-<div class="field"><label>Estado</label><select id="pieceStatus"><option>En proceso</option><option>En horno</option><option>Lista para retirar</option><option>Cliente notificado</option><option>Entregada</option></select></div>
+<h3>＋ Registrar pieza</h3><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si el número es internacional.</p></div></div><div class="field"><label>Fecha en que pintaron la pieza</label><input id="pieceDate" type="date" required></div>
+<input id="pieceStatus" type="hidden" value="En horno">
 <div class="field"><label>Foto de la pieza</label><input id="piecePhoto" type="file" accept="image/*"><p class="hint">La foto se mostrará en este registro; la nube se conectará después.</p></div><div class="field"><label>Notas</label><textarea id="pieceNotes" rows="2"></textarea></div><button class="btn primary full" type="submit">Guardar pieza</button>
 </form><div id="pieceList"></div>
 </section>
@@ -147,12 +147,24 @@ function renderPieces(){
 $("pieceList").innerHTML=pieces.map(p=>{
 const digits=String(p.phone||"").replace(/\D/g,"");
 const waNumber=digits.length===8?"507"+digits:digits;
-const msg="¡Hola "+(p.client||"")+"! Te escribimos de parte de STAIN Studio. "+(p.status==="Lista para retirar"||p.status==="Cliente notificado"?"¡Tu pieza "+p.name+" ya está lista para retirar! 💚 Cuando gustes, coordinamos la entrega.":"Te compartimos una actualización sobre tu pieza "+p.name+": "+p.status+". 💚")+" ¡Gracias por crear con nosotros!";
+const msg="¡Hola "+(p.client||"")+"! Te escribimos de parte de STAIN Studio. ¡Tu pieza "+p.name+" ya está lista para retirar! 💚 Cuando gustes, coordinamos la entrega. ¡Gracias por crear con nosotros!";
 const wa=waNumber?"https://wa.me/"+waNumber+"?text="+encodeURIComponent(msg):"";
-return '<div class="item"><div class="row"><h3>'+esc(p.name)+'</h3><span class="pill">'+esc(p.status)+'</span></div><p class="muted">'+esc(p.client||"Sin cliente")+" · "+esc(p.date||"Sin fecha")+'</p>'+(p.phone?'<p class="muted">☎ WhatsApp: '+esc(p.phone)+'</p>':'<p class="muted">Sin teléfono registrado</p>')+(p.photo?'<img class="preview" src="'+p.photo+'" alt="Foto de pieza">':'')+'<div class="field"><label>Actualizar estado</label><select onchange="updatePiece('+p.id+',this.value)">'+["En proceso","En horno","Lista para retirar","Cliente notificado","Entregada"].map(s=>'<option '+(p.status===s?'selected':'')+'>'+s+'</option>').join("")+'</select></div><p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(wa?'<a class="btn primary small" style="text-decoration:none;display:inline-flex;align-items:center" href="'+wa+'" target="_blank" rel="noopener">Enviar mensaje por WhatsApp</a>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
+const status=p.status||"En horno";
+const pending=status==="Avisado · esperando retiro";
+const delivered=status==="Entregada";
+return '<div class="item"><div class="row"><h3>'+esc(p.name)+'</h3><span class="pill '+(delivered?'':'gold')+'">'+esc(status)+'</span></div><p class="muted">'+esc(p.client||"Sin cliente")+' · Pintada el '+esc(p.date||"Sin fecha")+'</p>'+(p.phone?'<p class="muted">☎ WhatsApp: '+esc(p.phone)+'</p>':'<p class="muted">Sin teléfono registrado</p>')+(p.photo?'<img class="preview" src="'+p.photo+'" alt="Foto de pieza">':'')+'<p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(!delivered&&!pending?(wa?'<button class="btn primary small" onclick="sendPieceWhatsApp('+p.id+')">Avisar por WhatsApp</button>':'<span class="muted">Agrega un teléfono para avisar por WhatsApp.</span>'):'')+(pending?'<button class="btn primary small" onclick="deliverPiece('+p.id+')">Marcar como entregada</button>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
 }).join("")||'<div class="empty">Aquí verás las piezas de tus clientes.</div>'
 }
-function updatePiece(id,status){const p=pieces.find(x=>x.id===id);if(p){p.status=status;save();renderPieces()}}
+function sendPieceWhatsApp(id){
+const p=pieces.find(x=>x.id===id);if(!p)return;
+const digits=String(p.phone||"").replace(/\D/g,"");
+const number=digits.length===8?"507"+digits:digits;
+if(!number){alert("Agrega el teléfono del cliente primero.");return}
+const msg="¡Hola "+(p.client||"")+"! Te escribimos de parte de STAIN Studio. ¡Tu pieza "+p.name+" ya está lista para retirar! 💚 Cuando gustes, coordinamos la entrega. ¡Gracias por crear con nosotros!";
+window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg),"_blank");
+p.status="Avisado · esperando retiro";save();renderPieces()
+}
+function deliverPiece(id){const p=pieces.find(x=>x.id===id);if(p){p.status="Entregada";save();renderPieces()}}
 function deletePiece(id){if(confirm("¿Eliminar esta pieza?")){pieces=pieces.filter(p=>p.id!==id);save();renderPieces()}}
 $("inventoryForm").addEventListener("submit",e=>{e.preventDefault();inventory.push({id:Date.now(),name:$("invName").value.trim(),qty:Number($("invQty").value),unit:$("invUnit").value.trim(),min:Number($("invMin").value)});save();e.target.reset();$("invQty").value=1;$("invUnit").value="unidades";$("invMin").value=2;renderInventory()});
 function renderInventory(){$("inventoryList").innerHTML=inventory.map(i=>'<div class="item"><div class="row"><h3>'+esc(i.name)+'</h3><span class="pill '+(i.qty<=i.min?'gold':'')+'">'+(i.qty<=i.min?'Reponer':'En stock')+'</span></div><p>'+i.qty+' '+esc(i.unit)+'</p><p class="muted">Stock mínimo: '+i.min+'</p><div class="btnrow"><button class="btn small" onclick="changeStock('+i.id+',-1)">− 1</button><button class="btn small" onclick="changeStock('+i.id+',1)">＋ 1</button><button class="btn small danger" onclick="deleteStock('+i.id+')">Eliminar</button></div></div>').join("")||'<div class="empty">Tu inventario aparecerá aquí.</div>'}
