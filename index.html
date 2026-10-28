@@ -213,7 +213,8 @@ $("loginForm").addEventListener("submit",async e=>{
  if(!/^[a-z0-9._-]+$/.test(username)){error.textContent="Revisa el usuario e inténtalo de nuevo.";return}
  button.disabled=true;button.textContent="Entrando…";error.textContent="";
  try{
-  const result=await supabaseClient.auth.signInWithPassword({email:username+"@stain.local",password});
+  const loginEmail=username==="stain"?"stain@gmail.com":username+"@stain.local";
+  const result=await supabaseClient.auth.signInWithPassword({email:loginEmail,password});
   if(result.error)throw result.error;
   currentUser=result.data.user;
   await loadCloudData();
