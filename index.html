@@ -430,25 +430,39 @@ function closePiecePhoto(){$("piecePhotoModal").classList.remove("open");$("piec
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePiecePhoto()});
 function renderPieces(){
 $("pieceList").innerHTML=pieces.map(p=>{
-const digits=String(p.phone||"").replace(/\D/g,"");
-const waNumber=digits.length===8?"507"+digits:digits;
-const msg="¡Hola "+(p.client||"")+"! Te escribimos de parte de STAIN Studio. ¡Tu pieza "+p.name+" ya está lista para retirar! 💚 Cuando gustes, coordinamos la entrega. ¡Gracias por crear con nosotros!";
-const wa=waNumber?"https://wa.me/"+waNumber+"?text="+encodeURIComponent(msg):"";
 const status=p.status||"En horno";
-const pending=status==="Avisado · esperando retiro";
+const ready=status==="Lista para retirar"||status==="Avisado · esperando retiro";
+const notified=status==="Avisado · esperando retiro";
 const delivered=status==="Entregada";
-return '<div class="item"><div class="row"><div style="display:flex;align-items:center;gap:9px;min-width:0">'+(p.photo&&photoSrc(p.photo)?'<button type="button" class="piece-photo-btn" onclick="openPiecePhoto('+p.id+')" aria-label="Ampliar foto de la pieza"><img class="piece-thumb" src="'+esc(photoSrc(p.photo))+'" alt="Foto pequeña de '+esc(p.name)+'"></button>':'')+'<h3 style="margin:0">'+esc(p.name)+'</h3></div><span class="pill '+(delivered?'':'gold')+'">'+esc(status)+'</span></div><p class="muted">'+esc(p.client||"Sin cliente")+' · Pintada el '+esc(p.date||"Sin fecha")+'</p>'+(p.phone?'<p class="muted">☎ WhatsApp: '+esc(p.phone)+'</p>':'<p class="muted">Sin teléfono registrado</p>')+'<p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(!delivered&&!pending?(wa?'<button class="btn primary small" onclick="sendPieceWhatsApp('+p.id+')">Avisar por WhatsApp</button>':'<span class="muted">Agrega un teléfono para avisar por WhatsApp.</span>'):'')+(pending?'<button class="btn primary small" onclick="deliverPiece('+p.id+')">Marcar como entregada</button>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
+const contact=getPieceContact(p),phone=contact.phone?normalizeWhatsAppNumber(contact.phone):"";
+return '<div class="item"><div class="row"><div style="display:flex;align-items:center;gap:9px;min-width:0">'+(p.photo&&photoSrc(p.photo)?'<button type="button" class="piece-photo-btn" onclick="openPiecePhoto('+p.id+')" aria-label="Ampliar foto de la pieza"><img class="piece-thumb" src="'+esc(photoSrc(p.photo))+'" alt="Foto pequeña de '+esc(p.name)+'"></button>':'')+'<h3 style="margin:0">'+esc(p.name)+'</h3></div><span class="pill '+(delivered?'':ready?'':'gold')+'">'+esc(status)+'</span></div><p class="muted">'+esc(contact.client||"Sin cliente")+' · Pintada el '+esc(p.date||"Sin fecha")+'</p>'+(contact.phone?'<p class="muted">☎ WhatsApp: '+esc(contact.phone)+(contact.fromBooking?' · tomado de la reserva':'')+'</p>':'<p class="muted">'+(contact.ambiguous?'Hay varias reservas con este nombre y distintos teléfonos':'Sin teléfono registrado')+'</p>')+'<p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(!ready&&!delivered?'<button class="btn primary small" onclick="markPieceReady('+p.id+')">Marcar lista para retirar</button>':'')+(ready&&!delivered?'<button class="btn primary small" onclick="sendPieceWhatsApp('+p.id+')">'+(notified?'Volver a avisar por WhatsApp':'Avisar por WhatsApp')+'</button>':'')+(ready&&!notified&&!delivered?'<button class="btn small" onclick="markPieceNotified('+p.id+')">Marcar aviso enviado</button>':'')+(notified?'<button class="btn small" onclick="deliverPiece('+p.id+')">Marcar como entregada</button>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
 }).join("")||'<div class="empty">Aquí verás las piezas de tus clientes.</div>'
 }
+function getPieceContact(piece){
+const client=String(piece.client||"").trim(),piecePhone=String(piece.phone||"").trim(),matches=client?bookings.filter(item=>String(item.client||"").trim().toLocaleLowerCase()===client.toLocaleLowerCase()&&item.phone):[],numbers=[...new Set(matches.map(item=>normalizeWhatsAppNumber(item.phone)).filter(Boolean))],ambiguous=!piecePhone&&numbers.length>1,booking=!piecePhone&&!ambiguous&&numbers.length===1?matches.find(item=>normalizeWhatsAppNumber(item.phone)===numbers[0]):null;
+return {client:client||String(booking?.client||"").trim(),phone:piecePhone||String(booking?.phone||"").trim(),fromBooking:!piecePhone&&Boolean(booking?.phone),ambiguous}
+}
+function normalizeWhatsAppNumber(phone){
+let digits=String(phone||"").replace(/\D/g,"");
+if(digits.startsWith("00"))digits=digits.slice(2);
+if(digits.length===8)return "507"+digits;
+return digits.length>=9&&digits.length<=15?digits:"";
+}
+function pieceWhatsAppMessage(piece,client){
+return (client?"¡Hola "+client+"! ":"¡Hola! ")+"💗 Te escribimos de STAIN para avisarte que tu pieza de cerámica ya está lista para retirar. ¡Te esperamos!";
+}
+function markPieceReady(id){const piece=pieces.find(item=>item.id===id);if(!piece||piece.status==="Entregada")return;piece.status="Lista para retirar";save();renderPieces()}
 function sendPieceWhatsApp(id){
 const p=pieces.find(x=>x.id===id);if(!p)return;
-const digits=String(p.phone||"").replace(/\D/g,"");
-const number=digits.length===8?"507"+digits:digits;
-if(!number){alert("Agrega el teléfono del cliente primero.");return}
-const msg="¡Hola "+(p.client||"")+"! Te escribimos de parte de STAIN Studio. ¡Tu pieza "+p.name+" ya está lista para retirar! 💚 Cuando gustes, coordinamos la entrega. ¡Gracias por crear con nosotros!";
-window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg),"_blank");
-p.status="Avisado · esperando retiro";save();renderPieces()
+if(p.status!=="Lista para retirar"&&p.status!=="Avisado · esperando retiro")return alert("Marca la pieza como lista para retirar antes de avisar al cliente.");
+const contact=getPieceContact(p),number=normalizeWhatsAppNumber(contact.phone);
+if(contact.ambiguous){alert("Hay varias reservas con este nombre y teléfonos distintos. Verifica y guarda el número correcto en la ficha de la pieza antes de abrir WhatsApp.");return}
+if(!contact.phone){alert("No hay un teléfono registrado para esta pieza ni en una reserva coincidente. Agrega el teléfono en la ficha de la pieza.");return}
+if(!number){alert("El teléfono guardado no parece válido. Verifica que incluya el código de país si es internacional.");return}
+const url="https://wa.me/"+number+"?text="+encodeURIComponent(pieceWhatsAppMessage(p,contact.client));
+window.open(url,"_blank","noopener,noreferrer")
 }
+function markPieceNotified(id){const p=pieces.find(x=>x.id===id);if(p?.status==="Lista para retirar"){p.status="Avisado · esperando retiro";save();renderPieces()}}
 function deliverPiece(id){const p=pieces.find(x=>x.id===id);if(p){p.status="Entregada";save();renderPieces()}}
 function deletePiece(id){if(confirm("¿Eliminar esta pieza?")){pieces=pieces.filter(p=>p.id!==id);save();renderPieces()}}
 $("inventoryForm").addEventListener("submit",e=>{e.preventDefault();inventory.push({id:Date.now(),name:$("invName").value.trim(),qty:Number($("invQty").value),unit:$("invUnit").value.trim(),min:Number($("invMin").value)});save();e.target.reset();$("invQty").value=1;$("invUnit").value="unidades";$("invMin").value=2;renderInventory()});
