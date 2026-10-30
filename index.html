@@ -12,11 +12,60 @@
 .nav{position:sticky;top:0;z-index:5;display:flex;gap:3px;overflow:auto;padding:9px 12px;background:#fffefaed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{border:0;background:transparent;color:var(--muted);padding:9px 12px;border-radius:10px;white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.1px;transition:background .15s,color .15s}.nav button.active{background:var(--sage);color:var(--green2);font-weight:750}.nav button:hover{color:var(--green2)}
 main{max-width:1050px;margin:auto;padding:18px 15px 95px}.view{display:none}.view.active{display:block}.eyebrow{text-transform:uppercase;letter-spacing:1.8px;font-size:10px;color:var(--green);font-weight:800}.heading{font-size:25px;line-height:1.15;margin:5px 0 7px;font-weight:720;letter-spacing:-.5px}.desc{margin:0;color:var(--muted);font-size:13px}.headrow{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 18px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}.card h3{margin:0 0 10px;font-size:16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{border-radius:18px;padding:15px;background:var(--paper);border:1px solid var(--line)}.stat .ico{font-size:20px}.stat strong{display:block;font-size:27px;letter-spacing:-1px;margin:7px 0 2px;color:var(--green2)}.stat span{font-size:12px;color:var(--muted)}.btn{border:0;border-radius:12px;background:var(--sage);color:var(--green2);font-weight:700;padding:11px 14px;font-size:13px}.btn.primary{background:var(--green);color:white}.btn.soft{background:#f3f3e9}.btn.danger{background:var(--rose);color:#854b52}.btn.small{padding:7px 10px;font-size:12px}.btn.full{width:100%;margin-top:12px}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:#596754}.field input,.field select,.field textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);min-width:0}.field textarea{resize:vertical}.hint{font-size:11px;color:var(--muted);margin:5px 0 0}.pill{display:inline-flex;align-items:center;border-radius:99px;padding:5px 9px;font-size:11px;font-weight:750;background:var(--sage);color:var(--green2)}.pill.gold{background:var(--gold);color:#87672e}.pill.rose{background:var(--rose);color:#8a555a}.divider{height:1px;background:var(--line);margin:14px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted);font-size:12px}.empty{text-align:center;padding:23px 12px;color:var(--muted);font-size:13px}.empty .emoji{font-size:26px;margin-bottom:6px}.slot{border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:#fff}.slothead{display:flex;align-items:center;justify-content:space-between;gap:8px}.spacegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.spacebox{background:#f7f8f1;border-radius:12px;padding:10px;min-width:0}.spacebox b{font-size:12px;display:block}.spacebox small{display:block;color:var(--muted);font-size:10px;margin:3px 0 8px}.spstatus{font-size:11px;font-weight:800;color:var(--green)}.spstatus.busy{color:#a36a36}.moneybox{background:#f4f6ed;border-radius:15px;padding:14px;margin:13px 0}.moneyline{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:13px}.moneyline.total{font-size:16px;font-weight:800;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:5px}.approval{background:#fff5dd;border:1px solid #f0dfb8;border-radius:14px;padding:13px;margin:12px 0}.approval label{display:flex;gap:9px;align-items:flex-start;font-size:12px}.approval input{width:auto;margin-top:3px}.item{border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:white}.item p{margin:5px 0}.preview{max-width:100%;max-height:160px;border-radius:12px;display:block;margin-top:8px}.piece-thumb{width:42px;height:42px;object-fit:cover;border-radius:9px;border:1px solid var(--line);display:block}.piece-photo-btn{border:0;background:transparent;padding:0;display:inline-flex;align-items:center;cursor:zoom-in}.photo-modal{position:fixed;inset:0;z-index:9999;background:#172016e8;display:none;align-items:center;justify-content:center;padding:18px}.photo-modal.open{display:flex}.photo-modal img{max-width:100%;max-height:86vh;object-fit:contain;border-radius:12px}.photo-modal-close{position:absolute;top:16px;right:16px;border:0;border-radius:50%;width:42px;height:42px;background:#fff;color:#354334;font-size:25px}.bottomnote{text-align:center;color:var(--muted);font-size:10px;padding:15px}
 @media(min-width:720px){main{padding:26px 24px 70px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.heading{font-size:29px}.nav{justify-content:center}.spacegrid{gap:12px}}
+@media(max-width:719px){.spacegrid{grid-template-columns:1fr}}
 @media(max-width:390px){.spacegrid{grid-template-columns:1fr}.topnote{display:none}.heading{font-size:23px}}
 .calendar{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:15px;margin:12px 0;box-shadow:var(--shadow)}.cal-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}.cal-title{font-size:17px;font-weight:800;text-transform:capitalize}.cal-arrow{width:36px;height:36px;border:1px solid var(--line);border-radius:12px;background:#f6f7ef;color:var(--green);font-size:20px}.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.cal-week{font-size:10px;text-align:center;color:var(--muted);font-weight:800;padding:6px 0}.cal-day{min-height:43px;border:1px solid transparent;border-radius:11px;background:#f7f8f2;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;padding:4px 0}.cal-day.outside{opacity:.35;background:transparent}.cal-day.selected{background:var(--green);color:white}.cal-day.today:not(.selected){border-color:var(--sage2)}.cal-day.has-booking:not(.selected){background:var(--sage)}.cal-dot{width:5px;height:5px;border-radius:50%;background:#73966b}.cal-day.selected .cal-dot{background:#fff}.day-summary{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.day-chip{background:#f2f5ec;border-radius:12px;padding:9px 11px;font-size:11px;color:var(--green2)}
-.pill.completed{background:#dcebd8;color:#3e6b42}.completed-text{text-decoration:line-through;text-decoration-color:#73966b}.guide-section-title{margin:18px 0 8px;font-size:14px}.group-participant{padding:9px 0;border-top:1px solid var(--line)}
+.pill.completed{background:#dcebd8;color:#3e6b42}.completed-text{text-decoration:line-through;text-decoration-color:#73966b}.guide-section-title{margin:18px 0 8px;font-size:14px}.group-participant{padding:9px 0;border-top:1px solid var(--line)}.spacebox.selected{outline:2px solid var(--green);background:var(--sage)}.spacebox:disabled{opacity:.55;cursor:not-allowed}.spacegrid button.spacebox{border:0;text-align:left;color:var(--ink);font:inherit}
 body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.authenticated) main{display:none!important}
 #loginScreen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#fdfbf5,#e6eee0)}#loginScreen[hidden]{display:none!important}.login-card{width:100%;max-width:380px;background:#fffefa;border:1px solid #e6e9df;border-radius:24px;padding:28px;box-shadow:0 12px 36px #53634a12}.login-card h1{font-size:27px;letter-spacing:5px;color:var(--green);margin:0}.login-card p{color:var(--muted);font-size:13px}.login-card label{display:block;font-size:12px;font-weight:650;margin:14px 0 6px}.login-card input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;color:var(--ink)}.login-card button{width:100%;border:0;border-radius:12px;background:var(--green);color:white;padding:12px;margin-top:18px;font-weight:700}.login-error{color:#a33b45!important;min-height:18px}.topnote{display:flex;align-items:center;gap:9px}.topnote button{border:1px solid #dfe7d9;background:#fffefa;color:var(--green);border-radius:99px;padding:6px 10px;font-size:11px}
+</style>
+<style>
+.seat-map-shell{overflow-x:auto;padding:5px 0 10px}
+.seat-map{min-width:540px;display:grid;grid-template-columns:minmax(210px,1fr) minmax(300px,1.35fr);grid-template-rows:auto auto auto;gap:12px;align-items:start}
+.seat-direction{grid-column:1/-1;text-align:center;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.6px}
+.seat-back{grid-row:3}
+.seat-area{border:1px solid #e8dfd9;border-radius:16px;background:#fffefa;padding:11px;min-width:0}
+.seat-area-left{grid-column:1;grid-row:2}
+.seat-area-right{grid-column:2;grid-row:2;display:grid;gap:12px}
+.seat-area-heading{font-size:11px;font-weight:800;color:var(--green2);text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.seat-table-row{display:flex;justify-content:center;align-items:center;gap:7px;min-width:0}
+.seat-table-row+.seat-table-row{margin-top:0}
+.seat-area-right .seat-table-row{gap:4px}
+.seat-table{position:relative;flex:0 1 168px;width:168px;height:116px;min-width:0}
+.seat-table.vertical{flex-basis:108px;width:108px;height:112px}
+.seat-table-surface{position:absolute;inset:19px 25px;background:#f2e7df;border:1px solid #e6d7cd;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#8f786c;font-size:10px;font-weight:800;letter-spacing:.6px}
+.seat-table.vertical .seat-table-surface{inset:0 17px;border-radius:0}
+.seat-area-left .seat-table-row:first-of-type .seat-table-surface{border-radius:12px 12px 0 0}
+.seat-area-left .seat-table-row:last-of-type .seat-table-surface{border-radius:0 0 12px 12px}
+.seat-table-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none}
+.seat-chair{position:absolute;width:25px;height:25px;padding:0;border:1px solid #dcd7ce;border-radius:50%;background:#fff;color:#6d766b;font-size:10px;font-weight:800;display:grid;place-items:center;z-index:1;touch-action:manipulation}
+.seat-chair.available:hover{background:#eef4e9;border-color:#95b28b}
+.seat-chair.selected{background:#e8cfd5;border:2px solid #bd8794;color:#714d55}
+.seat-chair.conflict{background:#f3d9d4;border:2px solid #c9786d;color:#84453c}
+.seat-chair.occupied{background:#dcebd8;border-color:#a8c59f;color:#3e6b42;cursor:not-allowed}
+.seat-chair:disabled{opacity:1}
+.seat-chair.position-top-left{top:0;left:25%}.seat-chair.position-top-right{top:0;right:25%}
+.seat-chair.position-top-center{top:0;left:50%;transform:translateX(-50%)}
+.seat-chair.position-bottom-left{bottom:0;left:25%}.seat-chair.position-bottom-right{bottom:0;right:25%}
+.seat-chair.position-bottom-center{bottom:0;left:50%;transform:translateX(-50%)}
+.seat-chair.position-left{top:50%;left:0;transform:translateY(-50%)}
+.seat-chair.position-right{top:50%;right:0;transform:translateY(-50%)}
+.seat-chair.position-left-upper{top:29%;left:0;transform:translateY(-50%)}
+.seat-chair.position-left-lower{top:71%;left:0;transform:translateY(-50%)}
+.seat-chair.position-right-upper{top:29%;right:0;transform:translateY(-50%)}
+.seat-chair.position-right-lower{top:71%;right:0;transform:translateY(-50%)}
+.seat-map-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:9px 0}
+.seat-map-summary span{font-size:10px;text-align:center;border-radius:9px;background:#f6f1eb;padding:6px 3px;color:#6f665e}
+.seat-map-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin:8px 0}
+.seat-map-legend span{display:inline-flex;align-items:center;gap:5px}
+.seat-legend-dot{width:12px;height:12px;border-radius:50%;border:1px solid #dcd7ce;background:#fff}
+.seat-legend-dot.selected{background:#e8cfd5;border-color:#bd8794}
+.seat-legend-dot.occupied{background:#dcebd8;border-color:#a8c59f}
+.seat-assignment-controls{display:flex;align-items:end;gap:10px;flex-wrap:wrap}
+.seat-assignment-controls .field{flex:1;min-width:200px}
+@media(max-width:600px){.seat-map{gap:8px;grid-template-columns:210px 300px}.seat-area{padding:8px}.seat-area-right{gap:8px}.seat-map-summary span{font-size:9px}}
+.booking-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 0 14px}.booking-view-switch{display:flex;gap:5px;padding:4px;background:#f0f2e9;border-radius:13px}.booking-view-switch button{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700}.booking-view-switch button.active{background:white;color:var(--green2);box-shadow:0 2px 8px #53634a12}.booking-card{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:white;color:var(--ink)}.booking-card:hover{border-color:var(--sage2);background:#fffefa}.booking-time{flex:0 0 76px;color:var(--green2);font-weight:800;font-size:12px}.booking-card-details{min-width:0;flex:1}.booking-card-details strong{display:block;font-size:14px}.booking-card-details span{display:block;margin-top:3px;color:var(--muted);font-size:11px}.booking-details{width:min(560px,calc(100% - 24px));max-height:85vh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:18px;background:var(--paper);color:var(--ink);box-shadow:0 20px 70px #26332244}.booking-details::backdrop{background:#1d271dd9}.booking-details h3{margin:0 0 5px}.booking-details .btnrow{margin-top:14px}.booking-details-close{float:right;border:0;background:transparent;color:var(--muted);font-size:23px;line-height:1}.availability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.availability-table{background:#f7f8f1;border-radius:12px;padding:10px;min-width:0}.availability-table b{display:block;font-size:12px}.availability-table small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.availability-table .spstatus{display:block;margin-top:7px}.availability-table .spstatus.busy{color:#a36a36}@media(max-width:719px){.availability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:390px){.booking-time{flex-basis:65px}.booking-card{gap:8px;padding:11px}}
+.group-category{padding:0;overflow:hidden}.group-category-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;padding:15px 16px;cursor:pointer}.group-category-summary::-webkit-details-marker{display:none}.group-category-summary::after{content:"＋";color:var(--green);font-weight:800}.group-category[open]>.group-category-summary::after{content:"−"}.group-category-title{min-width:0}.group-category-title strong{display:block}.group-category-title small{display:block;margin-top:3px;color:var(--muted);font-size:11px}.group-category-content{padding:0 16px 16px}.group-participant-form{padding:13px;border:1px solid var(--line);border-radius:14px;background:#fafaf5;margin:12px 0}.group-participant-form h4{margin:0 0 6px}.group-participant-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.group-participant-photo{width:48px;height:48px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}.group-arrival{display:inline-flex;align-items:center;gap:6px;color:var(--green2);font-size:12px;font-weight:700;white-space:nowrap}.group-arrival input{accent-color:var(--green);width:17px;height:17px}.group-reservation-card{border-left:3px solid var(--sage2);padding-left:12px}.group-reservation-card p{margin:5px 0}.group-proof-link{font-size:11px}
 </style>
 </head>
 <body>
@@ -28,39 +77,47 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 </div>
 <header class="top"><div class="brandline"><div><h1 class="brand">STAIN</h1><div class="sub">CREATIVE STUDIO · PANEL DE ADMINISTRACIÓN</div></div><div class="topnote"><span id="cloudStatus">✿ Un espacio para crear</span><button id="logoutBtn" type="button">Salir</button></div></div></header>
 <nav class="nav" id="nav">
-<button class="active" data-view="inicio">Inicio</button><button data-view="agenda">Agenda</button><button data-view="reservas">Reservas</button><button data-view="grupales">Grupales</button><button data-view="piezas">Piezas</button><button data-view="mas">Más ···</button>
+<button class="active" data-view="inicio">Inicio</button><button data-view="reservas">Reservas</button><button data-view="grupales">Grupales</button><button data-view="piezas">Piezas</button><button data-view="mas">Más ···</button>
 </nav>
 <main>
 <section id="inicio" class="view active">
 <div class="headrow"><div><div class="eyebrow">Tu estudio, organizado</div><h2 class="heading">Hola, bienvenida a STAIN ✿</h2><p class="desc">Todo lo que necesitas para que tu día fluya bonito.</p></div></div>
 <div class="stats"><div class="stat"><div class="ico">▦</div><strong id="statBookings">0</strong><span>Reservas registradas</span></div><div class="stat"><div class="ico">✿</div><strong id="statWorkshops">0</strong><span>Talleres en catálogo</span></div><div class="stat"><div class="ico">♧</div><strong id="statPieces">0</strong><span>Piezas en seguimiento</span></div><div class="stat"><div class="ico">▤</div><strong id="statInventory">0</strong><span>Artículos de inventario</span></div></div>
-<div class="card"><div class="eyebrow">Accesos rápidos</div><h3 style="margin-top:5px">¿Qué vamos a organizar hoy?</h3><div class="grid"><button class="btn" onclick="show('reservas')">＋ Nueva reserva</button><button class="btn" onclick="show('agenda')">▦ Ver disponibilidad</button><button class="btn" onclick="show('talleres')">✿ Crear taller guiado</button><button class="btn" onclick="show('piezas')">♧ Registrar una pieza</button></div></div>
-<div class="card"><div class="row"><div><h3>Distribución del estudio</h3><p class="muted">Espacios fijos · turnos de dos horas</p></div><span class="pill">9 a. m. – 7 p. m.</span></div><div class="spacegrid"><div class="spacebox"><b>Espacio A</b><small>2 mesas</small><span class="spstatus">Hasta 10</span></div><div class="spacebox"><b>Espacio B</b><small>3 mesas</small><span class="spstatus">12 cómodas · 16 con permiso</span></div><div class="spacebox"><b>Espacio C</b><small>Mesa adicional</small><span class="spstatus">Hasta 4</span></div></div></div>
+<div class="card"><div class="eyebrow">Accesos rápidos</div><h3 style="margin-top:5px">¿Qué vamos a organizar hoy?</h3><div class="grid"><button class="btn" onclick="startNewBooking()">＋ Nueva reserva</button><button class="btn" onclick="show('reservas')">▦ Ver reservas</button><button class="btn" onclick="show('talleres')">✿ Crear taller guiado</button><button class="btn" onclick="show('piezas')">♧ Registrar una pieza</button></div></div>
+<div class="card"><div class="row"><div><h3>Distribución del estudio</h3><p class="muted">Espacios fijos · turnos de dos horas</p></div><span class="pill">9 a. m. – 7 p. m.</span></div><div class="spacegrid"><div class="spacebox"><b>Espacio A</b><small>2 mesas</small><span class="spstatus">8 cómodas · máximo aprox. 10</span></div><div class="spacebox"><b>Espacio B</b><small>3 mesas verticales pegadas</small><span class="spstatus">12 cómodas · máximo 16</span></div><div class="spacebox"><b>Espacio C</b><small>Mesa adicional</small><span class="spstatus">4 cómodas · máximo aprox. 5</span></div></div></div>
 <div class="card"><h3>Próximas reservas</h3><div id="homeBookings"></div></div>
 </section>
 
-<section id="agenda" class="view">
-<div class="headrow"><div><div class="eyebrow">Disponibilidad en un vistazo</div><h2 class="heading">Agenda de mesas</h2><p class="desc">Cada espacio se reserva por bloques de dos horas.</p></div></div>
-<div class="calendar"><div class="cal-head"><button class="cal-arrow" type="button" onclick="changeMonth(-1)" aria-label="Mes anterior">‹</button><div class="cal-title" id="calendarTitle">Calendario</div><button class="cal-arrow" type="button" onclick="changeMonth(1)" aria-label="Mes siguiente">›</button></div><div class="cal-grid" id="calendarGrid"></div><div class="muted" style="margin-top:10px">Los puntitos verdes indican días con reservas. Toca cualquier día para ver sus reservas y espacios.</div></div><div class="card"><div class="row"><div><div class="eyebrow">Día seleccionado</div><h3 id="selectedDayTitle" style="margin:5px 0">Reservas del día</h3></div><button class="btn small" onclick="goToday()">Hoy</button></div><div class="field"><label>También puedes elegir una fecha</label><input id="agendaDate" type="date"></div><div id="daySummary" class="day-summary"></div><div id="dayBookings"></div><div class="muted">Los espacios libres pueden reservarse al mismo tiempo. Cada espacio ocupado queda bloqueado para ese turno.</div></div><div id="agendaList"></div>
-</section>
-
 <section id="reservas" class="view">
-<div class="headrow"><div><div class="eyebrow">Cada detalle en su lugar</div><h2 class="heading">Nueva reserva</h2><p class="desc">Cliente, espacio, actividad y pagos en un solo lugar.</p></div></div>
+<div class="headrow"><div><div class="eyebrow">Cada detalle en su lugar</div><h2 class="heading">Reservas</h2><p class="desc">Agenda diaria, asignación de mesas y detalles de cada visita.</p></div></div>
+<div id="bookingToolbar" class="booking-toolbar"><div class="booking-view-switch"><button id="bookingCalendarButton" type="button" class="active" onclick="setBookingView('calendar')">▦ Agenda</button><button id="bookingMapButton" type="button" onclick="setBookingView('map')">⌘ Plano</button></div><button class="btn primary" type="button" onclick="startNewBooking()">＋ Agregar reserva</button></div>
+<div id="bookingCalendarPanel">
+<div class="calendar"><div class="cal-head"><button class="cal-arrow" type="button" onclick="changeMonth(-1)" aria-label="Mes anterior">‹</button><div class="cal-title" id="calendarTitle">Calendario</div><button class="cal-arrow" type="button" onclick="changeMonth(1)" aria-label="Mes siguiente">›</button></div><div class="cal-grid" id="calendarGrid"></div><div class="muted" style="margin-top:10px">Los puntitos verdes indican días con reservas o talleres grupales.</div></div>
+<div class="card"><div class="row"><div><div class="eyebrow">Agenda del día</div><h3 id="selectedDayTitle" style="margin:5px 0">Reservas del día</h3></div><button class="btn small" type="button" onclick="goToday()">Hoy</button></div><div class="field"><label for="agendaDate">Fecha</label><input id="agendaDate" type="date"></div><div id="daySummary" class="day-summary"></div><div id="dayBookings"></div></div>
+</div>
+<div id="bookingMapPanel" hidden>
+<div class="card"><h3>Plano de mesas</h3><p class="muted">Vista desde arriba: conserva la distribución y selecciona las sillas disponibles para cada reserva.</p><div class="grid"><div class="field"><label>Reserva</label><select id="tableMapBooking"></select></div><div class="field"><label>Horario a consultar</label><select id="tableMapTime"></select></div></div><div id="tableMap"></div><div id="tableMapHint" class="hint"></div><div class="btnrow"><button id="saveTableMap" type="button" class="btn primary small" onclick="saveTableMapAssignment()">Guardar asignación</button><button type="button" class="btn small" onclick="recommendMapAssignment()">Recomendar distribución</button><button type="button" class="btn small" onclick="prepareBooking('A',document.getElementById('tableMapTime').value)">Nueva reserva a esta hora</button></div></div>
+</div>
+<div id="bookingFormPanel" hidden>
+<div class="row"><div><div class="eyebrow">Cada detalle en su lugar</div><h2 id="bookingFormTitle" class="heading">Nueva reserva</h2><p class="desc">Cliente, espacio, actividad y pagos en un solo lugar.</p></div><button class="btn small" type="button" onclick="cancelBookingEdit()">Volver a la agenda</button></div>
 <form id="bookingForm" class="card">
 <div class="field"><label>Nombre del cliente *</label><input id="client" required placeholder="Nombre y apellido"></div>
 <div class="grid"><div class="field"><label>Teléfono / WhatsApp</label><input id="phone" type="tel" placeholder="Número de contacto"></div><div class="field"><label>Fecha *</label><input id="bookingDate" type="date" required></div></div>
-<div class="grid"><div class="field"><label>Espacio *</label><select id="space"><option value="A">A · 2 mesas · máx. 10</option><option value="B">B · 3 mesas · 12 cómodas</option><option value="C">C · mesa adicional · máx. 4</option></select></div><div class="field"><label>Horario *</label><select id="time"><option value="09:00">9:00 – 11:00 a. m.</option><option value="11:00">11:00 a. m. – 1:00 p. m.</option><option value="13:00">1:00 – 3:00 p. m.</option><option value="15:00">3:00 – 5:00 p. m.</option><option value="17:00">5:00 – 7:00 p. m.</option></select></div></div>
-<div class="field"><label>Cantidad de personas *</label><input id="people" type="number" min="1" max="16" value="2" required><p class="hint" id="capacityHint">Selecciona el espacio y la cantidad de personas.</p></div>
-<div id="approvalBox" class="approval" hidden><b>♡ Autorización especial necesaria</b><p class="muted">El espacio B admite cómodamente 12 personas. Para grupos de 13 a 16, debes autorizar la excepción personalmente.</p><label><input id="approved" type="checkbox"> Confirmo que autorizo hasta 16 personas en este espacio.</label></div>
+<div class="grid"><div class="field"><label>Área de referencia *</label><select id="space"><option value="A">A · 2 mesas horizontales</option><option value="B">B · 3 mesas verticales</option><option value="C">C · mesa horizontal independiente</option></select></div><div class="field"><label>Hora de inicio *</label><select id="time"></select></div></div>
+<div class="field"><label>Cantidad de personas *</label><input id="people" type="number" min="1" max="31" value="2" required><p class="hint" id="capacityHint">Selecciona el espacio y la cantidad de personas.</p></div>
+<div class="card"><h3>Asignación de sillas</h3><div class="seat-assignment-controls"><div class="field"><label for="bookingAssignmentMode">Modalidad</label><select id="bookingAssignmentMode"><option value="automatic">Automática · recomendar mesas y sillas</option><option value="manual">Manual · elegir cada silla</option></select></div><button id="recalculateBookingSeats" class="btn small" type="button" onclick="recalculateBookingSeats()">Recalcular recomendación</button></div><p id="bookingAllocationHint" class="muted">Elige fecha, hora y personas para ver disponibilidad.</p><div id="bookingAllocationChoices"></div></div>
+<div id="approvalBox" class="approval" hidden><b>♡ Autorización especial necesaria</b><p class="muted">El área B admite cómodamente 12 personas. Para grupos mayores que usen esa área, confirma personalmente la distribución y capacidad.</p><label><input id="approved" type="checkbox"> Confirmo esta distribución especial de mesas.</label></div>
 <div class="field"><label>Tipo de actividad *</label><select id="activity"><option value="Pintura libre">Pintura libre</option><option value="Taller guiado">Taller guiado</option><option value="Taller grupal">Taller grupal</option><option value="Celebración">Celebración</option><option value="Otro">Otro</option></select></div>
 <div id="guidedFields" hidden><div class="field"><label>Elige un taller guiado *</label><select id="guidedWorkshop"></select><p class="hint">Se cargarán el precio y los datos del guía desde tu catálogo.</p></div><div class="field"><label>Guía / planner asignado</label><div id="bookingGuideInfo" class="muted">Selecciona un taller del catálogo.</div></div></div>
 <div class="field"><label>Precio total de la reserva ($)</label><input id="amount" type="number" min="0" step=".01" value="0" required><p class="hint">En talleres guiados se calcula desde el precio del catálogo × participantes; puedes ajustar el total si es un paquete.</p></div>
 <div class="moneybox"><div class="moneyline total"><span>Total</span><strong id="totalAmount">$0.00</strong></div><div class="moneyline"><span>Abono del 30%</span><strong id="deposit">$0.00</strong></div><div class="moneyline"><span>Saldo pendiente del 70%</span><strong id="balance">$0.00</strong></div></div>
 <div class="field"><label>Comprobante del abono</label><input id="receipt" type="file" accept="image/*,.pdf"><p class="hint">Puedes seleccionar una foto o PDF. En esta versión el archivo no se sube a la nube todavía.</p></div>
 <div class="field"><label>Observaciones</label><textarea id="notes" rows="3" placeholder="Preferencias, notas del cliente…"></textarea></div>
-<button class="btn primary full" type="submit">Guardar reserva ♡</button>
+<button id="bookingSubmit" class="btn primary full" type="submit">Guardar reserva ♡</button><button id="bookingCancelEdit" class="btn full" type="button" hidden onclick="cancelBookingEdit()">Cancelar edición</button>
 </form>
-<div class="card"><h3>Reservas guardadas en este dispositivo</h3><div id="bookingList"></div></div>
+</div>
+<div id="bookingList" hidden></div>
+<dialog id="bookingDetailsDialog" class="booking-details"><div id="bookingDetailsContent"></div></dialog>
 </section>
 
 <section id="talleres" class="view">
@@ -78,20 +135,20 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <section id="grupales" class="view">
 <div class="headrow"><div><div class="eyebrow">Fechas especiales</div><h2 class="heading">Talleres grupales</h2><p class="desc">Controla cupos, abonos y comprobantes por participante.</p></div></div>
 <form id="groupForm" class="card">
-<h3>＋ Crear taller grupal</h3>
+<h3>＋ Agregar taller grupal</h3>
 <div class="field"><label>Nombre del taller *</label><input id="groupName" required placeholder="Ej. Sábado de cerámica"></div>
 <div class="grid"><div class="field"><label>Fecha *</label><input id="groupDate" type="date" required></div><div class="field"><label>Hora *</label><select id="groupTime"><option>9:00 a. m.</option><option>11:00 a. m.</option><option>1:00 p. m.</option><option>3:00 p. m.</option><option>5:00 p. m.</option></select></div></div>
 <div class="grid"><div class="field"><label>Precio por persona ($)</label><input id="groupPrice" type="number" min="0" step=".01" value="25" required></div><div class="field"><label>Mínimo de participantes</label><input id="groupMinimum" type="number" min="6" value="6" required></div></div>
 <div class="field"><label>Cupos estimados (orientativo)</label><input id="groupCapacityEstimate" type="number" min="1" placeholder="Opcional"><p class="hint">Es una estimación; no limita ni bloquea inscripciones.</p></div>
 <div class="field"><label>Guía / planner</label><select id="groupGuide"></select></div><div class="field"><label>Descripción</label><textarea id="groupDetails" rows="2"></textarea></div>
-<button id="groupSubmit" class="btn primary full" type="submit">Crear taller grupal</button><button id="groupCancelEdit" class="btn full" type="button" hidden onclick="cancelGroupEdit()">Cancelar edición</button>
+<button id="groupSubmit" class="btn primary full" type="submit">Agregar taller</button><button id="groupCancelEdit" class="btn full" type="button" hidden onclick="cancelGroupEdit()">Cancelar edición</button>
 </form><div id="groupList"></div>
 </section>
 
 <section id="piezas" class="view">
 <div class="headrow"><div><div class="eyebrow">Del taller a la entrega</div><h2 class="heading">Seguimiento de piezas</h2><p class="desc">Registra fotos y controla cada etapa hasta la entrega.</p></div></div>
 <form id="pieceForm" class="card">
-<h3>＋ Registrar pieza</h3><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si el número es internacional.</p></div></div><div class="field"><label>Fecha en que pintaron la pieza</label><input id="pieceDate" type="date" required></div>
+<h3>＋ Agregar pieza</h3><div class="field"><label>Tipo de registro</label><select id="pieceSource"><option value="manual">Sin reserva · registro manual</option><option value="booking">Con reserva</option></select></div><div id="pieceBookingField" class="field" hidden><label>Reserva relacionada</label><select id="pieceBooking"></select><button id="loadPieceBooking" class="btn small" type="button" style="margin-top:8px">Usar datos de la reserva</button><p class="hint">Los campos se pueden editar antes de guardar.</p></div><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si es internacional.</p></div></div><div class="field"><label>Fecha de registro</label><input id="pieceDate" type="date" required></div>
 <input id="pieceStatus" type="hidden" value="En horno">
 <div class="field"><label>Foto de la pieza</label><input id="piecePhoto" type="file" accept="image/*"><p class="hint">Elige una foto; STAIN la ajustará para guardarla en la nube.</p></div><div class="field"><label>Notas</label><textarea id="pieceNotes" rows="2"></textarea></div><button class="btn primary full" type="submit">Guardar pieza</button>
 </form><div id="pieceList"></div>
@@ -107,25 +164,46 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <form id="guideForm" class="card"><h3>＋ Agregar guía o planner</h3><div class="field"><label>Nombre completo *</label><input id="guideName" required placeholder="Nombre y apellido"></div><div class="field"><label>Teléfono / WhatsApp *</label><input id="guidePhone" type="tel" required placeholder="Número de contacto"></div><div class="field"><label>Función</label><select id="guideRole"><option>Guía</option><option>Planner</option><option>Guía y planner</option></select></div><div class="field"><label>Observaciones</label><textarea id="guideNotes" rows="2"></textarea></div><button class="btn primary full" type="submit">Guardar persona</button></form><div id="guideList"></div>
 </section>
 
-<section id="mas" class="view"><div class="headrow"><div><div class="eyebrow">Herramientas de apoyo</div><h2 class="heading">Más opciones</h2><p class="desc">Aquí están los módulos secundarios para mantener la navegación sencilla.</p></div></div><div class="card"><h3>Módulos del estudio</h3><div class="grid"><button class="btn" onclick="show('talleres')">Talleres guiados</button><button class="btn" onclick="show('inventario')">Inventario</button><button class="btn" onclick="show('guias')">Guías</button></div></div><div class="card"><h3>Mensajes y WhatsApp</h3><p class="muted">Genera un resumen de reserva para copiarlo y enviarlo por WhatsApp.</p><button class="btn primary" onclick="copySummary()">Copiar resumen de reservas</button></div><div class="card"><h3>Datos de este dispositivo</h3><p class="muted">Por ahora los registros viven en el almacenamiento local de este navegador. No se sincronizan automáticamente con otros teléfonos.</p><button class="btn danger" onclick="exportData()">Exportar respaldo JSON</button></div><div class="card"><h3>Próximo paso: nube</h3><p class="muted">Para compartir reservas entre los teléfonos y la tablet y conservar comprobantes/fotos, hay que conectar una base de datos y almacenamiento seguros. No guardes contraseñas ni claves privadas en este archivo público.</p></div></section>
+<section id="mas" class="view">
+<div class="headrow"><div><div class="eyebrow">Herramientas de apoyo</div><h2 class="heading">Más opciones</h2><p class="desc">Calendarios, respaldos e intercambio de registros.</p></div></div>
+<div class="card"><h3>Módulos del estudio</h3><div class="grid"><button class="btn" onclick="show('talleres')">Talleres guiados</button><button class="btn" onclick="show('inventario')">Inventario</button><button class="btn" onclick="show('guias')">Guías</button></div></div>
+<div class="card"><h3>Mensajes y WhatsApp</h3><p class="muted">Genera un resumen de reserva para copiarlo y enviarlo por WhatsApp.</p><button class="btn primary" onclick="copySummary()">Copiar resumen de reservas</button></div>
+<div class="card"><h3>Google Calendar de las guías</h3><p class="muted">Cada guía autoriza su propia cuenta desde su ficha. Google Cloud debe tener Calendar API habilitada, una aplicación OAuth de tipo aplicación web y este origen agregado como origen JavaScript autorizado. No pegues aquí un client secret.</p><div class="field"><label>OAuth Client ID público de Google</label><input id="googleClientId" autocomplete="off" placeholder="...apps.googleusercontent.com"></div><div class="grid"><div class="field"><label>Zona horaria de los eventos</label><input id="calendarTimezone" value="America/Panama" placeholder="America/Panama"></div><div class="field"><label>Recordatorio emergente (minutos antes)</label><input id="calendarReminder" type="number" min="0" max="40320" value="30"></div></div><div class="field"><label>Ubicación predeterminada (opcional)</label><input id="calendarLocation" placeholder="No se agregará una ubicación si lo dejas vacío"></div><div class="btnrow"><button class="btn primary" type="button" onclick="saveCalendarSettings()">Guardar configuración</button><span id="calendarConfigStatus" class="hint" role="status"></span></div><p class="hint">El acceso de Google solo vive en la memoria de este dispositivo y caduca. Para sincronizar desde otro dispositivo, la guía debe autorizar allí su cuenta también. Se envían a Google el título, la guía, el número de participantes, la ubicación y las observaciones; no se envían teléfono, nombre del cliente ni pagos. Evita información personal en las observaciones.</p><div id="calendarGlobalStatus" class="hint" role="status"></div></div>
+<div class="card"><h3>Respaldo completo</h3><p class="muted">Descarga un ZIP con reservas, inventario, guías, talleres, pagos, metadatos y fotos disponibles. La copia incluye las fotos originales almacenadas en Supabase Storage.</p><div class="btnrow"><button class="btn primary" type="button" onclick="downloadFullBackup()">Descargar copia de seguridad</button></div><div class="divider"></div><div class="field"><label>Restaurar una copia ZIP</label><input id="backupFile" type="file" accept=".zip,application/zip"></div><button class="btn" type="button" onclick="previewBackupRestore()">Analizar copia</button><div id="backupPreview" class="hint" role="status"></div><div class="btnrow"><button id="confirmBackupRestore" class="btn danger" type="button" hidden onclick="confirmBackupRestore()">Reemplazar datos con esta copia</button><button id="cancelBackupRestore" class="btn" type="button" hidden onclick="cancelBackupRestore()">Cancelar</button></div><p class="hint">La restauración reemplaza las seis categorías actuales después de confirmarlo. No borra objetos antiguos de Storage. Los comprobantes existentes en STAIN son nombres o referencias, no archivos digitales guardados.</p></div>
+<div class="card"><h3>Excel e importación</h3><p class="muted">Exporta hojas separadas. Clientes, participantes y pagos se derivan de reservas y talleres; la copia ZIP es la opción para conservar relaciones y fotos.</p><div class="btnrow"><button class="btn primary" type="button" onclick="exportExcel()">Exportar a Excel (.xlsx)</button></div><div class="field"><label>Importar Excel o CSV</label><input id="spreadsheetFile" type="file" accept=".xlsx,.xls,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div><div class="field"><label>Tipo de registro para CSV o un Excel propio de una hoja</label><select id="spreadsheetCsvKind"><option value="bookings">Reservas</option><option value="pieces">Piezas</option><option value="workshops">Talleres guiados</option><option value="groups">Talleres grupales</option><option value="participants">Participantes (requiere ID de taller)</option></select></div><button class="btn" type="button" onclick="previewSpreadsheetImport()">Analizar archivo</button><div id="spreadsheetPreview" class="hint" role="status"></div><div class="btnrow"><button id="confirmSpreadsheetImport" class="btn primary" type="button" hidden onclick="confirmSpreadsheetImport()">Importar registros nuevos</button><button id="cancelSpreadsheetImport" class="btn" type="button" hidden onclick="cancelSpreadsheetImport()">Cancelar</button></div><p class="hint">La importación añade solo registros nuevos; detecta duplicados y no reemplaza los existentes. Usa el archivo Excel exportado por STAIN para preservar todos los campos. Clientes se importan mediante reservas/piezas; pagos y participantes se conservan dentro del taller o registro. Comprobantes adjuntos históricos no están disponibles en los datos actuales.</p></div>
+</section>
 <div class="bottomnote">STAIN Studio · Hecho con cariño y un toque de verde salvia ♡</div>
 </main>
 <div id="piecePhotoModal" class="photo-modal" role="dialog" aria-modal="true" aria-label="Foto ampliada" onclick="if(event.target===this)closePiecePhoto()"><button type="button" class="photo-modal-close" onclick="closePiecePhoto()" aria-label="Cerrar">×</button><img id="piecePhotoLarge" alt="Foto ampliada de la pieza"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const SUPABASE_URL="https://xhhmggrusriywvvrkmqr.supabase.co";
 const SUPABASE_PUBLIC_KEY="sb_publishable_fV3Z2RSJuU1bCe-2Sr0DZg_9o9uKszp";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY);
 let currentUser=null,cloudReady=false,syncing=false,syncPending=false,accountGeneration=0,loginRequest=null;
 const piecePhotoUrlCache={};
-const SLOTS=[{time:"09:00",label:"9:00 – 11:00 a. m."},{time:"11:00",label:"11:00 a. m. – 1:00 p. m."},{time:"13:00",label:"1:00 – 3:00 p. m."},{time:"15:00",label:"3:00 – 5:00 p. m."},{time:"17:00",label:"5:00 – 7:00 p. m."}];
-const SPACES={A:{name:"Espacio A · 2 mesas",max:10,desc:"Hasta 10 personas"},B:{name:"Espacio B · 3 mesas",max:16,desc:"12 cómodas · 13–16 con autorización"},C:{name:"Espacio C · mesa adicional",max:4,desc:"Hasta 4 personas"}};
+const SLOTS=Array.from({length:9},(_,index)=>{const hour=9+index,endHour=hour+2,labelHour=hour%12||12,endDisplay=endHour%12||12;return {time:String(hour).padStart(2,"0")+":00",label:labelHour+":00 "+(hour<12?"a. m.":"p. m.")+" – "+endDisplay+":00 "+(endHour<12?"a. m.":"p. m.")}});
+const BOOKING_DURATION_MINUTES=120;
+const SPACES={A:{name:"Área A · 2 mesas",max:10,comfortable:8,desc:"8 cómodas · máximo aproximado 10"},B:{name:"Área B · 3 mesas verticales pegadas",max:16,comfortable:12,desc:"12 cómodas · máximo 16"},C:{name:"Mesa C independiente",max:5,comfortable:4,desc:"4 cómodas · máximo aproximado 5"}};
+const PHYSICAL_TABLES=[
+ {id:"B1",area:"B",orientation:"vertical",seats:6,positions:["top-left","top-right","left-upper","right-upper","left-lower","right-lower"]},
+ {id:"B2",area:"B",orientation:"vertical",seats:4,positions:["left-upper","right-upper","left-lower","right-lower"]},
+ {id:"B3",area:"B",orientation:"vertical",seats:6,positions:["bottom-left","bottom-right","left-upper","right-upper","left-lower","right-lower"]},
+ {id:"A1",area:"A",orientation:"horizontal",seats:5,positions:["top-left","top-right","left","right","bottom-center"]},
+ {id:"A2",area:"A",orientation:"horizontal",seats:5,positions:["top-left","top-right","left","right","bottom-center"]},
+ {id:"C1",area:"C",orientation:"horizontal",seats:5,positions:["top-left","top-right","left","right","bottom-center"]}
+].map(table=>({...table,seatIds:Array.from({length:table.seats},(_,index)=>table.id+"-"+(index+1))}));
+const ALL_SEAT_IDS=PHYSICAL_TABLES.flatMap(table=>table.seatIds),SEAT_TABLE_BY_ID=new Map(PHYSICAL_TABLES.flatMap(table=>table.seatIds.map(id=>[id,table])));
+let bookingFormSpaces=[],bookingMapSpaces=[],bookingFormSeatIds=[],bookingMapSeatIds=[],bookingMapMode="manual",bookingEditingId=null,bookingView="calendar";
 let bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[];
 const $=id=>document.getElementById(id),money=n=>"$"+(Number(n)||0).toFixed(2);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 const dataKeys=["bookings","workshops","guides","groups","pieces","inventory"];
 const dataStateKeys={bookings:"bookings",workshops:"workshops",guides:"guides",groups:"groups",pieces:"pieces",inventory:"inventory"};
 let pendingDataKeys=new Set(),dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0])),cloudVersions={},dataSnapshot={},groupEditingId=null;
+const calendarConnections=new Map(),calendarActivityStatuses=new Map(),externalLibraryPromises=new Map();
+let calendarSyncRunning=false,calendarSyncPending=false,calendarSyncTimer=null,backupRestoreDraft=null,spreadsheetImportDraft=null;
 function accountStorageKey(userId,key){return "stain_v2_user_"+encodeURIComponent(userId)+"_"+key}
 function pendingStorageKey(userId){return accountStorageKey(userId,"pending")}
 function pendingVersionsStorageKey(userId){return accountStorageKey(userId,"pending_versions")}
@@ -172,12 +250,25 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
    dataSnapshot[key]=JSON.stringify(value);
    localSave(user.id);
   }
-  const current=await supabaseClient.from("stain_data").select("updated_at").eq("user_id",user.id).eq("data_key",key).maybeSingle();
+  const current=await supabaseClient.from("stain_data").select(key==="bookings"||key==="groups"?"updated_at,data":"updated_at").eq("user_id",user.id).eq("data_key",key).maybeSingle();
   if(current.error)throw current.error;
   if(!isCurrentAccount(user.id,generation))return;
   const remoteVersion=current.data?.updated_at||null;
   let knownVersion=cloudVersions[key]||null;
   if(remoteVersion!==knownVersion){
+   if(key==="bookings"||key==="groups"){
+    const [remoteBookingsResult,remoteGroupsResult]=await Promise.all([
+     key==="bookings"?Promise.resolve({data:current.data,error:null}):supabaseClient.from("stain_data").select("data").eq("user_id",user.id).eq("data_key","bookings").maybeSingle(),
+     key==="groups"?Promise.resolve({data:current.data,error:null}):supabaseClient.from("stain_data").select("data").eq("user_id",user.id).eq("data_key","groups").maybeSingle()
+    ]);
+    if(remoteBookingsResult.error)throw remoteBookingsResult.error;
+    if(remoteGroupsResult.error)throw remoteGroupsResult.error;
+    if(!isCurrentAccount(user.id,generation))return;
+    const remoteBookings=Array.isArray(remoteBookingsResult.data?.data)?remoteBookingsResult.data.data:[],remoteGroups=Array.isArray(remoteGroupsResult.data?.data)?remoteGroupsResult.data.data:[];
+    const localBookings=key==="bookings"?value:bookings,localGroups=key==="groups"?value:groups;
+    const collision=findSeatConflictAcrossSnapshots(localBookings,remoteBookings,localGroups,remoteGroups);
+    if(collision)throw new Error("Conflicto de sillas en la nube: la silla "+collision.seatId+" ya está asignada a otra actividad en un horario incompatible. No se sobrescribió la versión de Supabase; actualiza los datos y vuelve a elegir sillas.");
+   }
    if(!confirm("Los datos de "+key+" cambiaron en otro dispositivo. ¿Quieres reemplazar la versión más reciente de Supabase con los cambios de este dispositivo? Cancelar conserva los cambios localmente sin sincronizarlos."))throw new Error("Conflicto de sincronización en "+key+". Los cambios locales se conservaron.");
    knownVersion=remoteVersion;cloudVersions[key]=remoteVersion;persistPendingData(user.id);
   }
@@ -210,7 +301,7 @@ async function queueCloudSync(){
  if(syncing){syncPending=true;return}
  syncing=true;
  try{do{syncPending=false;await syncAllToCloud(user,generation)}while(syncPending&&isCurrentAccount(user.id,generation))}
- catch(err){console.error(err);if(isCurrentAccount(user.id,generation))setCloudStatus(err?.message?.startsWith("Conflicto de sincronización")?"Conflicto: cambios locales conservados":"Error al guardar · cambios conservados en este dispositivo");}
+ catch(err){console.error(err);if(isCurrentAccount(user.id,generation))setCloudStatus(err?.message?.startsWith("Conflicto de sillas en la nube")?err.message:err?.message?.startsWith("Conflicto de sincronización")?"Conflicto: cambios locales conservados":"Error al guardar · cambios conservados en este dispositivo");}
  finally{const pending=syncPending;syncPending=false;syncing=false;if(pending&&currentUser)queueCloudSync()}
 }
 function save(){
@@ -223,7 +314,421 @@ function save(){
    dataSnapshot[key]=serialized;
   }
  }
- localSave();persistPendingData();renderAll();if(cloudReady&&currentUser&&pendingDataKeys.size)queueCloudSync();
+ localSave();persistPendingData();renderAll();if(cloudReady&&currentUser&&pendingDataKeys.size)queueCloudSync();scheduleCalendarSync();
+}
+function loadExternalLibrary(src,globalName){
+ if(window[globalName])return Promise.resolve(window[globalName]);
+ if(externalLibraryPromises.has(globalName))return externalLibraryPromises.get(globalName);
+ const promise=new Promise((resolve,reject)=>{const script=document.createElement("script");script.src=src;script.async=true;script.onload=()=>window[globalName]?resolve(window[globalName]):reject(new Error("La biblioteca "+globalName+" no quedó disponible."));script.onerror=()=>reject(new Error("No se pudo cargar "+globalName+". Revisa tu conexión e inténtalo otra vez."));document.head.appendChild(script)});
+ externalLibraryPromises.set(globalName,promise);promise.catch(()=>{if(externalLibraryPromises.get(globalName)===promise)externalLibraryPromises.delete(globalName)});return promise;
+}
+const loadZipLibrary=()=>loadExternalLibrary("https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js","JSZip");
+const loadSpreadsheetLibrary=()=>loadExternalLibrary("https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js","XLSX");
+function downloadBlob(blob,fileName){const url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download=fileName;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function getPiecePhotoBlob(photo){
+ if(!photo)return null;
+ if(photo.startsWith("data:"))return (await fetch(photo)).blob();
+ if(photo.startsWith("storage:")){
+  const path=photo.slice(8),result=await supabaseClient.storage.from("stain-pieces").download(path);
+  if(result.error)throw new Error("No se pudo descargar la foto "+path+": "+result.error.message);
+  return result.data;
+ }
+ const response=await fetch(photo);
+ if(!response.ok)throw new Error("No se pudo recuperar una foto vinculada al registro.");
+ return response.blob();
+}
+function photoExtension(blob){return blob.type.includes("png")?"png":blob.type.includes("webp")?"webp":blob.type.includes("gif")?"gif":"jpg"}
+async function downloadFullBackup(){
+ const output=$("backupPreview");output.textContent="Preparando respaldo…";
+ try{
+  if(!currentUser)throw new Error("Inicia sesión antes de descargar una copia.");
+  const userId=currentUser.id,generation=accountGeneration,snapshot=JSON.parse(JSON.stringify(getDataState()));
+  const JSZip=await loadZipLibrary(),zip=new JSZip();
+  let photoCount=0,totalPhotoBytes=0;
+  for(let index=0;index<snapshot.pieces.length;index++){
+   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
+   const piece=snapshot.pieces[index];
+   if(!piece.photo)continue;
+   const blob=await getPiecePhotoBlob(piece.photo);
+   if(!blob)throw new Error("No se pudo recuperar la foto de la pieza "+(piece.name||piece.id)+". La copia no se descargó para evitar omitir archivos.");
+   totalPhotoBytes+=blob.size;if(totalPhotoBytes>200*1024*1024)throw new Error("Las fotos superan el límite de 200 MB para una copia ZIP.");
+   const safeId=String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_"),path="photos/piece-"+safeId+"-"+index+"."+photoExtension(blob);
+   zip.file(path,blob);piece.photo="backup-photo:"+path;photoCount++;
+  }
+  const calendarSettings=readCalendarSettings();
+  zip.file("manifest.json",JSON.stringify({format:"stain-full-backup",version:1,createdAt:new Date().toISOString(),photoCount,receiptFilesIncluded:false,calendarSettings:{timezone:calendarSettings.timezone||"America/Panama",reminderMinutes:Number(calendarSettings.reminderMinutes??30),location:calendarSettings.location||""}}));
+  zip.file("data.json",JSON.stringify(snapshot,null,2));
+  const blob=await zip.generateAsync({type:"blob",compression:"DEFLATE"});
+  if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
+  downloadBlob(blob,"stain-backup-"+dateToday()+".zip");
+  output.textContent="Copia descargada. "+photoCount+" foto(s) incluidas. Los comprobantes solo se incluyen como referencias porque STAIN no conserva sus archivos.";
+ }catch(error){console.error("STAIN backup export error:",error);output.textContent="No se pudo crear el respaldo: "+(error.message||"error inesperado");}
+}
+async function previewBackupRestore(){
+ const output=$("backupPreview"),file=$("backupFile").files[0];
+ backupRestoreDraft=null;$("confirmBackupRestore").hidden=true;$("cancelBackupRestore").hidden=true;
+ if(!currentUser){output.textContent="Inicia sesión antes de restaurar una copia.";return}
+ if(!file){output.textContent="Selecciona primero un archivo ZIP.";return}
+ try{
+  const userId=currentUser.id,generation=accountGeneration;
+  if(file.size>200*1024*1024)throw new Error("El ZIP supera el límite de 200 MB.");
+  const JSZip=await loadZipLibrary(),zip=await JSZip.loadAsync(file,{checkCRC32:true}),manifestFile=zip.file("manifest.json"),dataFile=zip.file("data.json");
+  if(Object.keys(zip.files).length>5000)throw new Error("La copia contiene demasiados archivos.");
+  let expandedSize=0;for(const entry of Object.values(zip.files)){expandedSize+=Number(entry._data?.uncompressedSize)||0;if(expandedSize>500*1024*1024)throw new Error("La copia descomprimida supera el límite de 500 MB.")}
+  if(!manifestFile||!dataFile)throw new Error("No parece una copia STAIN válida (faltan manifest.json o data.json).");
+  const manifest=JSON.parse(await manifestFile.async("string")),snapshot=JSON.parse(await dataFile.async("string"));
+  if(manifest.format!=="stain-full-backup"||manifest.version!==1)throw new Error("Formato o versión de copia no compatible.");
+  if(manifest.calendarSettings){
+   try{new Intl.DateTimeFormat("en",{timeZone:manifest.calendarSettings.timezone}).format(new Date())}catch{throw new Error("La copia contiene una zona horaria no válida.")}
+   if(!Number.isInteger(Number(manifest.calendarSettings.reminderMinutes))||Number(manifest.calendarSettings.reminderMinutes)<0||Number(manifest.calendarSettings.reminderMinutes)>40320||typeof manifest.calendarSettings.location!=="string")throw new Error("La copia contiene configuración de calendario no válida.");
+  }
+  for(const key of dataKeys)if(!Array.isArray(snapshot[key]))throw new Error("La copia no contiene la categoría "+key+" con el formato esperado.");
+  for(const key of dataKeys){const ids=new Set();for(const record of snapshot[key]){if(!record||typeof record!=="object"||Array.isArray(record)||(record.id!==undefined&&!/^\d{1,20}$/.test(String(record.id))))throw new Error("La categoría "+key+" contiene un registro con formato o ID no válido.");if(record.id!==undefined){const id=String(record.id);if(ids.has(id))throw new Error("La categoría "+key+" contiene IDs duplicados.");ids.add(id)}}}
+  const photoPaths=[];
+  for(const piece of snapshot.pieces)if(typeof piece.photo==="string"&&piece.photo.startsWith("backup-photo:")){
+   const path=piece.photo.slice("backup-photo:".length);
+   if(!/^photos\/[A-Za-z0-9_-]+\.(jpg|png|webp|gif)$/.test(path)||!zip.file(path))throw new Error("Falta el archivo de foto asociado a la pieza "+(piece.name||piece.id)+".");
+   photoPaths.push(path);
+  }
+  if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante el análisis; selecciona y analiza la copia de nuevo.");
+  if(Number(manifest.photoCount)!==photoPaths.length)throw new Error("La cantidad de fotos de la copia no coincide con sus registros.");
+  backupRestoreDraft={zip,snapshot,manifest,userId,generation};
+  const examples=[...snapshot.bookings.slice(0,2).map(item=>item.client+" · "+item.date),...snapshot.pieces.slice(0,2).map(item=>item.name),...snapshot.groups.slice(0,2).map(item=>item.name)].filter(Boolean).slice(0,4);
+  output.textContent="Vista previa: "+dataKeys.map(key=>key+" "+snapshot[key].length).join(" · ")+" · "+photoPaths.length+" foto(s)"+(examples.length?" · Ejemplos: "+examples.join(" / "):"")+" . La confirmación reemplazará los datos locales y enviará los cambios por la sincronización normal.";
+  $("confirmBackupRestore").hidden=false;$("cancelBackupRestore").hidden=false;
+ }catch(error){console.error("STAIN backup preview error:",error);output.textContent="No se pudo analizar la copia: "+(error.message||"archivo inválido");}
+}
+function cancelBackupRestore(){backupRestoreDraft=null;$("backupPreview").textContent="Restauración cancelada; no se modificaron datos.";$("confirmBackupRestore").hidden=true;$("cancelBackupRestore").hidden=true;$("backupFile").value=""}
+async function confirmBackupRestore(){
+ const draft=backupRestoreDraft;
+ if(!draft)return;
+ if(!isCurrentAccount(draft.userId,draft.generation))return alert("La sesión cambió desde que se analizó esta copia. Analízala de nuevo antes de restaurar.");
+ if(!cloudReady)return alert("Supabase no está conectado. Espera a que STAIN indique que la nube está sincronizada antes de restaurar, para no mezclar datos locales con datos pendientes.");
+ if(!confirm("Vas a reemplazar reservas, talleres, guías, grupales, piezas e inventario por los datos de esta copia. No se borrarán objetos de Storage. ¿Continuar?"))return;
+ const userId=currentUser.id,generation=accountGeneration;
+ $("confirmBackupRestore").disabled=true;$("backupPreview").textContent="Restaurando fotos…";
+ try{
+  const snapshot=JSON.parse(JSON.stringify(draft.snapshot));let index=0;
+  for(const piece of snapshot.pieces){
+   if(!String(piece.photo||"").startsWith("backup-photo:"))continue;
+   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
+   const zipPath=piece.photo.slice("backup-photo:".length),blob=await draft.zip.file(zipPath).async("blob"),ext=photoExtension(blob),path=userId+"/restore-"+String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_")+"-"+Date.now()+"-"+index+"."+ext;
+   const upload=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:false,contentType:blob.type||"image/jpeg"});
+   if(upload.error)throw new Error("No se pudo guardar una foto de la copia en Supabase Storage: "+upload.error.message);
+   piece.photo="storage:"+path;
+   const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
+   if(signed.error)throw new Error("La foto se subió, pero no se pudo crear su enlace temporal: "+signed.error.message);
+   piecePhotoUrlCache[path]=signed.data.signedUrl;
+   index++;
+  }
+  if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
+  setDataState(snapshot);dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(snapshot[key])]));
+  const existingCalendarSettings=readCalendarSettings();localStorage.setItem(calendarSettingsKey(),JSON.stringify({...existingCalendarSettings,...(draft.manifest.calendarSettings||{})}));loadCalendarSettings();
+  for(const key of dataKeys){pendingDataKeys.add(key);dataRevisions[key]++}
+  localSave(userId);persistPendingData(userId);renderAll();queueCloudSync();
+  $("backupPreview").textContent="Datos restaurados en este dispositivo. La sincronización con Supabase está en curso; revisa el estado de nube antes de cerrar.";
+  $("confirmBackupRestore").hidden=true;$("cancelBackupRestore").hidden=true;backupRestoreDraft=null;
+ }catch(error){console.error("STAIN backup restore error:",error);$("backupPreview").textContent="Restauración incompleta: "+(error.message||"error inesperado")+". Los datos actuales no se reemplazaron; puede haber fotos nuevas sin referencia en Storage."}
+ finally{$("confirmBackupRestore").disabled=false}
+}
+function clientRowsForExport(data=getDataState()){
+ const rows=[],seen=new Set();
+ for(const record of [...data.bookings,...data.pieces]){
+  const name=String(record.client||"").trim(),phone=String(record.phone||"").trim(),key=(phone||name.toLocaleLowerCase()).toLocaleLowerCase();
+  if(!key||seen.has(key))continue;seen.add(key);rows.push({Nombre:name,Telefono:phone,Origen:data.bookings.includes(record)?"Reserva":"Pieza"});
+ }
+ return rows;
+}
+async function exportExcel(){
+ try{
+  if(!currentUser)throw new Error("Inicia sesión antes de exportar.");
+  const userId=currentUser.id,generation=accountGeneration,snapshot=JSON.parse(JSON.stringify(getDataState()));
+  const XLSX=await loadSpreadsheetLibrary();
+  if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la exportación; inténtalo otra vez.");
+  const workbook=XLSX.utils.book_new();
+  const add=(name,rows)=>XLSX.utils.book_append_sheet(workbook,XLSX.utils.json_to_sheet(rows),name);
+  add("Reservas",snapshot.bookings.map(record=>({ID:record.id,Cliente:record.client,Telefono:record.phone,Fecha:record.date,Hora:record.time,Personas:record.people,Actividad:record.activity,Guia:record.guideName,Total:record.amount,Abono:record.deposit,Saldo:record.balance,Observaciones:record.notes,_record:JSON.stringify(record)})));
+  add("Clientes",clientRowsForExport(snapshot));
+  add("Piezas",snapshot.pieces.map(record=>({ID:record.id,Pieza:record.name,Cliente:record.client,Telefono:record.phone,Fecha:record.date,Estado:record.status,Reserva:record.bookingId,_record:JSON.stringify({...record,photo:""})})));
+  add("Talleres",[...snapshot.workshops.map(record=>({_tipo:"guiado",ID:record.id,Nombre:record.name,Guia:record.guideName,Precio:record.price,_record:JSON.stringify(record)})),...snapshot.groups.map(record=>({_tipo:"grupal",ID:record.id,Nombre:record.name,Fecha:record.date,Hora:record.time,Guia:record.guideName,Participantes:(record.participants||[]).length,_record:JSON.stringify(record)}))]);
+  add("Participantes",snapshot.groups.flatMap(group=>(group.participants||[]).map(record=>({TallerID:group.id,Taller:group.name,Participante:record.name,Abono:record.deposit,Estado:record.status,_record:JSON.stringify(record)}))));
+  add("Pagos",[...snapshot.bookings.map(record=>({Tipo:"Reserva",RegistroID:record.id,Cliente:record.client,Total:record.amount,Abono:record.deposit,Saldo:record.balance,Comprobante:record.receiptName||""})),...snapshot.groups.flatMap(group=>(group.participants||[]).map(record=>({Tipo:"Taller grupal",RegistroID:group.id,Cliente:record.name,Total:group.price,Abono:record.deposit,Saldo:Math.max(0,group.price-(Number(record.deposit)||0)),Comprobante:record.receipt||""})))]);
+  XLSX.writeFile(workbook,"stain-registros-"+dateToday()+".xlsx");
+ }catch(error){console.error("STAIN Excel export error:",error);$("spreadsheetPreview").textContent="No se pudo exportar a Excel: "+(error.message||"error inesperado")}
+}
+function cellValue(row,names){const wanted=new Set(names.map(name=>name.toLocaleLowerCase()));const key=Object.keys(row).find(name=>wanted.has(String(name).trim().toLocaleLowerCase()));return key?row[key]:""}
+function parseImportedRecord(kind,row,index){
+ const val=(...names)=>cellValue(row,names),id=val("id","ID"),newId=Number(id)||Date.now()+index;
+ if(kind==="bookings"){
+  const client=String(val("cliente","client","nombre cliente","nombre")).trim(),date=String(val("fecha","date")).trim(),time=String(val("hora","time")).trim(),people=Number(val("personas","participantes","people"))||0;
+  if(!client||!date||!time||people<1)return {error:"Reserva requiere cliente, fecha, hora y personas."};
+  return {id:newId,client,phone:String(val("telefono","teléfono","phone")||"").trim(),date,time,people,space:String(val("area","espacio","space")||"A"),spaces:[String(val("area","espacio","space")||"A")],activity:String(val("actividad","activity")||"Pintura libre"),workshop:String(val("taller","workshop")||""),guideName:String(val("guia","guía","guide")||""),amount:Number(val("total","amount"))||0,deposit:Number(val("abono","deposit"))||0,balance:Number(val("saldo","balance"))||0,notes:String(val("observaciones","notas","notes")||""),receiptName:String(val("comprobante","receipt")||""),status:"Registrada"};
+ }
+ if(kind==="pieces"){
+  const name=String(val("pieza","nombre de la pieza","name")).trim();
+  if(!name)return {error:"Pieza requiere el nombre de la pieza."};
+  return {id:newId,name,client:String(val("cliente","client")||"").trim(),phone:String(val("telefono","teléfono","phone")||"").trim(),date:String(val("fecha","date")||dateToday()),status:String(val("estado","status")||"En horno"),notes:String(val("observaciones","notas","notes")||""),photo:"",source:"manual",bookingId:null};
+ }
+ if(kind==="workshops"){
+  const name=String(val("nombre","taller","actividad","name")).trim();
+  if(!name)return {error:"Taller guiado requiere un nombre."};
+  return {id:newId,name,price:Number(val("precio","price"))||0,people:Number(val("personas","people"))||1,duration:Number(val("duracion","duración","duration"))||2,guideName:String(val("guia","guía","guide")||""),guidePhone:"",materials:String(val("materiales","materials")||""),details:String(val("observaciones","notas","details")||"")};
+ }
+ if(kind==="groups"){
+  const name=String(val("nombre","taller","actividad","name")).trim(),date=String(val("fecha","date")).trim(),time=String(val("hora","time")).trim();
+  if(!name||!date||!time)return {error:"Taller grupal requiere nombre, fecha y hora."};
+  return {id:newId,name,date,time,price:Number(val("precio","price"))||0,minimum:Math.max(1,Number(val("minimo","mínimo","minimum"))||1),capacityEstimate:Number(val("cupos estimados","capacidad estimada","capacityestimate"))||null,guideName:String(val("guia","guía","guide")||""),guidePhone:"",details:String(val("observaciones","notas","details")||""),participants:[],status:"Pendiente"};
+ }
+ if(kind==="participants"){
+  const groupId=String(val("tallerid","taller id","groupid","id de taller")||"").trim(),name=String(val("participante","nombre","cliente","name")).trim();
+  if(!groupId||!name)return {error:"Participante requiere ID de taller y nombre."};
+  return {groupId,name,deposit:Number(val("abono","deposit"))||0,receipt:String(val("comprobante","receipt")||""),status:String(val("estado","status")||"Pendiente de pago")};
+ }
+ return {error:"Categoría de importación no reconocida."};
+}
+function importRecordKey(kind,record){
+ if(kind==="participants")return "participants:"+String(record.groupId)+":"+record.name.trim().toLocaleLowerCase();
+ if(kind==="bookings")return "bookings:"+[record.client,record.date,record.time,record.phone].join("|").toLocaleLowerCase();
+ if(kind==="pieces")return "pieces:"+[record.name,record.date,record.client].join("|").toLocaleLowerCase();
+ if(kind==="groups")return "groups:"+[record.name,record.date,record.time].join("|").toLocaleLowerCase();
+ return "workshops:"+String(record.name||"").toLocaleLowerCase();
+}
+function importRecordKeys(kind,record){const natural=importRecordKey(kind,record);return kind==="participants"?[natural]:[natural,record.id!==undefined&&record.id!==null?kind+":id:"+String(record.id):""]}
+function validateImportedRecord(kind,record){
+ if(kind==="bookings"){
+  if(!record.client||!record.date||!record.time||Number(record.people)<1)return "Reserva incompleta: se requieren cliente, fecha, hora y personas.";
+  const spaces=Array.isArray(record.spaces)&&record.spaces.length?record.spaces:[record.space];
+  if(!spaces.length||spaces.some(space=>!SPACES[space]))return "Reserva con área o combinación de áreas no válida.";
+ }
+ if(kind==="pieces"&&!String(record.name||"").trim())return "Pieza sin nombre.";
+ if(kind==="workshops"&&!String(record.name||"").trim())return "Taller guiado sin nombre.";
+ if(kind==="groups"){
+  if(!record.name||!record.date||!record.time)return "Taller grupal incompleto: se requieren nombre, fecha y hora.";
+  if(record.participants!==undefined&&!Array.isArray(record.participants))return "La lista de participantes del taller no es válida.";
+  record.participants=record.participants||[];
+ }
+ if(kind==="participants"&&(!String(record.groupId||"").trim()||!String(record.name||"").trim()))return "Participante incompleto: se requieren ID de taller y nombre.";
+ return "";
+}
+function currentImportRecords(kind){if(kind==="participants")return groups.flatMap(group=>(group.participants||[]).map(record=>({...record,groupId:group.id})));return ({bookings,pieces,workshops,groups})[kind]||[]}
+function prepareSpreadsheetDraft(rowsByKind,invalidRows=[]){
+ const existingKeys=new Set(),fileKeys=new Set(),items=[],duplicates=[];
+ for(const kind of ["bookings","pieces","workshops","groups","participants"])for(const record of currentImportRecords(kind))for(const key of importRecordKeys(kind,record))existingKeys.add(key);
+ for(const [kind,rows] of Object.entries(rowsByKind))for(let index=0;index<rows.length;index++){
+  const input=rows[index];
+  if(input&&typeof input._record==="string"){
+   let record;try{record=JSON.parse(input._record)}catch{invalidRows.push(kind+": fila "+(index+1)+" contiene _record inválido.");continue}
+   const actualKind=kind==="workshops"?(String(input._tipo||"").toLocaleLowerCase()==="grupal"?"groups":"workshops"):kind;
+   if(!record||typeof record!=="object"||Array.isArray(record)||(record.id!==undefined&&!/^\d{1,20}$/.test(String(record.id)))){invalidRows.push(kind+": fila "+(index+1)+" contiene un registro o ID inválido.");continue}
+   if(actualKind==="pieces")record.photo="";
+   if(actualKind!=="participants"){
+    const guide=guides.find(item=>item.name===record.guideName);
+    record.guideId=guide?.id||null;delete record.calendarEvent;
+   }
+   const validationError=validateImportedRecord(actualKind,record);
+   if(validationError){invalidRows.push(kind+" · fila "+(index+1)+": "+validationError);continue}
+   const keys=importRecordKeys(actualKind,record);
+   if(keys.some(key=>existingKeys.has(key)||fileKeys.has(key))){duplicates.push(actualKind);continue}
+   keys.forEach(key=>fileKeys.add(key));items.push({kind:actualKind,record});continue;
+  }
+  const parsed=parseImportedRecord(kind,input,index);
+  if(parsed.error){invalidRows.push(kind+" · fila "+(index+1)+": "+parsed.error);continue}
+  const validationError=validateImportedRecord(kind,parsed);
+  if(validationError){invalidRows.push(kind+" · fila "+(index+1)+": "+validationError);continue}
+  if(kind==="participants"&&!groups.some(group=>String(group.id)===String(parsed.groupId))){invalidRows.push("participants · fila "+(index+1)+": no existe el ID de taller "+parsed.groupId+".");continue}
+  const keys=importRecordKeys(kind,parsed);
+  if(keys.some(key=>existingKeys.has(key)||fileKeys.has(key))){duplicates.push(kind);continue}
+  keys.forEach(key=>fileKeys.add(key));items.push({kind,record:parsed});
+ }
+ return {items,duplicates,invalidRows};
+}
+async function previewSpreadsheetImport(){
+ const output=$("spreadsheetPreview"),file=$("spreadsheetFile").files[0];
+ spreadsheetImportDraft=null;$("confirmSpreadsheetImport").hidden=true;$("cancelSpreadsheetImport").hidden=true;
+ if(!currentUser){output.textContent="Inicia sesión antes de importar.";return}
+ if(!file){output.textContent="Selecciona primero un Excel o CSV.";return}
+ try{
+  const userId=currentUser.id,generation=accountGeneration;
+  if(file.size>50*1024*1024)throw new Error("El archivo supera el límite de 50 MB.");
+  const XLSX=await loadSpreadsheetLibrary(),buffer=await file.arrayBuffer(),workbook=XLSX.read(buffer,{type:"array",cellDates:false}),invalidRows=[],rowsByKind={};
+  if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la lectura; analiza el archivo de nuevo.");
+  if(file.name.toLocaleLowerCase().endsWith(".csv"))rowsByKind[$("spreadsheetCsvKind").value]=XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]],{defval:""});
+  else{
+   const map={Reservas:"bookings",Piezas:"pieces",Talleres:"workshops"};
+   for(const [sheetName,kind] of Object.entries(map))if(workbook.Sheets[sheetName])rowsByKind[kind]=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName],{defval:""});
+   if(!Object.keys(rowsByKind).length&&workbook.SheetNames[0])rowsByKind[$("spreadsheetCsvKind").value]=XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]],{defval:""});
+   if(!Object.keys(rowsByKind).length)throw new Error("El archivo no contiene hojas que se puedan importar.");
+  }
+  const draft=prepareSpreadsheetDraft(rowsByKind,invalidRows);spreadsheetImportDraft={...draft,userId,generation};
+  const totals=Object.entries(draft.items.reduce((counts,item)=>(counts[item.kind]=(counts[item.kind]||0)+1,counts),{})).map(([kind,count])=>kind+": "+count).join(" · ")||"ningún registro nuevo";
+  const samples=draft.items.slice(0,5).map(({kind,record})=>kind+": "+(record.client||record.name||record.participant||"registro"));
+  output.textContent="Vista previa: "+totals+" · duplicados omitidos: "+draft.duplicates.length+" · filas incompletas/no válidas: "+draft.invalidRows.length+(samples.length?" · Ejemplos: "+samples.join(" / "):"")+(draft.invalidRows.length?" · "+draft.invalidRows.slice(0,3).join(" "):"");
+  $("confirmSpreadsheetImport").hidden=!draft.items.length;$("cancelSpreadsheetImport").hidden=false;
+ }catch(error){console.error("STAIN import preview error:",error);output.textContent="No se pudo analizar el archivo: "+(error.message||"error inesperado")}
+}
+function cancelSpreadsheetImport(){spreadsheetImportDraft=null;$("spreadsheetPreview").textContent="Importación cancelada; no se modificaron datos.";$("confirmSpreadsheetImport").hidden=true;$("cancelSpreadsheetImport").hidden=true;$("spreadsheetFile").value=""}
+function confirmSpreadsheetImport(){
+ const draft=spreadsheetImportDraft;if(!draft||!draft.items.length)return;
+ if(!isCurrentAccount(draft.userId,draft.generation))return alert("La sesión cambió desde que se analizó el archivo. Analízalo de nuevo antes de importar.");
+ if(!confirm("Se añadirán "+draft.items.length+" registro(s) nuevo(s). Los existentes y los duplicados no se sobrescribirán. ¿Continuar?"))return;
+ for(const {kind,record} of draft.items){
+  if(kind==="bookings")bookings.push(record);
+  else if(kind==="pieces")pieces.push(record);
+  else if(kind==="workshops")workshops.push(record);
+  else if(kind==="groups")groups.push(record);
+  else if(kind==="participants"){const group=groups.find(item=>String(item.id)===String(record.groupId));if(group){group.participants=group.participants||[];group.participants.push({name:record.name,deposit:record.deposit,receipt:record.receipt,status:record.status})}}
+ }
+ save();$("spreadsheetPreview").textContent="Importación local completada; los cambios se enviarán por la sincronización existente.";
+ $("confirmSpreadsheetImport").hidden=true;$("cancelSpreadsheetImport").hidden=true;spreadsheetImportDraft=null;$("spreadsheetFile").value="";
+}
+function calendarSettingsKey(){return "stain_google_calendar_config_"+encodeURIComponent(currentUser?.id||"")}
+function readCalendarSettings(){try{return JSON.parse(localStorage.getItem(calendarSettingsKey())||"{}")}catch{return {}}}
+function loadCalendarSettings(){
+ const config=readCalendarSettings();
+ if($("googleClientId"))$("googleClientId").value=config.clientId||"";
+ if($("calendarTimezone"))$("calendarTimezone").value=config.timezone||"America/Panama";
+ if($("calendarReminder"))$("calendarReminder").value=String(config.reminderMinutes??30);
+ if($("calendarLocation"))$("calendarLocation").value=config.location||"";
+ if($("calendarGlobalStatus"))$("calendarGlobalStatus").textContent=config.clientId?"Client ID configurado en este dispositivo. Cada guía todavía debe autorizar su propia cuenta.":"Google Calendar aún no está configurado ni conectado.";
+}
+function saveCalendarSettings(){
+ const timezone=$("calendarTimezone").value.trim(),reminder=Number($("calendarReminder").value);
+ try{new Intl.DateTimeFormat("en",{timeZone:timezone}).format(new Date())}catch{return alert("La zona horaria no es válida. Usa un identificador IANA, por ejemplo America/Panama.")}
+ if(!Number.isInteger(reminder)||reminder<0||reminder>40320)return alert("El recordatorio debe estar entre 0 y 40 320 minutos.");
+ const config={clientId:$("googleClientId").value.trim(),timezone,reminderMinutes:reminder,location:$("calendarLocation").value.trim()};
+ localStorage.setItem(calendarSettingsKey(),JSON.stringify(config));
+ $("calendarConfigStatus").textContent="Configuración guardada en este dispositivo; no contiene credenciales privadas.";
+ loadCalendarSettings();scheduleCalendarSync();
+}
+function calendarConnectionFor(guideId){const connection=calendarConnections.get(String(guideId));return connection&&connection.expiresAt>Date.now()+30000?connection:null}
+function calendarGuideMarkup(guide){
+ const connection=calendarConnectionFor(guide.id),calendars=connection?.calendars||[];
+ const connected=connection?'<p class="hint">Google conectado en este dispositivo: '+esc(connection.email)+'</p>':guide.googleEmail?'<p class="hint">Cuenta configurada: '+esc(guide.googleEmail)+' · vuelve a autorizar en este dispositivo para sincronizar.</p>':'<p class="hint">Google Calendar no conectado para esta guía.</p>';
+ const options=calendars.map(calendar=>'<option value="'+esc(calendar.id)+'" '+(calendar.id===guide.googleCalendarId?'selected':'')+'>'+esc(calendar.summary||calendar.id)+(calendar.primary?' · principal':'')+'</option>').join("");
+ return '<div class="divider"></div><b>Google Calendar</b>'+connected+'<div class="btnrow"><button class="btn small" type="button" onclick="connectGuideCalendar('+guide.id+')">'+(connection?'Volver a autorizar':'Conectar cuenta Google')+'</button>'+(connection?'<button class="btn small" type="button" onclick="disconnectGuideCalendar('+guide.id+')">Desconectar en este dispositivo</button>':'')+'</div>'+(calendars.length?'<div class="field"><label>Calendario para las actividades</label><select onchange="selectGuideCalendar('+guide.id+',this.value)"><option value="">Selecciona un calendario</option>'+options+'</select></div>':guide.googleCalendarId?'<p class="hint">Calendario seleccionado: '+esc(guide.googleCalendarName||guide.googleCalendarId)+'</p>':'')+'<p class="hint">La autorización es independiente para cada guía. Google no se conectará hasta que esa persona lo autorice.</p>';
+}
+async function connectGuideCalendar(guideId){
+ const guide=guides.find(item=>String(item.id)===String(guideId));if(!guide)return;
+ const clientId=$("googleClientId").value.trim();
+ if(!clientId){$("calendarGlobalStatus").textContent="Configura primero el OAuth Client ID de Google.";show("mas");return}
+ if(!/\.apps\.googleusercontent\.com$/.test(clientId)){alert("El Client ID debe ser el ID OAuth de aplicación web que termina en .apps.googleusercontent.com; no uses un client secret.");return}
+ const googleIdentity=window.google;
+ if(!googleIdentity?.accounts?.oauth2?.initTokenClient){$("calendarGlobalStatus").textContent="Google Identity Services todavía está cargando o no está disponible. Espera un momento y vuelve a pulsar conectar.";return}
+ try{
+  const tokenResult=await new Promise((resolve,reject)=>{
+   const tokenClient=googleIdentity.accounts.oauth2.initTokenClient({client_id:clientId,scope:"openid email https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.calendarlist.readonly",include_granted_scopes:true,callback:result=>result.error?reject(new Error(result.error_description||result.error)):resolve(result),error_callback:error=>reject(new Error(error.message||"Google canceló la autorización."))});
+   tokenClient.requestAccessToken({prompt:"select_account"});
+  });
+  const accessToken=tokenResult.access_token,headers={Authorization:"Bearer "+accessToken};
+  const [identityResponse,calendarResponse]=await Promise.all([fetch("https://www.googleapis.com/oauth2/v3/userinfo",{headers}),fetch("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer&maxResults=250",{headers})]);
+  if(!identityResponse.ok||!calendarResponse.ok)throw new Error("Google no permitió consultar la cuenta o sus calendarios. Revisa los permisos OAuth y Calendar API.");
+  const identity=await identityResponse.json(),calendarData=await calendarResponse.json(),calendars=calendarData.items||[];
+  if(!calendars.length)throw new Error("La cuenta autorizada no tiene calendarios con permiso de escritura.");
+  const expiresAt=Date.now()+(Number(tokenResult.expires_in)||3600)*1000;
+  calendarConnections.set(String(guide.id),{accessToken,expiresAt,email:identity.email||"Cuenta Google",calendars});
+  guide.googleEmail=identity.email||"";guide.googleCalendarId=calendars.some(item=>item.id===guide.googleCalendarId)?guide.googleCalendarId:(calendars.find(item=>item.primary)?.id||calendars[0].id);
+  guide.googleCalendarName=calendars.find(item=>item.id===guide.googleCalendarId)?.summary||"";
+  save();$("calendarGlobalStatus").textContent="Cuenta autorizada para "+guide.name+". Selecciona o confirma su calendario.";
+  renderGuides();scheduleCalendarSync();
+ }catch(error){console.error("STAIN Google Calendar authorization error:",error);$("calendarGlobalStatus").textContent="No se conectó Google Calendar: "+(error.message||"autorización cancelada o fallida");}
+}
+function disconnectGuideCalendar(guideId){calendarConnections.delete(String(guideId));renderGuides();$("calendarGlobalStatus").textContent="La autorización de esta guía se quitó de la memoria de este dispositivo. Los eventos existentes permanecen en Google Calendar."}
+function selectGuideCalendar(guideId,calendarId){
+ const guide=guides.find(item=>String(item.id)===String(guideId)),connection=calendarConnectionFor(guideId);
+ if(!guide||!connection)return alert("Autoriza primero la cuenta Google de esta guía.");
+ const calendar=connection.calendars.find(item=>item.id===calendarId);
+ if(!calendar)return alert("El calendario elegido ya no está disponible.");
+ guide.googleCalendarId=calendar.id;guide.googleCalendarName=calendar.summary||calendar.id;guide.googleEmail=connection.email;
+ save();$("calendarGlobalStatus").textContent="Calendario seleccionado para "+guide.name+"; sincronización de actividades en curso.";
+}
+function guideForCalendarActivity(record){
+ return guides.find(guide=>(record.guideId&&String(guide.id)===String(record.guideId))||(!record.guideId&&record.guideName&&guide.name===record.guideName))||null;
+}
+function calendarActivityKey(kind,record){return kind+":"+String(record.id)}
+function calendarActivityDetails(kind,record){
+ const isGroup=kind==="group"||kind==="groups",time=isGroup?groupTimeForSlot(record):normalizeGroupTime(record.time)||record.time;
+ const duration=Number(record.durationMinutes)||(Number(record.duration)>0?Number(record.duration)*60:BOOKING_DURATION_MINUTES);
+ const date=String(record.date||"");
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||timeToMinutes(time)===null)return null;
+ const [hour,minute]=time.split(":").map(Number),startMinutes=hour*60+minute,endMinutes=startMinutes+duration,endDate=new Date(date+"T00:00:00Z");
+ endDate.setUTCDate(endDate.getUTCDate()+Math.floor(endMinutes/1440));
+ const endDateText=endDate.toISOString().slice(0,10),endTime=String(Math.floor(endMinutes%1440/60)).padStart(2,"0")+":"+String(endMinutes%60).padStart(2,"0"),config=readCalendarSettings();
+ const title=isGroup?record.name:(record.workshop||record.activity||"Actividad STAIN");
+ const participantCount=isGroup?groupParticipantCount(record):(Number(record.people)||0),guide=guideForCalendarActivity(record);
+ const description=[guide?"Guía: "+guide.name:"", "Participantes: "+participantCount,record.details||record.notes||""].filter(Boolean).join("\n");
+ return {guide,date,time,duration,participantCount,title,description,location:record.location||config.location||"",timezone:config.timezone||"America/Panama",reminderMinutes:Number(config.reminderMinutes??30),startDateTime:date+"T"+time+":00",endDateTime:endDateText+"T"+endTime+":00"};
+}
+function calendarEventBody(details){
+ return {summary:details.title,description:details.description,location:details.location,start:{dateTime:details.startDateTime,timeZone:details.timezone},end:{dateTime:details.endDateTime,timeZone:details.timezone},reminders:{useDefault:false,overrides:details.reminderMinutes?[{method:"popup",minutes:details.reminderMinutes}]:[]}};
+}
+function calendarSignature(details,calendarId,guideId,email){return JSON.stringify({body:calendarEventBody(details),calendarId,guideId:String(guideId),email:email||""})}
+function stableGoogleEventId(kind,id){
+ const input=kind+":"+String(id),hash=seed=>{let value=seed>>>0;for(let index=0;index<input.length;index++){value^=input.charCodeAt(index);value=Math.imul(value,16777619)>>>0}return value.toString(16).padStart(8,"0")};
+ return hash(2166136261)+hash(2246822519)+hash(3266489917)+hash(668265263);
+}
+async function googleCalendarRequest(connection,calendarId,eventId,method,body){
+ const base="https://www.googleapis.com/calendar/v3/calendars/"+encodeURIComponent(calendarId)+"/events"+(eventId?"/"+encodeURIComponent(eventId):"");
+ const response=await fetch(base,{method,headers:{Authorization:"Bearer "+connection.accessToken,...(body?{"Content-Type":"application/json"}:{})},body:body?JSON.stringify(body):undefined});
+ if(method==="DELETE"&&(response.status===404||response.status===410))return null;
+ if(!response.ok){const text=await response.text(),error=new Error(response.status===401?"La autorización de Google venció; vuelve a conectar la guía.":"Google Calendar respondió "+response.status+": "+text.slice(0,300));error.status=response.status;throw error}
+ return method==="DELETE"?null:response.json();
+}
+function setCalendarActivityStatus(kind,record,message){calendarActivityStatuses.set(calendarActivityKey(kind,record),message)}
+function calendarActivityMarkup(kind,record){
+ const map=record.calendarEvent,status=calendarActivityStatuses.get(calendarActivityKey(kind,record));
+ if(!record.guideId&&!record.guideName&&!map)return "";
+ const eventLink=map?.htmlLink&&/^https:\/\/calendar\.google\.com\//.test(map.htmlLink)?'<a class="btn small" href="'+esc(map.htmlLink)+'" target="_blank" rel="noopener noreferrer">Abrir evento</a>':"";
+ const statusText=status||(map?"Evento guardado · puede requerir autorización en este dispositivo":"");
+ return '<div class="btnrow"><span class="hint">'+esc(statusText)+'</span>'+eventLink+'<button class="btn small" type="button" onclick="syncOneCalendarActivity(\''+kind+'\','+record.id+')">Sincronizar con Google</button></div>';
+}
+async function removeCalendarEvent(record,kind){
+ const mapping=record.calendarEvent;if(!mapping?.eventId)return true;
+ const connection=calendarConnectionFor(mapping.guideId);
+ if(!connection){setCalendarActivityStatus(kind,record,"Conecta la cuenta anterior para cancelar su evento de Google.");renderBookings();renderGroups();return false}
+ if(mapping.googleEmail&&connection.email&&mapping.googleEmail.toLocaleLowerCase()!==connection.email.toLocaleLowerCase()){setCalendarActivityStatus(kind,record,"El evento pertenece a "+mapping.googleEmail+". Autoriza esa misma cuenta antes de cancelarlo o moverlo.");renderBookings();renderGroups();return false}
+ try{await googleCalendarRequest(connection,mapping.calendarId,mapping.eventId,"DELETE");record.calendarEvent=null;calendarActivityStatuses.delete(calendarActivityKey(kind,record));return true}
+ catch(error){setCalendarActivityStatus(kind,record,"No se canceló el evento: "+error.message);renderBookings();renderGroups();return false}
+}
+async function syncCalendarActivity(kind,record){
+ const details=calendarActivityDetails(kind,record),mapping=record.calendarEvent;
+ if(mapping?.eventId&&(!details?.guide||!details.guide.googleCalendarId||String(mapping.guideId)!==String(details.guide.id)||mapping.calendarId!==details.guide.googleCalendarId)){
+  if(!await removeCalendarEvent(record,kind))return;
+  save();
+ }
+ if(!details){setCalendarActivityStatus(kind,record,"Falta una fecha u hora válida; no se creó ningún evento.");return}
+ if(!details.guide){setCalendarActivityStatus(kind,record,"Asigna una guía para sincronizar esta actividad.");return}
+ if(!details.guide.googleCalendarId){setCalendarActivityStatus(kind,record,"Selecciona un calendario para esta guía.");return}
+ const connection=calendarConnectionFor(details.guide.id);
+ if(!connection){setCalendarActivityStatus(kind,record,"Pendiente: la guía debe autorizar Google en este dispositivo.");return}
+ if(record.calendarEvent?.eventId&&record.calendarEvent.googleEmail&&connection.email&&record.calendarEvent.googleEmail.toLocaleLowerCase()!==connection.email.toLocaleLowerCase()){setCalendarActivityStatus(kind,record,"El evento pertenece a "+record.calendarEvent.googleEmail+". Reconecta esa cuenta; no se creará un duplicado.");return}
+ const signature=calendarSignature(details,details.guide.googleCalendarId,details.guide.id,connection.email),body=calendarEventBody(details);
+ if(record.calendarEvent?.eventId&&record.calendarEvent.signature===signature){setCalendarActivityStatus(kind,record,"Sincronizado en "+(details.guide.googleCalendarName||"Google Calendar"));return}
+ try{
+  const eventId=record.calendarEvent?.eventId||stableGoogleEventId(kind,record.id);
+  let response;
+  if(record.calendarEvent?.eventId){
+   try{response=await googleCalendarRequest(connection,details.guide.googleCalendarId,eventId,"PUT",body)}
+   catch(error){if(error.status!==404)throw error;response=await googleCalendarRequest(connection,details.guide.googleCalendarId,null,"POST",{...body,id:eventId})}
+  }else{
+   try{response=await googleCalendarRequest(connection,details.guide.googleCalendarId,null,"POST",{...body,id:eventId})}
+   catch(error){if(error.status!==409)throw error;response=await googleCalendarRequest(connection,details.guide.googleCalendarId,eventId,"PUT",body)}
+  }
+  record.calendarEvent={eventId:response.id,calendarId:details.guide.googleCalendarId,guideId:details.guide.id,googleEmail:connection.email,signature,htmlLink:response.htmlLink||""};
+  setCalendarActivityStatus(kind,record,"Sincronizado correctamente en Google Calendar.");
+  save();
+ }catch(error){if(error.message.includes("autorización"))calendarConnections.delete(String(details.guide.id));setCalendarActivityStatus(kind,record,"Error de sincronización: "+error.message);console.error("STAIN Calendar event sync error:",error);renderBookings();renderGroups();renderGuides()}
+}
+async function runCalendarSync(){
+ if(calendarSyncRunning){calendarSyncPending=true;return}
+ calendarSyncRunning=true;
+ try{do{calendarSyncPending=false;for(const record of bookings)await syncCalendarActivity("booking",record);for(const record of groups)await syncCalendarActivity("group",record)}while(calendarSyncPending)}
+ finally{calendarSyncRunning=false;if(calendarSyncPending)scheduleCalendarSync()}
+}
+function scheduleCalendarSync(){if(!currentUser)return;if(calendarSyncTimer)clearTimeout(calendarSyncTimer);calendarSyncTimer=setTimeout(()=>{calendarSyncTimer=null;runCalendarSync()},800)}
+function syncOneCalendarActivity(kind,id){
+ const records=kind==="group"?groups:bookings,record=records.find(item=>String(item.id)===String(id));
+ if(!record)return;
+ syncCalendarActivity(kind,record).then(()=>{renderBookings();renderGroups();renderGuides()}).catch(error=>{setCalendarActivityStatus(kind,record,"Error: "+error.message);console.error(error);renderBookings();renderGroups()});
 }
 async function refreshPiecePhotoUrls(userId=currentUser?.id,generation=accountGeneration){
  if(!userId)return;
@@ -274,14 +779,15 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
  localSave(user.id);persistPendingData(user.id);
  cloudReady=true;
  setCloudStatus(pendingDataKeys.size?"Guardando cambios pendientes…":"☁ Sincronizado");
- refreshSelects();capacityCheck();calcMoney();renderAll();
+ refreshSelects();capacityCheck();calcMoney();renderAll();scheduleCalendarSync();
  if(pendingDataKeys.size)queueCloudSync();
 }
 function showAuthenticatedApp(){document.body.classList.add("authenticated");$("loginScreen").hidden=true}
 async function initializeAccount(user,timeoutMs=20000){
  accountGeneration++;
  const generation=accountGeneration;
- currentUser=user;cloudReady=false;syncPending=false;
+ if(currentUser?.id!==user.id)calendarConnections.clear();
+ currentUser=user;cloudReady=false;syncPending=false;loadCalendarSettings();
  clearAccountData();
  loadLocalData(user.id);
  setCloudStatus("Cargando tus datos…");
@@ -347,13 +853,13 @@ $("loginForm").addEventListener("submit",async e=>{
  finally{clearTimeout(authTimeout);button.disabled=false;button.textContent="Entrar a STAIN"}
 });
 $("logoutBtn").addEventListener("click",async()=>{
- accountGeneration++;cloudReady=false;syncPending=false;currentUser=null;clearAccountData();
+ accountGeneration++;cloudReady=false;syncPending=false;currentUser=null;calendarConnections.clear();clearAccountData();
  document.body.classList.remove("authenticated");$("loginScreen").hidden=false;$("loginPassword").value="";setCloudStatus("✿ Un espacio para crear");
  await supabaseClient.auth.signOut();
 });
 supabaseClient.auth.onAuthStateChange((event,session)=>{
  if(event==="SIGNED_OUT"&&currentUser){
-  accountGeneration++;cloudReady=false;syncPending=false;currentUser=null;clearAccountData();
+  accountGeneration++;cloudReady=false;syncPending=false;currentUser=null;calendarConnections.clear();clearAccountData();
   document.body.classList.remove("authenticated");$("loginScreen").hidden=false;$("loginPassword").value="";setCloudStatus("✿ Un espacio para crear");
  }
  if(event==="SIGNED_IN"&&!loginRequest&&session?.user&&currentUser?.id!==session.user.id){
@@ -361,7 +867,7 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
  }
 });
 
-function show(id){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("active",x.dataset.view===id||(x.dataset.view==="mas"&&["talleres","inventario","guias"].includes(id))));if(id==="agenda")renderAgenda();if(id==="reservas")renderBookings();if(id==="talleres")renderWorkshops();if(id==="grupales")renderGroups();if(id==="piezas")renderPieces();if(id==="inventario")renderInventory();if(id==="guias")renderGuides();refreshSelects();window.scrollTo({top:0,behavior:"smooth"})}
+function show(id){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("active",x.dataset.view===id||(x.dataset.view==="mas"&&["talleres","inventario","guias"].includes(id))));if(id==="reservas"){renderBookings();if(bookingView==="map"){refreshTableMapBookings();renderSpaceMap()}}if(id==="talleres")renderWorkshops();if(id==="grupales")renderGroups();if(id==="piezas")renderPieces();if(id==="inventario")renderInventory();if(id==="guias")renderGuides();refreshSelects();window.scrollTo({top:0,behavior:"smooth"})}
 $("nav").addEventListener("click",e=>{const b=e.target.closest("button[data-view]");if(b)show(b.dataset.view)});
 function dateToday(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 $("agendaDate").value=dateToday();$("bookingDate").value=dateToday();$("pieceDate").value=dateToday();
@@ -370,65 +876,292 @@ function groupTimeForSlot(group){return normalizeGroupTime(group.time)}
 function groupParticipantCount(group){return (group.participants||[]).length}
 function groupTables(group){return Array.isArray(group.assignedSpaces)?group.assignedSpaces.filter(space=>SPACES[space]):[]}
 function groupsAt(date,time){return groups.filter(group=>group.date===date&&groupTimeForSlot(group)===time)}
-function occupied(date,space,time){return bookings.some(b=>b.date===date&&b.space===space&&b.time===time)||groupsAt(date,time).some(group=>!Array.isArray(group.assignedSpaces)||!groupTables(group).length||groupTables(group).includes(space))}
-function groupBlockedSpaces(date,time,excludeGroupId){const blocked=new Set(bookings.filter(b=>b.date===date&&b.time===time).map(b=>b.space));for(const group of groupsAt(date,time)){if(group.id===excludeGroupId)continue;if(!Array.isArray(group.assignedSpaces)||!groupTables(group).length){Object.keys(SPACES).forEach(space=>blocked.add(space));continue}for(const space of groupTables(group))blocked.add(space)}return blocked}
+function timeToMinutes(time){const value=normalizeGroupTime(time)||time,match=String(value||"").match(/^(\d{2}):(\d{2})$/);return match?Number(match[1])*60+Number(match[2]):null}
+function assignedSpaces(record){return Array.isArray(record.spaces)&&record.spaces.length?record.spaces.filter(space=>SPACES[space]):record.space&&SPACES[record.space]?[record.space]:[]}
+function reservationInterval(record){const start=timeToMinutes(record.time);return start===null?null:{start,end:start+BOOKING_DURATION_MINUTES}}
+function intervalsOverlap(date,time,record){if(record.date&&record.date!==date)return false;const start=timeToMinutes(time),interval=reservationInterval(record);if(start===null||!interval)return false;const candidate={start,end:start+BOOKING_DURATION_MINUTES};return candidate.start<interval.end&&interval.start<candidate.end}
+function peakOccupiedPeople(records,capacity){if(records.some(item=>!reservationInterval(item)))return capacity;const intervals=records.map(item=>{const interval=reservationInterval(item);return {...interval,people:Number(item.people)||groupParticipantCount(item)}});return intervals.reduce((peak,current)=>Math.max(peak,intervals.filter(item=>item.start<current.end&&current.start<item.end).reduce((sum,item)=>sum+item.people,0)),0)}
+function reservationConflicts(date,time,space,excludeId,excludeKind){if(timeToMinutes(time)===null)return true;const unresolved=groups.some(item=>(excludeKind==="booking"||item.id!==excludeId)&&item.date===date&&!groupTimeForSlot(item));if(unresolved)return true;const records=[...bookings.filter(item=>(excludeKind==="group"||item.id!==excludeId)&&item.date===date&&assignedSpaces(item).includes(space)),...groups.filter(item=>(excludeKind==="booking"||item.id!==excludeId)&&item.date===date&&(!groupTables(item).length||groupTables(item).includes(space))).map(item=>({id:item.id,date:item.date,time:groupTimeForSlot(item),durationMinutes:BOOKING_DURATION_MINUTES}))];return records.some(record=>intervalsOverlap(date,time,record))}
+function occupied(date,space,time){return reservationConflicts(date,time,space)}
+function groupBlockedSpaces(date,time,excludeGroupId){return new Set(Object.keys(SPACES).filter(space=>reservationConflicts(date,time,space,excludeGroupId,"group")))}
 function groupSpaceOptions(group){const time=groupTimeForSlot(group);if(!group.date||!time)return [];const blocked=groupBlockedSpaces(group.date,time,group.id),spaces=Object.keys(SPACES).filter(space=>!blocked.has(space)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+SPACES[space].max,0);if(capacity>=groupParticipantCount(group))options.push({spaces:selected,capacity})}return options.sort((a,b)=>(a.capacity-groupParticipantCount(group))-(b.capacity-groupParticipantCount(group))||a.spaces.length-b.spaces.length)}
+function allocationOptions(date,time,people,excludeId=bookingEditingId){const spaces=Object.keys(SPACES).filter(space=>!reservationConflicts(date,time,space,excludeId)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+SPACES[space].max,0);if(capacity>=people)options.push({spaces:selected,capacity,comfortable:selected.reduce((sum,space)=>sum+SPACES[space].comfortable,0)})}return options.sort((a,b)=>a.spaces.length-b.spaces.length||a.capacity-b.capacity)}
+function validateSpaceAllocation(date,time,people,spaces,excludeId){if(!Array.isArray(spaces)||!spaces.length)return "Selecciona al menos un área.";if(new Set(spaces).size!==spaces.length||spaces.some(space=>!SPACES[space]))return "La distribución contiene un área inválida.";const capacity=spaces.reduce((sum,space)=>sum+SPACES[space].max,0);if(people<1||people>capacity)return "La capacidad seleccionada no alcanza para este grupo.";const conflict=spaces.find(space=>reservationConflicts(date,time,space,excludeId));return conflict?"El área "+SPACES[conflict].name+" está ocupada durante esa reserva.":""}
+function allocationCapacity(spaces,field){return spaces.reduce((sum,space)=>sum+SPACES[space][field],0)}
+function validSeatIds(ids){return Array.isArray(ids)?[...new Set(ids.filter(id=>SEAT_TABLE_BY_ID.has(id)))]:[]}
+function seatSpaces(seatIds){return [...new Set(validSeatIds(seatIds).map(id=>SEAT_TABLE_BY_ID.get(id).area))]}
+function recordSeatIds(record){return validSeatIds(record?.seatIds)}
+function recordSpacesForOccupancy(record,kind){return kind==="group"?groupTables(record):assignedSpaces(record)}
+function occupiedSeatIdsForRecord(record,kind){
+ const assigned=recordSeatIds(record),expected=kind==="group"?groupParticipantCount(record):Number(record.people)||0;if(assigned.length&&expected>0&&assigned.length>=expected)return assigned.slice(0,expected);
+ const spaces=recordSpacesForOccupancy(record,kind);
+ if(kind==="group")return spaces.length?PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(table=>table.seatIds):ALL_SEAT_IDS;
+ if(!spaces.length)return assigned;
+ const available=PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(table=>table.seatIds).filter(id=>!assigned.includes(id));
+ return [...assigned,...available.slice(0,Math.max(0,expected-assigned.length))];
+}
+function seatOccupants(date,time,seatId,excludeId=null,excludeKind="booking"){
+ if(!SEAT_TABLE_BY_ID.has(seatId))return [];
+ if(timeToMinutes(time)===null)return [...bookings.filter(item=>item.date===date&&!(excludeKind==="booking"&&String(item.id)===String(excludeId))),...groups.filter(item=>item.date===date&&!(excludeKind==="group"&&String(item.id)===String(excludeId)))];
+ const records=[
+  ...bookings.filter(item=>item.date===date&&!(excludeKind==="booking"&&String(item.id)===String(excludeId))).map(record=>({record,kind:"booking"})),
+  ...groups.filter(item=>item.date===date&&!(excludeKind==="group"&&String(item.id)===String(excludeId))).map(record=>({record,kind:"group"}))
+ ];
+ return records.filter(({record,kind})=>{
+  const recordTime=kind==="group"?groupTimeForSlot(record):record.time;
+  if(timeToMinutes(recordTime)===null)return true;
+  if(!intervalsOverlap(date,time,{...record,time:recordTime,durationMinutes:Number(record.durationMinutes)||BOOKING_DURATION_MINUTES}))return false;
+  return occupiedSeatIdsForRecord(record,kind).includes(seatId);
+ }).map(item=>item.record);
+}
+function recommendSeatAllocation(date,time,people,excludeId=null,excludeKind="booking",preferredSpaces=[]){
+ const count=Number(people)||0;if(!date||timeToMinutes(time)===null||count<1||count>ALL_SEAT_IDS.length)return null;
+ const availableByTable=PHYSICAL_TABLES.map(table=>({...table,available:table.seatIds.filter(id=>!seatOccupants(date,time,id,excludeId,excludeKind).length)})).filter(table=>table.available.length);
+ const candidates=[];
+ for(let mask=1;mask<(1<<availableByTable.length);mask++){
+  const tables=availableByTable.filter((_,index)=>mask&(1<<index)),available=tables.flatMap(table=>table.available);
+  if(available.length<count)continue;
+  const spaces=[...new Set(tables.map(table=>table.area))],preferredPenalty=preferredSpaces.length?tables.filter(table=>!preferredSpaces.includes(table.area)).length:0;
+  candidates.push({tables,available,spaces,score:[tables.length,available.length-count,preferredPenalty,spaces.length,tables.map(table=>table.id).join("|")]});
+ }
+ candidates.sort((a,b)=>{for(let index=0;index<a.score.length;index++){const left=a.score[index],right=b.score[index];if(left<right)return -1;if(left>right)return 1}return 0});
+ if(!candidates.length)return null;
+ const best=candidates[0],seatIds=best.available.slice(0,count);
+ return {seatIds,spaces:seatSpaces(seatIds),tableIds:[...new Set(seatIds.map(id=>SEAT_TABLE_BY_ID.get(id).id))],capacity:best.available.length};
+}
+function validateSeatAllocation(date,time,people,seatIds,excludeId=null,excludeKind="booking"){
+ const seats=validSeatIds(seatIds),count=Number(people)||0;
+ if(!date||timeToMinutes(time)===null)return "Selecciona una fecha y una hora válidas.";
+ if(!Array.isArray(seatIds)||seats.length!==seatIds.length)return "La selección contiene una silla no válida o repetida.";
+ if(count<1||seats.length!==count)return "Selecciona exactamente "+count+" silla"+(count===1?"":"s")+" para esta reserva.";
+ const conflict=seats.find(id=>seatOccupants(date,time,id,excludeId,excludeKind).length);
+ return conflict?"La silla "+conflict+" ya está ocupada durante esa reserva.":"";
+}
+function findSeatConflictAcrossSnapshots(localBookings,remoteBookings,localGroups,remoteGroups){
+ const clashes=(left,leftKind,right,rightKind)=>{
+  if(left.date!==right.date||(leftKind===rightKind&&String(left.id)===String(right.id)))return null;
+  const shared=occupiedSeatIdsForRecord(left,leftKind).find(id=>occupiedSeatIdsForRecord(right,rightKind).includes(id));if(!shared)return null;
+  const leftTime=leftKind==="group"?groupTimeForSlot(left):left.time,rightTime=rightKind==="group"?groupTimeForSlot(right):right.time;
+  if(timeToMinutes(leftTime)===null||timeToMinutes(rightTime)===null)return shared;
+  return intervalsOverlap(left.date,leftTime,{...right,time:rightTime,durationMinutes:Number(right.durationMinutes)||BOOKING_DURATION_MINUTES})?shared:null;
+ };
+ for(const booking of localBookings)for(const other of remoteBookings){const seatId=clashes(booking,"booking",other,"booking");if(seatId)return {seatId}}
+ for(const booking of localBookings)for(const group of remoteGroups){const seatId=clashes(booking,"booking",group,"group");if(seatId)return {seatId}}
+ for(const group of localGroups)for(const booking of remoteBookings){const seatId=clashes(group,"group",booking,"booking");if(seatId)return {seatId}}
+ for(const group of localGroups)for(const other of remoteGroups){const seatId=clashes(group,"group",other,"group");if(seatId)return {seatId}}
+ return null;
+}
+function renderSeatPlan(containerId,{date,time,selected=[],excludeId=null,excludeKind="booking",editable=false,people=0,target="form"}={}){
+ const container=$(containerId);if(!container)return;
+ const selectedIds=validSeatIds(selected),selectedSet=new Set(selectedIds),areas={A:{occupied:0,selected:0,available:0},B:{occupied:0,selected:0,available:0},C:{occupied:0,selected:0,available:0}};
+ for(const table of PHYSICAL_TABLES)for(const id of table.seatIds){
+  const area=areas[table.area],taken=seatOccupants(date,time,id,excludeId,excludeKind).length>0;
+  if(selectedSet.has(id))area.selected++;else if(taken)area.occupied++;else area.available++;
+ }
+ const renderTable=table=>'<div class="seat-table '+table.orientation+'"><div class="seat-table-surface"><span class="seat-table-badge">'+table.id+'</span></div>'+table.seatIds.map((id,index)=>{
+  const occupants=seatOccupants(date,time,id,excludeId,excludeKind),taken=occupants.length>0,selectedSeat=selectedSet.has(id),state=selectedSeat?(taken?"conflict":"selected"):taken?"occupied":"available",disabled=selectedSeat?!editable:taken||!editable||(people>0&&selectedIds.length>=people),owner=occupants.map(item=>item.client||item.name).filter(Boolean).join(", "),label=selectedSeat?(taken?"Silla "+id+" seleccionada con conflicto":"Silla "+id+" seleccionada"):taken?"Silla "+id+" ocupada"+(owner?" por "+owner:""):"Silla "+id+" disponible";
+  return '<button type="button" class="seat-chair '+state+' position-'+table.positions[index]+'" '+(disabled?"disabled ":"")+'aria-label="'+esc(label)+'" aria-pressed="'+selectedSeat+'" title="'+esc(label)+'" '+(editable?'onclick=\'toggleBookingSeat("'+target+'","'+id+'")\'':"")+'>'+(selectedSeat?"✓":taken?"×":index+1)+'</button>';
+ }).join("")+'</div>';
+ const areaSummary=area=>'<span>Área '+area+' · '+areas[area].occupied+' ocupadas · '+areas[area].selected+' seleccionadas · '+areas[area].available+' libres</span>';
+ container.innerHTML='<div class="seat-map-legend"><span><i class="seat-legend-dot"></i>Disponible</span><span><i class="seat-legend-dot occupied"></i>Ocupada</span><span><i class="seat-legend-dot selected"></i>Seleccionada</span></div><div class="seat-map-shell"><div class="seat-map"><div class="seat-direction">FRENTE DEL LOCAL ↑</div><section class="seat-area seat-area-left"><h4 class="seat-area-heading">Izquierda · 3 mesas verticales</h4>'+PHYSICAL_TABLES.filter(table=>table.area==="B").map(table=>'<div class="seat-table-row">'+renderTable(table)+'</div>').join("")+'</section><div class="seat-area-right"><section class="seat-area"><h4 class="seat-area-heading">Derecha · 2 mesas horizontales</h4><div class="seat-table-row">'+PHYSICAL_TABLES.filter(table=>table.area==="A").map(renderTable).join("")+'</div></section><section class="seat-area"><h4 class="seat-area-heading">Fondo · mesa individual horizontal</h4><div class="seat-table-row">'+renderTable(PHYSICAL_TABLES.find(table=>table.area==="C"))+'</div></section></div><div class="seat-direction seat-back">FONDO DEL LOCAL ↓</div></div></div><div class="seat-map-summary">'+areaSummary("A")+areaSummary("B")+areaSummary("C")+'</div>';
+}
+function formatStartTime(time){const minutes=timeToMinutes(time);if(minutes===null)return String(time||"");const hour=Math.floor(minutes/60),display=hour%12||12;return display+":00 "+(hour<12?"a. m.":"p. m.")}
+function setupScheduleControls(){const options=SLOTS.map(slot=>'<option value="'+slot.time+'">'+formatStartTime(slot.time)+'</option>').join("");$("time").innerHTML=options;$("tableMapTime").innerHTML=options;$("time").value="09:00";$("tableMapTime").value="09:00";$("bookingDate").value=$("bookingDate").value||dateToday();$("agendaDate").value=$("agendaDate").value||dateToday();refreshBookingAllocation();renderSpaceMap()}
+function renderBookingAllocation(){
+ const date=$("bookingDate").value,time=$("time").value,people=Number($("people").value)||0,hint=$("bookingAllocationHint"),mode=$("bookingAssignmentMode").value;
+ $("recalculateBookingSeats").hidden=mode!=="automatic";
+ if(!date||!time||people<1){hint.textContent="Elige fecha, hora y cantidad de personas para ver la disponibilidad.";bookingFormSeatIds=[];bookingFormSpaces=[];$("bookingAllocationChoices").innerHTML="";return}
+ if(mode==="automatic"){
+  const suggestion=recommendSeatAllocation(date,time,people,bookingEditingId,"booking",[$("space").value]);
+  bookingFormSeatIds=suggestion?.seatIds||[];
+  bookingFormSpaces=seatSpaces(bookingFormSeatIds);
+  hint.textContent=suggestion?"Vista previa automática: "+suggestion.tableIds.join(", ")+" · "+suggestion.seatIds.length+" sillas para "+people+" personas. Guarda para aceptar o cambia a asignación manual.":"No hay suficientes sillas disponibles para este horario.";
+ }else{
+  bookingFormSeatIds=validSeatIds(bookingFormSeatIds);bookingFormSpaces=seatSpaces(bookingFormSeatIds);
+  const error=validateSeatAllocation(date,time,people,bookingFormSeatIds,bookingEditingId,"booking");
+  hint.textContent=error||("Selección manual: "+bookingFormSeatIds.length+" de "+people+" sillas. Elige las sillas marcadas como disponibles.");
+ }
+ renderSeatPlan("bookingAllocationChoices",{date,time,selected:bookingFormSeatIds,excludeId:bookingEditingId,excludeKind:"booking",editable:mode==="manual",people,target:"form"});
+}
+function recalculateBookingSeats(){renderBookingAllocation()}
+function toggleBookingSeat(target,seatId){
+ const isForm=target==="form",selected=isForm?bookingFormSeatIds:bookingMapSeatIds,date=isForm?$("bookingDate").value:(bookings.find(item=>String(item.id)===String($("tableMapBooking").value))?.date||$("agendaDate").value),time=isForm?$("time").value:(bookings.find(item=>String(item.id)===String($("tableMapBooking").value))?.time||$("tableMapTime").value),people=isForm?Number($("people").value)||0:Number(bookings.find(item=>String(item.id)===String($("tableMapBooking").value))?.people)||0,excludeId=isForm?bookingEditingId:String($("tableMapBooking").value)||null;
+ if(!isForm)bookingMapMode="manual";
+ if(selected.includes(seatId)){if(isForm)bookingFormSeatIds=selected.filter(id=>id!==seatId);else bookingMapSeatIds=selected.filter(id=>id!==seatId)}
+ else{
+  if(people>0&&selected.length>=people)return;
+  if(seatOccupants(date,time,seatId,excludeId,"booking").length)return;
+  if(isForm)bookingFormSeatIds=[...selected,seatId];else bookingMapSeatIds=[...selected,seatId];
+ }
+ if(isForm)capacityCheck();else renderSpaceMap();
+}
+function chooseBookingAllocation(value){bookingFormSpaces=String(value).split(",").filter(Boolean);capacityCheck()}
+function renderSpaceMap(){
+ const bookingId=String($("tableMapBooking").value||""),booking=bookings.find(item=>String(item.id)===bookingId),date=booking?.date||$("agendaDate").value,time=booking?.time||$("tableMapTime").value||"09:00";
+ $("tableMapTime").disabled=!!booking;if(booking)$("tableMapTime").value=time;
+ renderSeatPlan("tableMap",{date,time,selected:bookingMapSeatIds,excludeId:booking?.id??null,excludeKind:"booking",editable:!!booking,people:Number(booking?.people)||0,target:"map"});
+ const spaces=seatSpaces(bookingMapSeatIds),error=booking?validateSeatAllocation(date,time,Number(booking.people)||0,bookingMapSeatIds,booking.id,"booking"):"";
+ $("tableMapHint").textContent=booking?"Reserva: "+booking.client+" · "+booking.date+" · "+formatStartTime(booking.time)+" · "+(booking.people||0)+" personas. Sillas seleccionadas: "+bookingMapSeatIds.length+"/"+(booking.people||0)+" · "+(spaces.map(space=>SPACES[space].name).join(" + ")||"sin asignar")+(error?" · "+error:""):"Disponibilidad para "+date+" a las "+formatStartTime(time)+". Cada silla queda ocupada durante las 2 horas de la reserva.";
+ const save=$("saveTableMap");if(save)save.disabled=!booking;
+}
+function toggleMapSeat(seatId){toggleBookingSeat("map",seatId)}
+function saveTableMapAssignment(){
+ const booking=bookings.find(item=>String(item.id)===String($("tableMapBooking").value));if(!booking)return alert("Selecciona una reserva para asignarle sillas.");
+ const error=validateSeatAllocation(booking.date,booking.time,Number(booking.people)||0,bookingMapSeatIds,booking.id,"booking");
+ if(error){$("tableMapHint").textContent=error;alert(error);return}
+ booking.seatIds=bookingMapSeatIds.slice();booking.spaces=seatSpaces(booking.seatIds);booking.space=booking.spaces[0];booking.assignmentMode=bookingMapMode;save();renderAll();$("tableMapBooking").value=String(booking.id);bookingMapSpaces=booking.spaces.slice();bookingMapSeatIds=booking.seatIds.slice();renderSpaceMap();
+}
+function recommendMapAssignment(){
+ const booking=bookings.find(item=>String(item.id)===String($("tableMapBooking").value));if(!booking)return alert("Selecciona una reserva para recomendarle una distribución.");
+ const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||0,booking.id,"booking",assignedSpaces(booking));
+ if(!suggestion)return alert("No hay sillas disponibles para esta reserva. Puedes revisar otros horarios o asignar manualmente.");
+ bookingMapSeatIds=suggestion.seatIds;bookingMapMode="automatic";renderSpaceMap();
+}
+function selectMapBooking(booking){
+ if(!booking){bookingMapSpaces=[];bookingMapSeatIds=[];bookingMapMode="manual";return}
+ bookingMapMode=booking.assignmentMode==="automatic"?"automatic":"manual";
+ bookingMapSpaces=assignedSpaces(booking).slice();
+ const savedSeats=recordSeatIds(booking);
+ if(savedSeats.length===Number(booking.people))bookingMapSeatIds=savedSeats;
+ else{
+  const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||0,booking.id,"booking",bookingMapSpaces);
+  bookingMapSeatIds=suggestion?.seatIds||[];
+ }
+}
+function refreshTableMapBookings(){const selected=String($("tableMapBooking").value||"");$("tableMapBooking").innerHTML='<option value="">Consultar disponibilidad</option>'+bookings.map(item=>'<option value="'+item.id+'">'+esc(item.client)+' · '+esc(item.date)+' '+formatStartTime(item.time)+' · '+(item.people||0)+' pers.</option>').join("");if(bookings.some(item=>String(item.id)===selected))$("tableMapBooking").value=selected;else{$("tableMapBooking").value="";selectMapBooking(null)}}
 function assignGroupTables(id,manual=false,persist=true){const group=groups.find(item=>item.id===id);if(!group)return false;const options=groupSpaceOptions(group);if(!options.length){group.assignedSpaces=[];group.assignmentNotice="No hay una combinación disponible que cubra la cantidad de participantes, o falta una fecha y hora válidas. Libera espacio, ajusta la reserva o completa el horario para asignar mesas.";alert("No se pudo asignar una combinación segura para “"+group.name+"”. Se requiere revisión manual: verifica fecha, hora, reservas y capacidad disponible.");if(persist){save();renderAll()}return false}let choice=options[0];if(manual){const choices=options.map((option,index)=>(index+1)+") "+option.spaces.join(" + ")+" · capacidad "+option.capacity).join("\n"),answer=prompt("Elige una combinación disponible para “"+group.name+"”:\n"+choices+"\nEscribe el número de la opción.");if(answer===null)return false;const index=Number(answer)-1;if(!Number.isInteger(index)||!options[index]){alert("La opción no es válida; no se modificó la asignación.");return false}choice=options[index]}group.assignedSpaces=choice.spaces;group.assignmentNotice="";if(persist){save();renderAll()}return true}
 let calendarMonth=new Date();
 function changeMonth(delta){calendarMonth=new Date(calendarMonth.getFullYear(),calendarMonth.getMonth()+delta,1);renderCalendar()}
-function goToday(){const d=dateToday();$("agendaDate").value=d;calendarMonth=new Date(d+"T12:00:00");renderAgenda()}
-function selectCalendarDay(date){$("agendaDate").value=date;renderAgenda()}
+function goToday(){const d=dateToday();$("agendaDate").value=d;calendarMonth=new Date(d+"T12:00:00");renderBookingSchedule()}
+function selectCalendarDay(date){$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");renderBookingSchedule()}
 function renderCalendar(){const selected=$("agendaDate").value||dateToday(),d=new Date(calendarMonth.getFullYear(),calendarMonth.getMonth(),1),start=(d.getDay()+6)%7,first=new Date(d.getFullYear(),d.getMonth(),1-start),weekdays=["L","M","M","J","V","S","D"];$("calendarTitle").textContent=d.toLocaleDateString("es-PA",{month:"long",year:"numeric"});let html=weekdays.map(x=>'<div class="cal-week">'+x+'</div>').join("");for(let i=0;i<42;i++){const day=new Date(first.getFullYear(),first.getMonth(),first.getDate()+i),iso=day.getFullYear()+"-"+String(day.getMonth()+1).padStart(2,"0")+"-"+String(day.getDate()).padStart(2,"0"),has=bookings.some(b=>b.date===iso)||groups.some(group=>group.date===iso),sel=iso===selected,today=iso===dateToday();html+='<button type="button" class="cal-day '+(day.getMonth()!==d.getMonth()?'outside ':'')+(has?'has-booking ':'')+(sel?'selected ':'')+(today?'today':'')+'" onclick="selectCalendarDay(\''+iso+'\')" aria-label="'+iso+'">'+day.getDate()+(has?'<span class="cal-dot"></span>':'')+'</button>'}$("calendarGrid").innerHTML=html}
-function renderDayBookings(date){const list=bookings.filter(b=>b.date===date).sort((a,b)=>a.time.localeCompare(b.time)),groupList=groups.filter(group=>group.date===date).sort((a,b)=>(groupTimeForSlot(a)||"").localeCompare(groupTimeForSlot(b)||"")),d=new Date(date+"T12:00:00"),nice=d.toLocaleDateString("es-PA",{weekday:"long",day:"numeric",month:"long",year:"numeric"}),people=list.reduce((n,b)=>n+(Number(b.people)||0),0)+groupList.reduce((n,group)=>n+groupParticipantCount(group),0);$("selectedDayTitle").textContent=nice.charAt(0).toUpperCase()+nice.slice(1);$("daySummary").innerHTML='<div class="day-chip">▦ '+(list.length+groupList.length)+' reserva'+(list.length+groupList.length===1?'':'s')+'</div><div class="day-chip">♡ '+people+' personas</div><div class="day-chip">'+money(list.reduce((n,b)=>n+(Number(b.amount)||0),0))+' en reservas</div>';$("dayBookings").innerHTML=list.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill">'+esc(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</span></div><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.phone?'WhatsApp: '+esc(b.phone)+' · ':'')+(b.guideName?'Guía: '+esc(b.guideName)+' · ':'')+'Total '+money(b.amount)+' · Abono '+money(b.deposit)+' · Saldo '+money(b.balance)+'</p><p class="muted">'+esc(b.notes||'Sin observaciones')+'</p><div class="btnrow"><button class="btn small" onclick="prepareBooking(\''+b.space+'\',\''+b.time+'\')">Crear reserva similar</button><button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar</button></div></div>').join("")+groupList.map(group=>'<div class="item"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+esc(SLOTS.find(slot=>slot.time===groupTimeForSlot(group))?.label||group.time||"Horario pendiente")+'</span></div><p>'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+' inscritos · Mesas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+'</p><p class="muted">Guía: '+esc(group.guideName||"Sin asignar")+(group.assignmentNotice?' · '+esc(group.assignmentNotice):'')+'</p><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas manualmente</button></div>').join("")||'<div class="empty"><div class="emoji">♡</div>No hay reservas ni talleres grupales para este día todavía.</div>'}
-function renderAgenda(){const date=$("agendaDate").value;if(!date)return;renderCalendar();renderDayBookings(date);$("agendaList").innerHTML=SLOTS.map(slot=>{const slotGroups=groupsAt(date,slot.time);return '<div class="card"><div class="eyebrow">Bloque de 2 horas</div><h3>'+slot.label+'</h3>'+slotGroups.map(group=>'<div class="item"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+'</span></div><p class="muted">Taller grupal · Guía: '+esc(group.guideName||"Sin asignar")+' · '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'mesas pendientes de asignar')+'</p></div>').join("")+'<div class="spacegrid">'+Object.entries(SPACES).map(([id,s])=>{const b=bookings.find(x=>x.date===date&&x.space===id&&x.time===slot.time),assignedGroup=slotGroups.find(group=>groupTables(group).includes(id)),unassignedGroup=slotGroups.find(group=>!Array.isArray(group.assignedSpaces)||!groupTables(group).length);const busy=Boolean(b||assignedGroup||unassignedGroup),label=b?'Reservado':assignedGroup?'Taller grupal':unassignedGroup?'Asignación pendiente':'Disponible',detail=b?esc(b.client)+' · '+b.people+' pers.':assignedGroup?esc(assignedGroup.name)+' · '+groupParticipantCount(assignedGroup)+' pers.':unassignedGroup?esc(unassignedGroup.name)+' · asignación manual':'';return '<div class="spacebox"><b>'+s.name+'</b><small>'+s.desc+'</small><span class="spstatus '+(busy?'busy':'')+'">'+label+'</span>'+(busy?'<p class="muted">'+detail+'</p>':'<button class="btn small" style="margin-top:8px" onclick="prepareBooking(\''+id+'\',\''+slot.time+'\')">Reservar</button>')+'</div>'}).join("")+'</div></div>'}).join("")}
-$("agendaDate").addEventListener("change",()=>{const date=$("agendaDate").value;if(date)calendarMonth=new Date(date+"T12:00:00");renderAgenda()});
-function prepareBooking(space,time){$("bookingDate").value=$("agendaDate").value;$("space").value=space;$("time").value=time;$("people").value=space==="A"?Math.min(10,2):space==="B"?12:2;capacityCheck();show("reservas")}
-function capacityCheck(){const space=$("space").value,n=Number($("people").value)||0;const max=SPACES[space].max;$("capacityHint").textContent=space==="B"?"Capacidad cómoda: 12. De 13 a 16 necesitas autorización.":SPACES[space].desc;$("approvalBox").hidden=!(space==="B"&&n>=13&&n<=16);if(!(space==="B"&&n>=13&&n<=16))$("approved").checked=false}
-$("space").addEventListener("change",capacityCheck);$("people").addEventListener("input",capacityCheck);
+function renderDayBookings(date){
+ const list=bookings.filter(booking=>booking.date===date).sort((a,b)=>(timeToMinutes(a.time)||0)-(timeToMinutes(b.time)||0)),groupList=groups.filter(group=>group.date===date).sort((a,b)=>(timeToMinutes(groupTimeForSlot(a))||0)-(timeToMinutes(groupTimeForSlot(b))||0)),d=new Date(date+"T12:00:00"),nice=d.toLocaleDateString("es-PA",{weekday:"long",day:"numeric",month:"long",year:"numeric"}),people=list.reduce((total,booking)=>total+(Number(booking.people)||0),0)+groupList.reduce((total,group)=>total+groupParticipantCount(group),0);
+ $("selectedDayTitle").textContent=nice.charAt(0).toUpperCase()+nice.slice(1);
+ $("daySummary").innerHTML='<div class="day-chip">▦ '+(list.length+groupList.length)+' reserva'+(list.length+groupList.length===1?'':'s')+'</div><div class="day-chip">♡ '+people+' personas</div><div class="day-chip">'+money(list.reduce((total,booking)=>total+(Number(booking.amount)||0),0))+' en reservas</div>';
+ const timeline=[
+  ...list.map(booking=>({minutes:timeToMinutes(booking.time)??Number.MAX_SAFE_INTEGER,html:'<button type="button" class="booking-card" onclick="openBookingDetails('+esc(JSON.stringify(String(booking.id)))+')"><span class="booking-time">'+esc(formatStartTime(booking.time))+'</span><span class="booking-card-details"><strong>'+esc(booking.client||"Sin nombre")+'</strong><span>'+esc(String(booking.people||0))+' personas · '+esc(assignedSpaces(booking).map(space=>SPACES[space].name).join(" + ")||"Zona pendiente")+'</span></span></button>'})),
+  ...groupList.map(group=>({minutes:timeToMinutes(groupTimeForSlot(group))??Number.MAX_SAFE_INTEGER,html:'<div class="item group-reservation-card"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+esc(formatStartTime(groupTimeForSlot(group))||group.time||"Horario pendiente")+'</span></div><p>'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+' inscrito'+(groupParticipantCount(group)===1?'':'s')+' · van '+groupParticipantCount(group)+' personas</p><p class="muted">Mesas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+' · Guía: '+esc(group.guideName||"Sin asignar")+'</p><div class="btnrow"><button class="btn small" onclick="openGroupCategory('+group.id+')">Ver taller y participantes</button><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas</button></div></div>'}))
+ ].sort((a,b)=>a.minutes-b.minutes);
+ $("dayBookings").innerHTML=timeline.map(item=>item.html).join("")||'<div class="empty"><div class="emoji">♡</div>No hay reservas para este día.</div>';
+}
+function renderBookingSchedule(){renderCalendar();renderDayBookings($("agendaDate").value||dateToday())}
+$("agendaDate").addEventListener("change",()=>{const date=$("agendaDate").value;if(date)calendarMonth=new Date(date+"T12:00:00");renderBookingSchedule()});
+function setBookingView(view){
+ bookingView=view==="map"?"map":"calendar";
+ $("bookingCalendarPanel").hidden=bookingView!=="calendar";$("bookingMapPanel").hidden=bookingView!=="map";
+ $("bookingCalendarButton").classList.toggle("active",bookingView==="calendar");$("bookingMapButton").classList.toggle("active",bookingView==="map");
+ if(bookingView==="calendar")renderBookingSchedule();else{refreshTableMapBookings();renderSpaceMap()}
+}
+function showBookingForm(){
+ $("bookingToolbar").hidden=true;$("bookingCalendarPanel").hidden=true;$("bookingMapPanel").hidden=true;$("bookingFormPanel").hidden=false;
+}
+function startNewBooking(){
+ bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingForm").reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("space").value="A";$("time").value="09:00";$("people").value=2;$("amount").value="0";$("guidedFields").hidden=true;$("bookingFormTitle").textContent="Nueva reserva";$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;showBookingForm();calcMoney();capacityCheck();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})
+}
+function prepareBooking(space,time){startNewBooking();$("bookingDate").value=$("agendaDate").value;$("space").value=space;$("time").value=time;$("people").value=Math.min(SPACES[space].comfortable,2);bookingFormSpaces=[];capacityCheck()}
+function capacityCheck(){const preferred=$("space").value,n=Number($("people").value)||0;$("capacityHint").textContent=SPACES[preferred].desc+" · La recomendación puede combinar mesas disponibles.";renderBookingAllocation();const useB=bookingFormSpaces.includes("B"),beyondComfort=n>SPACES.B.comfortable&&useB;$("approvalBox").hidden=!beyondComfort;if(!beyondComfort)$("approved").checked=false}
+function onBookingScheduleChanged(){if($("bookingAssignmentMode").value==="automatic")bookingFormSeatIds=[];capacityCheck()}
+$("bookingDate").addEventListener("change",onBookingScheduleChanged);$("time").addEventListener("change",onBookingScheduleChanged);$("space").addEventListener("change",onBookingScheduleChanged);$("people").addEventListener("input",onBookingScheduleChanged);
+$("tableMapBooking").addEventListener("change",()=>{const booking=bookings.find(item=>String(item.id)===String($("tableMapBooking").value));selectMapBooking(booking);renderSpaceMap()});
+$("tableMapTime").addEventListener("change",()=>{bookingMapSpaces=[];bookingMapSeatIds=[];renderSpaceMap()});
+$("bookingAssignmentMode").addEventListener("change",()=>{capacityCheck()});
 function refreshSelects(){const oldW=$("guidedWorkshop").value,oldG=$("workshopGuide").value,oldGG=$("groupGuide").value;$("guidedWorkshop").innerHTML=workshops.map((w,i)=>'<option value="'+i+'">'+esc(w.name)+' · '+money(w.price)+'/persona</option>').join("")||'<option value="">Primero agrega un taller</option>';$("workshopGuide").innerHTML='<option value="">Sin guía asignado</option>'+guides.map((g,i)=>'<option value="'+i+'">'+esc(g.name)+' · '+esc(g.phone)+'</option>').join("");$("groupGuide").innerHTML=$("workshopGuide").innerHTML;if(workshops[Number(oldW)])$("guidedWorkshop").value=oldW;if(guides[Number(oldG)])$("workshopGuide").value=oldG;if(guides[Number(oldGG)])$("groupGuide").value=oldGG}
 function calcMoney(){const n=Math.max(0,Number($("amount").value)||0);$("totalAmount").textContent=money(n);$("deposit").textContent=money(n*.3);$("balance").textContent=money(n*.7)}
 $("amount").addEventListener("input",calcMoney);
 $("activity").addEventListener("change",()=>{$("guidedFields").hidden=$("activity").value!=="Taller guiado";if($("activity").value==="Taller guiado")applyWorkshop()});
 function applyWorkshop(){const w=workshops[Number($("guidedWorkshop").value)];if(!w){$("bookingGuideInfo").textContent="Agrega primero un taller y un guía si corresponde.";return}const n=Math.max(1,Number($("people").value)||1);$("amount").value=(w.price*n).toFixed(2);$("bookingGuideInfo").textContent=w.guideName?(w.guideName+" · "+w.guidePhone):"Este taller no tiene guía asignado.";calcMoney()}
 $("guidedWorkshop").addEventListener("change",applyWorkshop);$("people").addEventListener("change",()=>{if($("activity").value==="Taller guiado")applyWorkshop()});
-$("bookingForm").addEventListener("submit",e=>{e.preventDefault();const date=$("bookingDate").value,space=$("space").value,time=$("time").value,n=Number($("people").value),act=$("activity").value;if(occupied(date,space,time))return alert("Ese espacio ya está reservado en ese horario. Elige otro bloque.");if(n<1||n>SPACES[space].max)return alert("La cantidad supera la capacidad máxima de este espacio.");if(space==="B"&&n>12&&!$("approved").checked)return alert("Debes autorizar personalmente el grupo de 13 a 16 personas.");const w=act==="Taller guiado"?workshops[Number($("guidedWorkshop").value)]:null;if(act==="Taller guiado"&&!w)return alert("Primero crea y selecciona un taller guiado.");const amount=Number($("amount").value)||0;bookings.push({id:Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space,time,people:n,activity:act,workshop:w?w.name:"",guideName:w?w.guideName:"",guidePhone:w?w.guidePhone:"",amount,deposit:amount*.3,balance:amount*.7,receiptName:$("receipt").files[0]?.name||"",notes:$("notes").value.trim(),status:"Registrada",authorized:space==="B"&&n>12});save();e.target.reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("amount").value="0";$("guidedFields").hidden=true;calcMoney();capacityCheck();alert("Reserva guardada en este dispositivo. Recuerda: la nube aún no está conectada.");show("agenda")});
+$("bookingForm").addEventListener("submit",e=>{e.preventDefault();const date=$("bookingDate").value,time=$("time").value,n=Number($("people").value),act=$("activity").value,existing=bookings.find(item=>String(item.id)===String(bookingEditingId));renderBookingAllocation();const allocationError=validateSeatAllocation(date,time,n,bookingFormSeatIds,bookingEditingId,"booking");if(allocationError)return alert(allocationError);if(bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable&&!$("approved").checked)return alert("Confirma la distribución especial del área B antes de guardar.");const w=act==="Taller guiado"?workshops[Number($("guidedWorkshop").value)]:null;if(act==="Taller guiado"&&!w&&!existing)return alert("Primero crea y selecciona un taller guiado.");const amount=Number($("amount").value)||0,deposit=existing?(Number(existing.deposit)||0):amount*.3,record={id:existing?.id||Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space:bookingFormSpaces[0],spaces:bookingFormSpaces.slice(),seatIds:bookingFormSeatIds.slice(),assignmentMode:$("bookingAssignmentMode").value,time,people:n,activity:act,workshop:w?w.name:(act==="Taller guiado"?existing?.workshop||"":""),guideId:w?.guideId||(act==="Taller guiado"?existing?.guideId||null:null),guideName:w?w.guideName:(act==="Taller guiado"?existing?.guideName||"":""),guidePhone:w?w.guidePhone:(act==="Taller guiado"?existing?.guidePhone||"":""),amount,deposit,balance:Math.max(0,amount-deposit),receiptName:$("receipt").files[0]?.name||existing?.receiptName||"",notes:$("notes").value.trim(),status:existing?.status||"Registrada",authorized:bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable};if(existing)Object.assign(existing,record);else bookings.push(record);bookingEditingId=null;$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");save();e.target.reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("amount").value="0";bookingFormSpaces=[];bookingFormSeatIds=[];$("guidedFields").hidden=true;calcMoney();capacityCheck();$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;setBookingView("calendar");show("reservas")});
+function openBookingDetails(id){
+ const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;
+ const spaces=assignedSpaces(booking).map(space=>esc(SPACES[space].name)).join(" + ")||"Zona pendiente",seats=recordSeatIds(booking).join(", ")||"Asignación automática";
+ const bookingId=esc(JSON.stringify(String(booking.id)));
+ $("bookingDetailsContent").innerHTML='<button class="booking-details-close" type="button" aria-label="Cerrar" onclick="document.getElementById(\'bookingDetailsDialog\').close()">×</button><div class="eyebrow">Detalle de la reserva</div><h3>'+esc(booking.client||"Sin nombre")+'</h3><p class="muted">'+esc(booking.date)+' · '+esc(formatStartTime(booking.time))+' · '+esc(String(booking.people||0))+' personas</p><p><b>Zona:</b> '+spaces+'</p><p><b>Sillas:</b> '+esc(seats)+'</p><p><b>Actividad:</b> '+esc(booking.activity||"")+(booking.workshop?' · '+esc(booking.workshop):'')+'</p>'+(booking.phone?'<p><b>Teléfono:</b> '+esc(booking.phone)+'</p>':'')+(booking.guideName?'<p><b>Guía:</b> '+esc(booking.guideName)+' · '+esc(booking.guidePhone||"")+'</p>':'')+'<div class="moneyline"><span>Total '+money(booking.amount)+'</span><span>Abono '+money(booking.deposit)+'</span><span>Saldo '+money(booking.balance)+'</span></div><p class="muted">'+esc(booking.notes||"Sin observaciones")+'</p><p class="muted">Comprobante: '+esc(booking.receiptName||"No adjuntado")+'</p>'+calendarActivityMarkup("booking",booking)+'<div class="btnrow"><button class="btn primary" type="button" onclick="editBooking('+bookingId+')">Editar reserva</button><button class="btn" type="button" onclick="openBookingInMap('+bookingId+')">Ver en el plano</button>'+(booking.activity==="Taller guiado"?'<button class="btn" type="button" onclick="markBookingRealized('+bookingId+');openBookingDetails('+bookingId+')">'+(booking.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>':'')+'<button class="btn danger" type="button" onclick="deleteBooking('+bookingId+');document.getElementById(\'bookingDetailsDialog\').close()">Eliminar reserva</button></div>';
+ $("bookingDetailsDialog").showModal();
+}
+function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>item.name===booking.workshop);if(workshopIndex>=0)$("guidedWorkshop").value=String(workshopIndex);$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
+function cancelBookingEdit(){$("bookingForm").reset();bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("bookingDate").value=dateToday();$("amount").value="0";$("guidedFields").hidden=true;$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;calcMoney();setBookingView("calendar");capacityCheck()}
 function renderBookings(){const arr=bookings.slice().reverse();$("bookingList").innerHTML=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</p><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button></div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>'}
-function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderAgenda();renderBookings()}}
-$("workshopForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("workshopGuide").value)];workshops.push({id:Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideName:g?.name||"",guidePhone:g?.phone||"",materials:$("workshopMaterials").value.trim(),details:$("workshopDetails").value.trim()});save();e.target.reset();$("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;renderWorkshops()});
+function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderBookings()}}
+$("workshopForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("workshopGuide").value)];workshops.push({id:Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideId:g?.id||null,guideName:g?.name||"",guidePhone:g?.phone||"",materials:$("workshopMaterials").value.trim(),details:$("workshopDetails").value.trim()});save();e.target.reset();$("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;renderWorkshops()});
 function renderWorkshops(){$("workshopList").innerHTML=workshops.map((w,i)=>'<div class="item"><div class="row"><h3>'+esc(w.name)+'</h3><span class="pill">'+money(w.price)+'/persona</span></div><p class="muted">'+w.duration+' horas · '+w.people+' personas incluidas</p><p>'+esc(w.materials||"Materiales por definir")+'</p><p class="muted">'+esc(w.details||"Sin descripción")+'</p><div class="divider"></div><p><b>Guía / planner:</b> '+esc(w.guideName||"Sin asignar")+'</p><p class="muted">'+esc(w.guidePhone||"")+'</p><button class="btn small danger" onclick="deleteWorkshop('+w.id+')">Eliminar</button></div>').join("")||'<div class="empty"><div class="emoji">✿</div>Agrega aquí los talleres que ofrece STAIN.</div>';refreshSelects()}
 function deleteWorkshop(id){if(confirm("¿Eliminar este taller del catálogo?")){workshops=workshops.filter(w=>w.id!==id);save();renderWorkshops()}}
 $("guideForm").addEventListener("submit",e=>{e.preventDefault();guides.push({id:Date.now(),name:$("guideName").value.trim(),phone:$("guidePhone").value.trim(),role:$("guideRole").value,notes:$("guideNotes").value.trim()});save();e.target.reset();renderGuides()});
 function renderGuides(){$("guideList").innerHTML=guides.map(g=>'<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+esc(g.role)+'</span></div><p>☎ '+esc(g.phone)+'</p><p class="muted">'+esc(g.notes||"")+'</p><p class="muted">Talleres asignados: '+workshops.filter(w=>w.guideName===g.name).map(w=>esc(w.name)).join(", ")+'</p><button class="btn small danger" onclick="deleteGuide('+g.id+')">Eliminar</button></div>').join("")||'<div class="empty">Agrega los datos de tus guías y planners.</div>';refreshSelects()}
 function deleteGuide(id){if(confirm("¿Eliminar esta persona? Los talleres ya guardados conservarán el nombre asignado.")){guides=guides.filter(g=>g.id!==id);save();renderGuides()}}
 $("groupForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("groupGuide").value)];groups.push({id:Date.now(),name:$("groupName").value.trim(),date:$("groupDate").value,time:$("groupTime").value,price:Number($("groupPrice").value),minimum:Math.max(6,Number($("groupMinimum").value)),guideName:g?.name||"",guidePhone:g?.phone||"",details:$("groupDetails").value.trim(),participants:[]});save();e.target.reset();$("groupPrice").value=25;$("groupMinimum").value=6;renderGroups()});
-function renderGroups(){$("groupList").innerHTML=groups.map(g=>'<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+g.participants.length+' inscritos</span></div><p class="muted">'+esc(g.date)+' · '+esc(g.time)+'</p><p>'+money(g.price)+' por persona · mínimo '+g.minimum+' participantes</p><p class="muted">Guía: '+esc(g.guideName||"Sin asignar")+' '+esc(g.guidePhone||"")+'</p><p class="muted">'+g.participants.length+' / '+g.minimum+' personas para alcanzar el mínimo</p><button class="btn small" onclick="addParticipant('+g.id+')">＋ Agregar participante</button> <button class="btn small danger" onclick="deleteGroup('+g.id+')">Eliminar taller</button>'+g.participants.map(p=>'<div class="divider"></div><p><b>'+esc(p.name)+'</b> · Abono '+money(p.deposit)+' · Saldo '+money(Math.max(0,g.price-p.deposit))+'</p><p class="muted">Comprobante: '+esc(p.receipt||"No registrado")+' · '+esc(p.status)+'</p>').join("")+'</div>').join("")||'<div class="empty">Crea una fecha de taller grupal. El mínimo predeterminado es de 6 personas.</div>'}
-function addParticipant(id){const g=groups.find(x=>x.id===id);if(!g)return;const name=prompt("Nombre del participante:");if(!name)return;const dep=prompt("Abono recibido en dólares (10 para abono, o el total para pago completo):","10");if(dep===null)return;const deposit=Math.max(0,Number(dep)||0);const receipt=prompt("Nombre o referencia del comprobante (la carga de archivo se añadirá con la nube):","Pendiente de adjuntar")||"Pendiente";g.participants.push({name:name.trim(),deposit,receipt,status:deposit>=g.price?"Pagado completo":deposit>0?"Abono registrado":"Pendiente de pago"});save();renderGroups()}
 function deleteGroup(id){if(confirm("¿Eliminar este taller grupal y su lista?")){groups=groups.filter(g=>g.id!==id);save();renderGroups()}}
 function guideMatches(record,guide){return record.guideId===guide.id||(!record.guideId&&record.guideName===guide.name)}
 function isGroupCompleted(group){return group.status==="Realizado"||group.completed===true}
 function groupStatusPill(group){return isGroupCompleted(group)?'<span class="pill completed completed-text">Realizado</span>':'<span class="pill">Pendiente</span>'}
 function groupParticipantMarkup(group){return (group.participants||[]).map(p=>'<div class="group-participant"><b>'+esc(p.name)+'</b><p class="muted">Abono '+money(p.deposit)+' · Saldo '+money(Math.max(0,group.price-p.deposit))+' · '+esc(p.status||"Pendiente de pago")+'</p><p class="muted">Comprobante: '+esc(p.receipt||"No registrado")+'</p></div>').join("")||'<p class="muted">Todavía no hay participantes inscritos.</p>'}
 function groupReservationCard(group){const count=groupParticipantCount(group),estimate=Number(group.capacityEstimate)>0?group.capacityEstimate:"No definido",tableText=groupTables(group).length?groupTables(group).map(space=>SPACES[space].name).join(" + "):"Asignación manual pendiente";return '<div class="item"><div class="row"><b class="'+(isGroupCompleted(group)?'completed-text':'')+'">'+esc(group.name)+'</b>'+groupStatusPill(group)+'</div><p class="muted">'+esc(group.date||"Fecha sin definir")+' · '+esc(group.time||"Hora sin definir")+'</p><p>Guía: '+esc(group.guideName||"Sin asignar")+' · '+count+' participante'+(count===1?'':'s')+' · Cupos estimados: '+esc(estimate)+'</p><p class="muted">Mesas: '+esc(tableText)+(group.assignmentNotice?' · '+esc(group.assignmentNotice):'')+'</p><p class="muted">'+money(group.price)+' por persona'+(group.details?' · '+esc(group.details):'')+'</p><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas manualmente</button><div class="group-participant"><b>Participantes y pagos</b>'+groupParticipantMarkup(group)+'</div></div>'}
-function markBookingRealized(id){const booking=bookings.find(b=>b.id===id);if(!booking)return;booking.status=booking.status==="Realizada"?"Registrada":"Realizada";save();renderBookings();renderGuides()}
-function renderBookings(){const arr=bookings.slice().reverse(),bookingHtml=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill '+(b.status==="Realizada"?'completed':'')+'">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</p><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p>'+(b.activity==="Taller guiado"?'<button class="btn small" onclick="markBookingRealized('+b.id+')">'+(b.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button> ':'')+(b.status==="Realizada"?'':'<button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button>')+'</div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>',groupHtml=groups.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(groupReservationCard).join("");$("bookingList").innerHTML=bookingHtml+(groupHtml?'<h3 class="guide-section-title">Talleres grupales vinculados</h3>'+groupHtml:"")}
-function deleteBooking(id){const booking=bookings.find(b=>b.id===id);if(booking?.status==="Realizada")return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderAgenda();renderBookings()}}
+function markBookingRealized(id){const booking=bookings.find(b=>String(b.id)===String(id));if(!booking)return;booking.status=booking.status==="Realizada"?"Registrada":"Realizada";save();renderBookings();renderGuides()}
+function renderBookings(){const arr=bookings.slice().reverse(),bookingHtml=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill '+(b.status==="Realizada"?'completed':'')+'">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+esc(formatStartTime(b.time))+' (2 horas)</p><p>'+assignedSpaces(b).map(space=>esc(SPACES[space].name)).join(" + ")+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small" onclick="openBookingInMap('+b.id+')">Cambiar mesas en el mapa</button> '+(b.activity==="Taller guiado"?'<button class="btn small" onclick="markBookingRealized('+b.id+')">'+(b.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button> ':'')+(b.status==="Realizada"?'':'<button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button>')+'</div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>',groupHtml=groups.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(groupReservationCard).join("");$("bookingList").innerHTML=bookingHtml+(groupHtml?'<h3 class="guide-section-title">Talleres grupales vinculados</h3>'+groupHtml:"")}
+function openBookingInMap(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();$("agendaDate").value=booking.date;$("tableMapTime").value=booking.time;calendarMonth=new Date(booking.date+"T12:00:00");show("reservas");refreshTableMapBookings();$("tableMapBooking").value=String(id);selectMapBooking(booking);setBookingView("map");$("tableMap").scrollIntoView({behavior:"smooth",block:"center"})}
+function deleteBooking(id){const booking=bookings.find(b=>b.id===id);if(booking?.status==="Realizada")return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderBookings()}}
 function renderGuideActivityItem(activity){const realized=activity.realized,status=realized?'<span class="pill completed completed-text">Realizado</span>':'<span class="pill">Pendiente</span>';return '<div class="item"><div class="row"><b class="'+(realized?'completed-text':'')+'">'+esc(activity.name)+'</b>'+status+'</div><p class="muted">'+esc(activity.when||"Sin fecha reservada")+(activity.time?' · '+esc(activity.time):'')+'</p><p>'+esc(activity.details||"")+'</p>'+(activity.button||'')+'</div>'}
 function renderGuides(){const guideCards=guides.map(g=>{const assignedWorkshops=workshops.filter(w=>guideMatches(w,g)),activities=[];for(const w of assignedWorkshops){const sessions=bookings.filter(b=>b.activity==="Taller guiado"&&(b.workshop===w.name)&&(b.guideName===g.name||guideMatches(w,g)));if(sessions.length)sessions.forEach(b=>activities.push({name:w.name,when:b.date,time:SLOTS.find(s=>s.time===b.time)?.label||b.time,details:(b.people||0)+" participante"+(Number(b.people)===1?"":"s")+(b.status?" · "+b.status:""),realized:b.status==="Realizada",button:'<button class="btn small" onclick="markBookingRealized('+b.id+')">'+(b.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>'}));else activities.push({name:w.name,details:money(w.price)+"/persona · "+(w.duration||"—")+" horas",realized:false})}groups.filter(group=>guideMatches(group,g)).forEach(group=>activities.push({name:group.name,when:group.date,time:group.time,details:(group.participants||[]).length+" participante"+((group.participants||[]).length===1?"":"s")+" · Cupos estimados: "+(Number(group.capacityEstimate)>0?group.capacityEstimate:"No definido"),realized:isGroupCompleted(group),button:'<button class="btn small" onclick="markGroupRealized('+group.id+')">'+(isGroupCompleted(group)?"Marcar pendiente":"Marcar realizado")+'</button>'}));const pending=activities.filter(a=>!a.realized).map(renderGuideActivityItem).join("")||'<div class="empty">No hay talleres próximos o pendientes asignados.</div>',completed=activities.filter(a=>a.realized).map(renderGuideActivityItem).join("")||'<div class="empty">Todavía no hay talleres realizados.</div>';return '<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+esc(g.role||"Guía")+'</span></div><p>☎ '+esc(g.phone||"")+'</p><p class="muted">'+esc(g.notes||"")+'</p><h4 class="guide-section-title">Próximos y pendientes</h4>'+pending+'<h4 class="guide-section-title">Talleres realizados</h4>'+completed+'<button class="btn small danger" onclick="deleteGuide('+g.id+')">Eliminar</button></div>'}).join("");$("guideList").innerHTML=guideCards||'<div class="empty">Agrega los datos de tus guías y planners.</div>';refreshSelects()}
-function resetGroupForm(){groupEditingId=null;$("groupForm").reset();$("groupPrice").value=25;$("groupMinimum").value=6;$("groupSubmit").textContent="Crear taller grupal";$("groupCancelEdit").hidden=true}
+function resetGroupForm(){groupEditingId=null;$("groupForm").reset();$("groupPrice").value=25;$("groupMinimum").value=6;$("groupSubmit").textContent="Agregar taller";$("groupCancelEdit").hidden=true}
 function groupFormData(){const guide=guides[Number($("groupGuide").value)];return {name:$("groupName").value.trim(),date:$("groupDate").value,time:$("groupTime").value,price:Number($("groupPrice").value),minimum:Math.max(6,Number($("groupMinimum").value)),capacityEstimate:Number($("groupCapacityEstimate").value)||null,guideId:guide?.id||null,guideName:guide?.name||"",guidePhone:guide?.phone||"",details:$("groupDetails").value.trim()}}
 $("groupForm").addEventListener("submit",e=>{e.preventDefault();e.stopImmediatePropagation();const data=groupFormData();let group;if(groupEditingId!==null){group=groups.find(g=>g.id===groupEditingId);if(!group){resetGroupForm();return}Object.assign(group,data)}else{group={id:Date.now(),...data,status:"Pendiente",participants:[]};groups.push(group)}assignGroupTables(group.id,false,false);save();resetGroupForm();renderAll()},true);
 function editGroup(id){const group=groups.find(g=>g.id===id);if(!group)return;groupEditingId=id;$("groupName").value=group.name||"";$("groupDate").value=group.date||"";$("groupTime").value=group.time||"9:00 a. m.";$("groupPrice").value=Number(group.price)||0;$("groupMinimum").value=Number(group.minimum)||6;$("groupCapacityEstimate").value=Number(group.capacityEstimate)||"";$("groupDetails").value=group.details||"";$("groupSubmit").textContent="Guardar cambios";$("groupCancelEdit").hidden=false;refreshSelects();const guideIndex=guides.findIndex(g=>group.guideId===g.id||(!group.guideId&&g.name===group.guideName));$("groupGuide").value=guideIndex>=0?String(guideIndex):"";$("groupForm").scrollIntoView({behavior:"smooth",block:"start"})}
 function cancelGroupEdit(){resetGroupForm()}
 function markGroupRealized(id){const group=groups.find(g=>g.id===id);if(!group)return;group.status=isGroupCompleted(group)?"Pendiente":"Realizado";group.completed=group.status==="Realizado";save();renderAll()}
-function renderGroups(){const sorted=groups.slice().sort((a,b)=>{const doneA=isGroupCompleted(a),doneB=isGroupCompleted(b);return doneA===doneB?(a.date||"").localeCompare(b.date||""):doneA?1:-1});$("groupList").innerHTML=sorted.map(g=>'<div class="item"><div class="row"><h3 class="'+(isGroupCompleted(g)?'completed-text':'')+'">'+esc(g.name)+'</h3>'+groupStatusPill(g)+'</div><p class="muted">'+esc(g.date||"Fecha sin definir")+' · '+esc(g.time||"Hora sin definir")+'</p><p>'+money(g.price)+' por persona · mínimo '+(Number(g.minimum)||6)+' participantes · '+(Number(g.capacityEstimate)>0?'Cupos estimados: '+esc(g.capacityEstimate):'Cupos estimados: no definidos')+'</p><p class="muted">Guía: '+esc(g.guideName||"Sin asignar")+' '+esc(g.guidePhone||"")+'</p><p class="muted">'+groupParticipantCount(g)+' / '+(Number(g.minimum)||6)+' personas para alcanzar el mínimo</p><p class="muted">'+esc(g.details||"")+'</p><p class="muted">Mesas asignadas: '+(groupTables(g).length?groupTables(g).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+(g.assignmentNotice?' · '+esc(g.assignmentNotice):'')+'</p><button class="btn small" onclick="addParticipant('+g.id+')">＋ Agregar participante</button> <button class="btn small" onclick="editGroup('+g.id+')">Editar taller</button> <button class="btn small" onclick="assignGroupTables('+g.id+',true)">Asignar mesas manualmente</button> <button class="btn small" onclick="markGroupRealized('+g.id+')">'+(isGroupCompleted(g)?"Marcar pendiente":"Marcar realizado")+'</button> '+(isGroupCompleted(g)?'':'<button class="btn small danger" onclick="deleteGroup('+g.id+')">Eliminar taller</button>')+'<div class="group-participant"><b>Participantes y pagos</b>'+groupParticipantMarkup(g)+'</div></div>').join("")||'<div class="empty">Crea una fecha de taller grupal. El mínimo predeterminado es de 6 participantes.</div>'}
+function renderGroups(){
+ const expanded=new Set([...$("groupList").querySelectorAll("details[open]")].map(item=>item.id));
+ const sorted=groups.slice().sort((a,b)=>{const doneA=isGroupCompleted(a),doneB=isGroupCompleted(b);return doneA===doneB?(a.date||"").localeCompare(b.date||""):doneA?1:-1});
+ $("groupList").innerHTML=sorted.map(group=>{
+  const participants=Array.isArray(group.participants)?group.participants:[],count=participants.length,arrived=participants.filter(person=>person.arrived).length,categoryId="group-category-"+String(group.id),isExpanded=expanded.has(categoryId),groupId=Number(group.id);
+  const roster=participants.map((person,index)=>{
+   const proof=person.receiptPhoto||"",proofThumb=proof?'<button type="button" class="piece-photo-btn" onclick="openGroupReceipt('+groupId+','+index+')" aria-label="Ver comprobante de '+esc(person.name)+'"><img class="group-participant-photo" src="'+esc(photoSrc(proof))+'" alt="Comprobante de pago"></button>':'';
+   return '<div class="group-participant-row"><div style="display:flex;align-items:flex-start;gap:10px">'+proofThumb+'<div><b>'+esc(person.name||"Sin nombre")+'</b><p class="muted">'+(person.phone?'☎ '+esc(person.phone):'Sin contacto')+' · Abono '+money(person.deposit)+' · Saldo '+money(Math.max(0,Number(group.price||0)-Number(person.deposit||0)))+'</p><p class="muted">'+esc(person.status||"Pendiente de pago")+(person.receipt&&!person.receiptPhoto?' · Comprobante: '+esc(person.receipt):'')+'</p>'+(proof?'<button class="btn small group-proof-link" type="button" onclick="openGroupReceipt('+groupId+','+index+')">Ver comprobante</button>':'<span class="muted">Sin foto de comprobante</span>')+'</div></div><label class="group-arrival"><input type="checkbox" '+(person.arrived?'checked':'')+' onchange="toggleGroupParticipantArrival('+groupId+','+index+',this.checked)">Llegó</label></div>'
+  }).join("")||'<p class="muted">Todavía no hay participantes en este taller.</p>';
+  return '<details class="item group-category" id="'+esc(categoryId)+'" '+(isExpanded?'open':'')+'><summary class="group-category-summary"><span class="group-category-title"><strong class="'+(isGroupCompleted(group)?'completed-text':'')+'">'+esc(group.name)+'</strong><small>'+esc(group.date||"Fecha sin definir")+' · '+esc(group.time||"Hora sin definir")+' · '+count+' participante'+(count===1?'':'s')+'</small></span>'+groupStatusPill(group)+'</summary><div class="group-category-content"><p>'+money(group.price)+' por persona · mínimo '+(Number(group.minimum)||6)+' · '+arrived+' llegaron</p><p class="muted">Guía: '+esc(group.guideName||"Sin asignar")+' '+esc(group.guidePhone||"")+'</p><p class="muted">'+count+' / '+(Number(group.minimum)||6)+' participantes para alcanzar el mínimo</p>'+(group.details?'<p class="muted">'+esc(group.details)+'</p>':'')+'<p class="muted">Mesas asignadas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+(group.assignmentNotice?' · '+esc(group.assignmentNotice):'')+'</p><div class="btnrow"><button class="btn small" type="button" onclick="editGroup('+groupId+')">Editar taller</button><button class="btn small" type="button" onclick="assignGroupTables('+groupId+',true)">Asignar mesas</button><button class="btn small" type="button" onclick="markGroupRealized('+groupId+')">'+(isGroupCompleted(group)?"Marcar pendiente":"Marcar realizado")+'</button>'+(isGroupCompleted(group)?'':'<button class="btn small danger" type="button" onclick="deleteGroup('+groupId+')">Eliminar taller</button>')+'</div><div class="group-participant-form"><h4>＋ Agregar participante</h4><p class="hint">Registra su contacto, abono y adjunta la foto del comprobante cuando corresponda.</p><form onsubmit="addParticipant(event,'+groupId+')"><div class="grid"><div class="field"><label>Nombre *</label><input name="name" required placeholder="Nombre y apellido"></div><div class="field"><label>Teléfono / contacto *</label><input name="phone" type="tel" required placeholder="Número de contacto"></div></div><div class="grid"><div class="field"><label>Abono recibido ($)</label><input name="deposit" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Foto del comprobante</label><input name="receiptPhoto" type="file" accept="image/*"></div></div><button class="btn primary small" type="submit">Guardar participante</button></form></div><div class="group-participants"><div class="row"><h4>Participantes y asistencia</h4><span class="pill">'+arrived+'/'+count+' llegaron</span></div>'+roster+'</div></div></details>'
+ }).join("")||'<div class="empty">Crea una fecha de taller grupal. El mínimo predeterminado es de 6 participantes.</div>';
+}
+async function addParticipant(event,id){
+ event.preventDefault();
+ const group=groups.find(item=>String(item.id)===String(id));if(!group)return;
+ const form=event.currentTarget,name=form.elements.name.value.trim(),phone=form.elements.phone.value.trim(),deposit=Math.max(0,Number(form.elements.deposit.value)||0),file=form.elements.receiptPhoto.files[0];
+ if(!name||!phone)return alert("Escribe el nombre y un teléfono de contacto para el participante.");
+ if(file&&!file.type.startsWith("image/"))return alert("El comprobante debe ser una imagen.");
+ const userId=currentUser?.id,generation=accountGeneration;
+ const receiptPhoto=file?await new Promise(resolve=>compressPiecePhoto(file,resolve)):"";
+ if(file&&!receiptPhoto)return;
+ if(userId&&!isCurrentAccount(userId,generation))return;
+ group.participants=Array.isArray(group.participants)?group.participants:[];
+ group.participants.push({id:Date.now(),name,phone,deposit,receipt:file?.name||"",receiptPhoto,arrived:false,status:deposit>=Number(group.price||0)?"Pagado completo":deposit>0?"Abono registrado":"Pendiente de pago"});
+ assignGroupTables(group.id,false,false);save();
+}
+function toggleGroupParticipantArrival(groupId,index,arrived){
+ const group=groups.find(item=>String(item.id)===String(groupId)),person=group?.participants?.[index];if(!person)return;
+ person.arrived=Boolean(arrived);save();
+}
+function openGroupReceipt(groupId,index){
+ const person=groups.find(item=>String(item.id)===String(groupId))?.participants?.[index],src=person?.receiptPhoto?photoSrc(person.receiptPhoto):"";
+ if(!src)return alert("La foto del comprobante no está disponible.");
+ $("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open");
+}
+function openGroupCategory(id){
+ show("grupales");
+ const category=document.getElementById("group-category-"+String(id));
+ if(category){category.open=true;category.scrollIntoView({behavior:"smooth",block:"center"})}
+}
 function deleteGroup(id){const group=groups.find(g=>g.id===id);if(isGroupCompleted(group||{}))return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar este taller grupal y su lista?")){groups=groups.filter(g=>g.id!==id);save();renderAll()}}
-function addParticipant(id){const group=groups.find(item=>item.id===id);if(!group)return;const name=prompt("Nombre del participante:");if(!name)return;const depositValue=prompt("Abono recibido en dólares (10 para abono, o el total para pago completo):","10");if(depositValue===null)return;const deposit=Math.max(0,Number(depositValue)||0),receipt=prompt("Nombre o referencia del comprobante (la carga de archivo se añadirá con la nube):","Pendiente de adjuntar")||"Pendiente";group.participants=group.participants||[];group.participants.push({name:name.trim(),deposit,receipt,status:deposit>=group.price?"Pagado completo":deposit>0?"Abono registrado":"Pendiente de pago"});assignGroupTables(group.id,false,false);save();renderAll()}
 function compressPiecePhoto(file,done){const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement("canvas");const scale=Math.min(1,1200/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);let quality=.82;let data=canvas.toDataURL("image/jpeg",quality);while(data.length>400000&&quality>.35){quality-=.1;data=canvas.toDataURL("image/jpeg",quality)}done(data)};img.onerror=()=>{alert("No pude leer esa foto. Prueba con otra imagen.");done("")};img.src=reader.result};reader.onerror=()=>{alert("No pude abrir esa foto. Prueba otra vez.");done("")};reader.readAsDataURL(file)}
-$("pieceForm").addEventListener("submit",e=>{e.preventDefault();const userId=currentUser?.id,generation=accountGeneration;if(!userId)return;const file=$("piecePhoto").files[0];const add=photo=>{if(!isCurrentAccount(userId,generation))return;pieces.push({id:Date.now(),name:$("pieceName").value.trim(),client:$("pieceClient").value.trim(),phone:$("piecePhone").value.trim(),date:$("pieceDate").value,status:$("pieceStatus").value,notes:$("pieceNotes").value.trim(),photo:photo||""});save();e.target.reset();$("pieceDate").value=dateToday();renderPieces()};if(file)compressPiecePhoto(file,add);else add("")});
+$("pieceForm").addEventListener("submit",e=>{e.preventDefault();const userId=currentUser?.id,generation=accountGeneration;if(!userId)return;const source=$("pieceSource").value,booking=source==="booking"?bookings.find(item=>String(item.id)===String($("pieceBooking").value)):null;if(source==="booking"&&!booking)return alert("Selecciona la reserva relacionada o cambia el tipo a registro manual.");const file=$("piecePhoto").files[0];const add=photo=>{if(!isCurrentAccount(userId,generation))return;pieces.push({id:Date.now(),name:$("pieceName").value.trim(),client:$("pieceClient").value.trim(),phone:$("piecePhone").value.trim(),date:$("pieceDate").value,status:$("pieceStatus").value,notes:$("pieceNotes").value.trim(),photo:photo||"",source,bookingId:booking?.id||null});save();e.target.reset();$("pieceDate").value=dateToday();updatePieceSourceFields();renderPieces()};if(file)compressPiecePhoto(file,add);else add("")});
+function refreshPieceBookingOptions(){const select=$("pieceBooking"),selected=String(select.value||"");select.innerHTML='<option value="">Selecciona una reserva</option>'+bookings.map(item=>'<option value="'+item.id+'">'+esc(item.client)+' · '+esc(item.date)+' · '+formatStartTime(item.time)+'</option>').join("");if(bookings.some(item=>String(item.id)===selected))select.value=selected}
+function updatePieceSourceFields(){const linked=$("pieceSource").value==="booking";$("pieceBookingField").hidden=!linked;$("pieceBooking").required=linked;refreshPieceBookingOptions()}
+function loadSelectedPieceBooking(){const booking=bookings.find(item=>String(item.id)===String($("pieceBooking").value));if(!booking)return alert("Selecciona una reserva primero.");$("pieceClient").value=booking.client||"";$("piecePhone").value=booking.phone||""}
+$("pieceSource").addEventListener("change",updatePieceSourceFields);
+$("loadPieceBooking").addEventListener("click",loadSelectedPieceBooking);
 function openPiecePhoto(id){const p=pieces.find(x=>String(x.id)===String(id));if(!p)return;const src=photoSrc(p.photo);if(!src){alert("La foto no está disponible todavía. Revisa la conexión de la nube.");return} $("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
 function closePiecePhoto(){$("piecePhotoModal").classList.remove("open");$("piecePhotoLarge").src=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePiecePhoto()});
 function renderPieces(){
+refreshPieceBookingOptions();
 $("pieceList").innerHTML=pieces.map(p=>{
 const status=p.status||"En horno";
 const ready=status==="Lista para retirar"||status==="Avisado · esperando retiro";
@@ -439,7 +1172,7 @@ return '<div class="item"><div class="row"><div style="display:flex;align-items:
 }).join("")||'<div class="empty">Aquí verás las piezas de tus clientes.</div>'
 }
 function getPieceContact(piece){
-const client=String(piece.client||"").trim(),piecePhone=String(piece.phone||"").trim(),matches=client?bookings.filter(item=>String(item.client||"").trim().toLocaleLowerCase()===client.toLocaleLowerCase()&&item.phone):[],numbers=[...new Set(matches.map(item=>normalizeWhatsAppNumber(item.phone)).filter(Boolean))],ambiguous=!piecePhone&&numbers.length>1,booking=!piecePhone&&!ambiguous&&numbers.length===1?matches.find(item=>normalizeWhatsAppNumber(item.phone)===numbers[0]):null;
+const client=String(piece.client||"").trim(),piecePhone=String(piece.phone||"").trim(),linked=bookings.find(item=>piece.bookingId&&String(item.id)===String(piece.bookingId)),matches=client?bookings.filter(item=>String(item.client||"").trim().toLocaleLowerCase()===client.toLocaleLowerCase()&&item.phone):[],numbers=[...new Set(matches.map(item=>normalizeWhatsAppNumber(item.phone)).filter(Boolean))],ambiguous=!piecePhone&&!linked&&numbers.length>1,booking=linked||(!piecePhone&&!ambiguous&&numbers.length===1?matches.find(item=>normalizeWhatsAppNumber(item.phone)===numbers[0]):null);
 return {client:client||String(booking?.client||"").trim(),phone:piecePhone||String(booking?.phone||"").trim(),fromBooking:!piecePhone&&Boolean(booking?.phone),ambiguous}
 }
 function normalizeWhatsAppNumber(phone){
@@ -472,8 +1205,55 @@ function deleteStock(id){if(confirm("¿Eliminar artículo del inventario?")){inv
 function copySummary(){const text=bookings.map(b=>b.client+" — "+b.date+" "+b.time+" — "+SPACES[b.space].name+" — "+b.people+" personas — "+b.activity+" — Total "+money(b.amount)+" — Abono "+money(b.deposit)+" — Saldo "+money(b.balance)).join("\n")||"No hay reservas registradas.";if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert("Resumen copiado."),()=>prompt("Copia el resumen:",text));else prompt("Copia el resumen:",text)}
 function exportData(){const data={bookings,workshops,guides,groups,pieces:pieces.map(({photo,...p})=>p),inventory};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="STAIN-respaldo.json";a.click();URL.revokeObjectURL(url)}
 function renderHome(){ $("statBookings").textContent=bookings.length;$("statWorkshops").textContent=workshops.length;$("statPieces").textContent=pieces.length;$("statInventory").textContent=inventory.length;const today=dateToday(),arr=bookings.filter(b=>b.date===today);$("homeBookings").innerHTML=arr.map(b=>'<div class="row"><div><b>'+esc(b.client)+'</b><p class="muted">'+esc(b.time)+' · '+esc(SPACES[b.space].name)+'</p></div><span class="pill">'+b.people+' pers.</span></div>').join("")||'<div class="empty">No hay reservas para hoy. Un espacio listo para crear ✿</div>'}
-function renderAll(){renderHome();renderCalendar();renderAgenda();renderBookings();renderWorkshops();renderGroups();renderPieces();renderInventory();renderGuides()}
-refreshSelects();capacityCheck();calcMoney();renderAll();
+function renderAll(){renderHome();renderCalendar();renderBookings();renderWorkshops();renderGroups();renderPieces();renderInventory();renderGuides()}
+const renderBookingsCore=renderBookings,renderGroupsCore=renderGroups,renderGuidesCore=renderGuides,renderGuideActivityCore=renderGuideActivityItem;
+renderBookings=function(){
+ renderBookingsCore();
+ for(const card of $("bookingList").querySelectorAll(".item")){
+  const bookingButton=card.querySelector('button[onclick^="openBookingInMap("]'),groupButton=card.querySelector('button[onclick^="assignGroupTables("]');
+  if(bookingButton){const id=bookingButton.getAttribute("onclick").match(/\((\d+)\)/)?.[1],record=bookings.find(item=>String(item.id)===id);if(record){bookingButton.insertAdjacentHTML("afterend",'<button class="btn small" type="button" onclick="editBooking('+record.id+')">Editar reserva</button>');card.insertAdjacentHTML("beforeend",calendarActivityMarkup("booking",record))}}
+  else if(groupButton){const id=groupButton.getAttribute("onclick").match(/\((\d+)/)?.[1],record=groups.find(item=>String(item.id)===id);if(record)card.insertAdjacentHTML("beforeend",calendarActivityMarkup("group",record))}
+ }
+ renderBookingSchedule();
+};
+renderGroups=function(){
+ renderGroupsCore();
+ for(const card of $("groupList").querySelectorAll(".item")){
+  const button=card.querySelector('button[onclick^="editGroup("]')||card.querySelector('button[onclick^="addParticipant("]');
+  if(button){const id=button.getAttribute("onclick").match(/\((\d+)/)?.[1],record=groups.find(item=>String(item.id)===id);if(record)card.insertAdjacentHTML("beforeend",calendarActivityMarkup("group",record))}
+ }
+};
+renderGuideActivityItem=function(activity){
+ let record=null,kind="";
+ const bookingId=String(activity.button||"").match(/markBookingRealized\((\d+)\)/)?.[1],groupId=String(activity.button||"").match(/markGroupRealized\((\d+)\)/)?.[1];
+ if(bookingId){record=bookings.find(item=>String(item.id)===bookingId);kind="booking"}
+ else if(groupId){record=groups.find(item=>String(item.id)===groupId);kind="group"}
+ return renderGuideActivityCore(activity)+(record?calendarActivityMarkup(kind,record):"");
+};
+renderGuides=function(){
+ renderGuidesCore();
+ for(let index=0;index<guides.length;index++){
+  const card=$("guideList").children[index];
+  if(card)card.insertAdjacentHTML("beforeend",calendarGuideMarkup(guides[index]));
+ }
+};
+deleteBooking=async function(id){
+ const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;
+ if(booking.status==="Realizada")return alert("Los talleres realizados se conservan en el historial.");
+ if(!confirm("¿Eliminar esta reserva?"))return;
+ if(!await removeCalendarEvent(booking,"booking"))return;
+ bookings=bookings.filter(item=>item!==booking);save();renderBookings();
+};
+deleteGroup=async function(id){
+ const group=groups.find(item=>String(item.id)===String(id));if(!group)return;
+ if(isGroupCompleted(group))return alert("Los talleres realizados se conservan en el historial.");
+ if(!confirm("¿Eliminar este taller grupal y su lista?"))return;
+ if(!await removeCalendarEvent(group,"group"))return;
+ groups=groups.filter(item=>item!==group);save();renderAll();
+};
+loadCalendarSettings();
+loadExternalLibrary("https://accounts.google.com/gsi/client","google").catch(error=>{if($("calendarGlobalStatus"))$("calendarGlobalStatus").textContent=error.message});
+setupScheduleControls();updatePieceSourceFields();refreshSelects();capacityCheck();calcMoney();renderAll();
 bootAuth().catch(err=>{console.error("STAIN cloud startup error:",err);$("loginError").textContent="Error de conexión: "+(err?.message||"No se pudo conectar con la nube")+(err?.code?" ("+err.code+")":"");});
 </script>
 </body>
