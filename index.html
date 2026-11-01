@@ -66,6 +66,8 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 @media(max-width:600px){.seat-map{gap:8px;grid-template-columns:210px 300px}.seat-area{padding:8px}.seat-area-right{gap:8px}.seat-map-summary span{font-size:9px}}
 .booking-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 0 14px}.booking-view-switch{display:flex;gap:5px;padding:4px;background:#f0f2e9;border-radius:13px}.booking-view-switch button{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700}.booking-view-switch button.active{background:white;color:var(--green2);box-shadow:0 2px 8px #53634a12}.booking-card{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:white;color:var(--ink)}.booking-card:hover{border-color:var(--sage2);background:#fffefa}.booking-time{flex:0 0 76px;color:var(--green2);font-weight:800;font-size:12px}.booking-card-details{min-width:0;flex:1}.booking-card-details strong{display:block;font-size:14px}.booking-card-details span{display:block;margin-top:3px;color:var(--muted);font-size:11px}.booking-card-details .booking-card-activity{width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:5px;padding:3px 8px;border-radius:99px;background:var(--rose);color:#714d55;font-size:11px;font-weight:750}.booking-card-details .booking-card-guide{color:var(--green2);font-size:10px}.booking-details{width:min(560px,calc(100% - 24px));max-height:85vh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:18px;background:var(--paper);color:var(--ink);box-shadow:0 20px 70px #26332244}.booking-details::backdrop{background:#1d271dd9}.booking-details h3{margin:0 0 5px}.booking-details .btnrow{margin-top:14px}.booking-details-close{float:right;border:0;background:transparent;color:var(--muted);font-size:23px;line-height:1}.availability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.availability-table{background:#f7f8f1;border-radius:12px;padding:10px;min-width:0}.availability-table b{display:block;font-size:12px}.availability-table small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.availability-table .spstatus{display:block;margin-top:7px}.availability-table .spstatus.busy{color:#a36a36}@media(max-width:719px){.availability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:390px){.booking-time{flex-basis:65px}.booking-card{gap:8px;padding:11px}}
 .group-category{padding:0;overflow:hidden}.group-category-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;padding:15px 16px;cursor:pointer}.group-category-summary::-webkit-details-marker{display:none}.group-category-summary::after{content:"＋";color:var(--green);font-weight:800}.group-category[open]>.group-category-summary::after{content:"−"}.group-category-title{min-width:0}.group-category-title strong{display:block}.group-category-title small{display:block;margin-top:3px;color:var(--muted);font-size:11px}.group-category-content{padding:0 16px 16px}.group-participant-form{padding:13px;border:1px solid var(--line);border-radius:14px;background:#fafaf5;margin:12px 0}.group-participant-form h4{margin:0 0 6px}.group-participant-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.group-participant-photo{width:48px;height:48px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}.group-arrival{display:inline-flex;align-items:center;gap:6px;color:var(--green2);font-size:12px;font-weight:700;white-space:nowrap}.group-arrival input{accent-color:var(--green);width:17px;height:17px}.group-reservation-card{border-left:3px solid var(--sage2);padding-left:12px}.group-reservation-card p{margin:5px 0}.group-proof-link{font-size:11px}
+.booking-card{display:block;text-align:left;padding:13px}.booking-card-top{display:flex;align-items:flex-start;gap:10px}.booking-card-top .booking-time{flex:0 0 auto;min-width:66px;padding-top:2px}.booking-card-details{display:block}.booking-card-name{display:block;padding:0;border:0;background:transparent;color:var(--ink);text-align:left;font-size:14px;font-weight:750}.booking-card-name:hover{text-decoration:underline}.booking-card-meta{display:block;margin-top:3px;color:var(--muted);font-size:11px}.booking-visit-status{display:inline-flex;align-items:center;margin-top:7px;padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800}.booking-visit-status--reserved{background:var(--gold);color:#87672e}.booking-visit-status--arrived{background:var(--rose);color:#854b52}.booking-visit-status--in_progress{background:#dcebd8;color:#3e6b42}.booking-visit-status--finished{background:#e8e9e1;color:#596052}.booking-card-timer{display:flex;flex-wrap:wrap;gap:4px 12px;margin:9px 0 0;padding:8px 10px;border-radius:11px;background:#f7f6ef;color:#53614e;font-size:11px}.booking-card-timer--overdue{background:#fff0ed;color:#8b4646}.booking-card-alert{flex-basis:100%;font-weight:800}.booking-card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.booking-card-actions .btn{min-height:34px}.booking-card--arrived{border-color:#ead6da}.booking-card--in_progress{border-color:#bdd4b7}.booking-card--finished{border-color:#d8dbd0}.booking-card--overdue{border-color:#e4b7ae;background:#fffafa}
+@media(max-width:390px){.booking-card{padding:10px}.booking-card-top{gap:7px}.booking-card-top .booking-time{min-width:60px;font-size:11px}.booking-card-timer{gap:4px 8px;padding:7px 8px}.booking-card-actions .btn{flex:1}}
 </style>
 </head>
 <body>
@@ -931,16 +933,70 @@ function bookingActivityLabel(booking){
  const type=String(booking.activity||"").trim(),specific=String(booking.workshop||"").trim();
  return [type,specific&&specific!==type?specific:""].filter(Boolean).join(" · ");
 }
+const BOOKING_VISIT_DURATION_MS=2*60*60*1000;
+function bookingVisitStatus(booking){
+ return ["arrived","in_progress","finished"].includes(booking.visitStatus)?booking.visitStatus:"reserved";
+}
+function bookingVisitStatusMarkup(status){
+ const labels={reserved:"Reservado",arrived:"Llegó",in_progress:"En taller",finished:"Finalizado"};
+ return '<span class="booking-visit-status booking-visit-status--'+status+'">'+labels[status]+'</span>';
+}
+function bookingTimerMarkup(booking){
+ if(!booking.arrivedAt)return "";
+ const activity=bookingActivityLabel(booking)||"Reserva";
+ return '<div class="booking-card-timer" data-booking-timer data-arrived-at="'+esc(booking.arrivedAt)+'" data-client="'+esc(booking.client||"Sin nombre")+'" data-activity="'+esc(activity)+'"><span>Llegó: <b data-booking-arrival></b></span><span>Transcurrido: <b data-booking-elapsed></b></span><span>Finaliza: <b data-booking-finish></b></span><span class="booking-card-alert" data-booking-alert role="alert" hidden></span></div>';
+}
+function formatElapsedTime(milliseconds){
+ const totalSeconds=Math.max(0,Math.floor(milliseconds/1000)),hours=Math.floor(totalSeconds/3600),minutes=Math.floor(totalSeconds%3600/60),seconds=totalSeconds%60;
+ return [hours,minutes,seconds].map(value=>String(value).padStart(2,"0")).join(":");
+}
+function updateBookingTimers(){
+ const now=Date.now();
+ for(const timer of document.querySelectorAll("[data-booking-timer]")){
+  const arrivedAt=Date.parse(timer.dataset.arrivedAt),elapsed=now-arrivedAt;
+  const arrivalElement=timer.querySelector("[data-booking-arrival]"),elapsedElement=timer.querySelector("[data-booking-elapsed]"),finishElement=timer.querySelector("[data-booking-finish]"),alertElement=timer.querySelector("[data-booking-alert]");
+  if(!Number.isFinite(arrivedAt)||!arrivalElement||!elapsedElement||!finishElement||!alertElement){if(elapsedElement)elapsedElement.textContent="Llegada no válida";continue}
+  arrivalElement.textContent=new Date(arrivedAt).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"});
+  elapsedElement.textContent=formatElapsedTime(elapsed);
+  finishElement.textContent=new Date(arrivedAt+BOOKING_VISIT_DURATION_MS).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"});
+  const card=timer.closest(".booking-card"),overdue=elapsed>=BOOKING_VISIT_DURATION_MS&&card?.dataset.visitStatus!=="finished";
+  timer.classList.toggle("booking-card-timer--overdue",overdue);
+  card?.classList.toggle("booking-card--overdue",overdue);
+  alertElement.hidden=!overdue;
+  const alertText=overdue?"⚠ Tiempo cumplido · "+(timer.dataset.client||"Sin nombre")+" · "+(timer.dataset.activity||"Reserva")+"; puedes finalizarla manualmente.":"";
+  if(alertElement.textContent!==alertText)alertElement.textContent=alertText;
+ }
+}
+function markBookingArrived(id){
+ const booking=bookings.find(item=>String(item.id)===String(id));if(!booking||bookingVisitStatus(booking)!=="reserved")return;
+ booking.arrivedAt=new Date().toISOString();booking.visitStatus="arrived";save();
+}
+function setBookingVisitStatus(id,status){
+ const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;
+ const current=bookingVisitStatus(booking);
+ if(status==="in_progress"&&current==="arrived")booking.visitStatus=status;
+ else if(status==="finished"&&(current==="arrived"||current==="in_progress"))booking.visitStatus=status;
+ else return alert("No se pudo cambiar el estado de llegada. Revisa el estado actual de la reserva.");
+ save();
+}
+function markBookingInProgress(id){setBookingVisitStatus(id,"in_progress")}
+function markBookingFinished(id){setBookingVisitStatus(id,"finished")}
 function renderDayBookings(date){
  const list=bookings.filter(booking=>booking.date===date).sort((a,b)=>(timeToMinutes(a.time)||0)-(timeToMinutes(b.time)||0)),groupList=groups.filter(group=>group.date===date).sort((a,b)=>(timeToMinutes(groupTimeForSlot(a))||0)-(timeToMinutes(groupTimeForSlot(b))||0)),d=new Date(date+"T12:00:00"),nice=d.toLocaleDateString("es-PA",{weekday:"long",day:"numeric",month:"long",year:"numeric"}),people=list.reduce((total,booking)=>total+(Number(booking.people)||0),0)+groupList.reduce((total,group)=>total+groupParticipantCount(group),0);
  $("selectedDayTitle").textContent=nice.charAt(0).toUpperCase()+nice.slice(1);
  $("daySummary").innerHTML='<div class="day-chip">▦ '+(list.length+groupList.length)+' reserva'+(list.length+groupList.length===1?'':'s')+'</div><div class="day-chip">♡ '+people+' personas</div><div class="day-chip">'+money(list.reduce((total,booking)=>total+(Number(booking.amount)||0),0))+' en reservas</div>';
  const timeline=[
-  ...list.map(booking=>{const activity=bookingActivityLabel(booking),areas=assignedSpaces(booking).map(space=>SPACES[space].name).join(" + ")||"Zona pendiente";return {minutes:timeToMinutes(booking.time)??Number.MAX_SAFE_INTEGER,html:'<button type="button" class="booking-card" onclick="openBookingDetails('+esc(JSON.stringify(String(booking.id)))+')"><span class="booking-time">'+esc(formatStartTime(booking.time))+'</span><span class="booking-card-details"><strong>'+esc(booking.client||"Sin nombre")+'</strong><span>'+esc(String(booking.people||0))+' personas · '+esc(areas)+'</span>'+(activity?'<span class="booking-card-activity">'+esc(activity)+'</span>':'')+(booking.guideName?'<span class="booking-card-guide">Guía: '+esc(booking.guideName)+'</span>':'')+'</span></button>'}}),
+  ...list.map(booking=>{
+   const activity=bookingActivityLabel(booking),areas=assignedSpaces(booking).map(space=>SPACES[space].name).join(" + ")||"Zona pendiente",status=bookingVisitStatus(booking),bookingId=esc(JSON.stringify(String(booking.id)));
+   const actions=status==="reserved"?'<button type="button" class="btn primary small" onclick="markBookingArrived('+bookingId+')">Marcar como llegó</button>':status==="arrived"?'<button type="button" class="btn small" onclick="markBookingInProgress('+bookingId+')">Marcar en taller</button><button type="button" class="btn small" onclick="markBookingFinished('+bookingId+')">Finalizar</button>':status==="in_progress"?'<button type="button" class="btn small" onclick="markBookingFinished('+bookingId+')">Finalizar</button>':'<span class="muted">Actividad finalizada</span>';
+   return {minutes:timeToMinutes(booking.time)??Number.MAX_SAFE_INTEGER,html:'<article class="booking-card booking-card--'+status+'" data-visit-status="'+status+'"><div class="booking-card-top"><span class="booking-time">'+esc(formatStartTime(booking.time))+'</span><div class="booking-card-details"><button type="button" class="booking-card-name" onclick="openBookingDetails('+bookingId+')">'+esc(booking.client||"Sin nombre")+'</button><span class="booking-card-meta">'+esc(String(booking.people||0))+' personas · '+esc(areas)+'</span>'+(activity?'<span class="booking-card-activity">'+esc(activity)+'</span>':'')+(booking.guideName?'<span class="booking-card-guide">Guía: '+esc(booking.guideName)+'</span>':'')+bookingVisitStatusMarkup(status)+'</div></div>'+bookingTimerMarkup(booking)+'<div class="booking-card-actions">'+actions+'</div></article>'}
+  }),
   ...groupList.map(group=>({minutes:timeToMinutes(groupTimeForSlot(group))??Number.MAX_SAFE_INTEGER,html:'<div class="item group-reservation-card"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+esc(formatStartTime(groupTimeForSlot(group))||group.time||"Horario pendiente")+'</span></div><p>'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+' inscrito'+(groupParticipantCount(group)===1?'':'s')+' · van '+groupParticipantCount(group)+' personas</p><p class="muted">Mesas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+' · Guía: '+esc(group.guideName||"Sin asignar")+'</p><div class="btnrow"><button class="btn small" onclick="openGroupCategory('+group.id+')">Ver taller y participantes</button><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas</button></div></div>'}))
  ].sort((a,b)=>a.minutes-b.minutes);
  $("dayBookings").innerHTML=timeline.map(item=>item.html).join("")||'<div class="empty"><div class="emoji">♡</div>No hay reservas para este día.</div>';
+ updateBookingTimers();
 }
+window.setInterval(updateBookingTimers,1000);
 function renderBookingSchedule(){renderCalendar();renderDayBookings($("agendaDate").value||dateToday())}
 $("agendaDate").addEventListener("change",()=>{const date=$("agendaDate").value;if(date)calendarMonth=new Date(date+"T12:00:00");renderBookingSchedule()});
 function setBookingView(view){
