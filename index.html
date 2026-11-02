@@ -20,40 +20,44 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 #loginScreen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#fdfbf5,#e6eee0)}#loginScreen[hidden]{display:none!important}.login-card{width:100%;max-width:380px;background:#fffefa;border:1px solid #e6e9df;border-radius:24px;padding:28px;box-shadow:0 12px 36px #53634a12}.login-card h1{font-size:27px;letter-spacing:5px;color:var(--green);margin:0}.login-card p{color:var(--muted);font-size:13px}.login-card label{display:block;font-size:12px;font-weight:650;margin:14px 0 6px}.login-card input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;color:var(--ink)}.login-card button{width:100%;border:0;border-radius:12px;background:var(--green);color:white;padding:12px;margin-top:18px;font-weight:700}.login-error{color:#a33b45!important;min-height:18px}.topnote{display:flex;align-items:center;gap:9px}.topnote button{border:1px solid #dfe7d9;background:#fffefa;color:var(--green);border-radius:99px;padding:6px 10px;font-size:11px}
 </style>
 <style>
-.seat-map-shell{overflow-x:auto;padding:5px 0 10px}
-.seat-map{min-width:540px;display:grid;grid-template-columns:minmax(210px,1fr) minmax(300px,1.35fr);grid-template-rows:auto auto auto;gap:12px;align-items:start}
+.booking-card-receipt{width:48px;height:48px;flex:0 0 48px;object-fit:cover;border:1px solid var(--line);border-radius:10px}.booking-card-receipt-button{border:0;background:transparent;padding:0;cursor:zoom-in}.booking-card-receipt-unavailable{max-width:76px;color:#8a555a;font-size:9px;line-height:1.2}.piece-booking-results{display:grid;gap:6px;margin-top:8px}.piece-booking-result{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-radius:11px;background:#fffefa;padding:9px 11px;color:var(--ink)}.piece-booking-result:hover,.piece-booking-result[aria-selected="true"]{border-color:var(--sage2);background:#f4f7ef}.piece-booking-result small{display:block;color:var(--muted);font-size:10px}.piece-booking-no-results{border:1px dashed var(--line);border-radius:11px;padding:10px;color:var(--muted);font-size:11px}
+.seat-map-shell{overflow-x:auto;padding:7px 2px 12px;scrollbar-color:#d6dfd0 transparent;scrollbar-width:thin}
+.seat-map{min-width:540px;display:grid;grid-template-columns:minmax(210px,.9fr) minmax(300px,1.15fr);grid-template-rows:auto auto auto;gap:14px;align-items:start;padding:4px}
 .seat-direction{grid-column:1/-1;text-align:center;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.6px}
 .seat-back{grid-row:3}
-.seat-area{border:1px solid #e8dfd9;border-radius:16px;background:#fffefa;padding:11px;min-width:0}
+.seat-area{border:1px solid #e8dfd9;border-radius:16px;background:linear-gradient(145deg,#fffefa,#fbf8f2);padding:13px;min-width:0;box-shadow:0 4px 14px #7f6b5b0a}
 .seat-area-left{grid-column:1;grid-row:2}
-.seat-area-right{grid-column:2;grid-row:2;display:grid;gap:12px}
-.seat-area-heading{font-size:11px;font-weight:800;color:var(--green2);text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
-.seat-table-row{display:flex;justify-content:center;align-items:center;gap:7px;min-width:0}
-.seat-table-row+.seat-table-row{margin-top:0}
-.seat-area-right .seat-table-row{gap:4px}
-.seat-table{position:relative;flex:0 1 168px;width:168px;height:116px;min-width:0}
-.seat-table.vertical{flex-basis:108px;width:108px;height:112px}
-.seat-table-surface{position:absolute;inset:19px 25px;background:#f2e7df;border:1px solid #e6d7cd;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#8f786c;font-size:10px;font-weight:800;letter-spacing:.6px}
-.seat-table.vertical .seat-table-surface{inset:0 17px;border-radius:0}
-.seat-area-left .seat-table-row:first-of-type .seat-table-surface{border-radius:12px 12px 0 0}
-.seat-area-left .seat-table-row:last-of-type .seat-table-surface{border-radius:0 0 12px 12px}
-.seat-table-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none}
-.seat-chair{position:absolute;width:25px;height:25px;padding:0;border:1px solid #dcd7ce;border-radius:50%;background:#fff;color:#6d766b;font-size:10px;font-weight:800;display:grid;place-items:center;z-index:1;touch-action:manipulation}
+.seat-area-right{grid-column:2;grid-row:2;display:grid;gap:14px}
+.seat-area-heading{font-size:11px;font-weight:800;color:var(--green2);text-transform:uppercase;letter-spacing:.7px;margin:0}
+.seat-area-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;flex-wrap:wrap}
+.seat-area-capacity{font-size:10px;color:var(--muted)}
+.seat-area-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.seat-area-tools .btn{flex:0 0 auto}
+.seat-area-plan{display:flex;justify-content:center;align-items:center;padding:8px 0 5px;overflow:visible}
+.seat-block{position:relative;flex:none}
+.seat-block--vertical{width:168px;height:370px}
+.seat-block--horizontal{width:min(100%,340px);min-width:255px;height:142px}
+.seat-block--single{width:min(100%,230px);min-width:205px;height:142px}
+.seat-block-surface{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f2e7df;border:1px solid #e6d7cd;border-radius:14px;color:#8f786c;font-size:10px;font-weight:800;letter-spacing:.6px;text-align:center;padding:12px}
+.seat-block--vertical .seat-block-surface{inset:0 30px}
+.seat-block--vertical .seat-block-surface::before,.seat-block--horizontal .seat-block-surface::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.55}
+.seat-block--vertical .seat-block-surface::before{background:linear-gradient(to bottom,transparent 33.15%,#d9c9bf 33.33%,transparent 33.55%,transparent 66.45%,#d9c9bf 66.66%,transparent 66.9%)}
+.seat-block--horizontal .seat-block-surface::before{background:linear-gradient(to right,transparent 49.7%,#d9c9bf 50%,transparent 50.3%)}
+.seat-block--horizontal .seat-block-surface,.seat-block--single .seat-block-surface{inset:26px 0}
+.seat-chair.position-long-left,.seat-chair.position-long-right{top:var(--seat-position);transform:translateY(-50%)}
+.seat-chair.position-long-left{left:0}.seat-chair.position-long-right{right:0}
+.seat-chair.position-long-top,.seat-chair.position-long-bottom{left:var(--seat-position);transform:translateX(-50%)}
+.seat-chair.position-long-top{top:0}.seat-chair.position-long-bottom{bottom:0}
+.seat-block .seat-chair{z-index:2}
+.seat-chair{position:absolute;width:25px;height:25px;padding:0;border:1px solid #dcd7ce;border-radius:50%;background:#fff;color:#6d766b;font-size:10px;font-weight:800;display:grid;place-items:center;z-index:1;touch-action:manipulation;box-shadow:0 2px 5px #5f665012}
 .seat-chair.available:hover{background:#eef4e9;border-color:#95b28b}
+.seat-chair.additional{border-style:dashed;background:#f5ebd4;color:#87672e}
+.seat-chair.additional::after{content:"+";position:absolute;top:-5px;right:-4px;width:11px;height:11px;border-radius:50%;background:#fffefa;border:1px solid #d5bd85;color:#87672e;font-size:8px;line-height:9px}
 .seat-chair.selected{background:#e8cfd5;border:2px solid #bd8794;color:#714d55}
 .seat-chair.conflict{background:#f3d9d4;border:2px solid #c9786d;color:#84453c}
 .seat-chair.occupied{background:#dcebd8;border-color:#a8c59f;color:#3e6b42;cursor:not-allowed}
+.seat-chair.legacy{background:#f5eee4;border-style:dashed;color:#897a68;cursor:not-allowed}
 .seat-chair:disabled{opacity:1}
-.seat-chair.position-top-left{top:0;left:25%}.seat-chair.position-top-right{top:0;right:25%}
-.seat-chair.position-top-center{top:0;left:50%;transform:translateX(-50%)}
-.seat-chair.position-bottom-left{bottom:0;left:25%}.seat-chair.position-bottom-right{bottom:0;right:25%}
-.seat-chair.position-bottom-center{bottom:0;left:50%;transform:translateX(-50%)}
-.seat-chair.position-left{top:50%;left:0;transform:translateY(-50%)}
-.seat-chair.position-right{top:50%;right:0;transform:translateY(-50%)}
-.seat-chair.position-left-upper{top:29%;left:0;transform:translateY(-50%)}
-.seat-chair.position-left-lower{top:71%;left:0;transform:translateY(-50%)}
-.seat-chair.position-right-upper{top:29%;right:0;transform:translateY(-50%)}
-.seat-chair.position-right-lower{top:71%;right:0;transform:translateY(-50%)}
 .seat-map-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:9px 0}
 .seat-map-summary span{font-size:10px;text-align:center;border-radius:9px;background:#f6f1eb;padding:6px 3px;color:#6f665e}
 .seat-map-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin:8px 0}
@@ -61,9 +65,10 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 .seat-legend-dot{width:12px;height:12px;border-radius:50%;border:1px solid #dcd7ce;background:#fff}
 .seat-legend-dot.selected{background:#e8cfd5;border-color:#bd8794}
 .seat-legend-dot.occupied{background:#dcebd8;border-color:#a8c59f}
+.seat-legend-dot.additional{background:#f5ebd4;border-style:dashed;border-color:#d5bd85}
 .seat-assignment-controls{display:flex;align-items:end;gap:10px;flex-wrap:wrap}
 .seat-assignment-controls .field{flex:1;min-width:200px}
-@media(max-width:600px){.seat-map{gap:8px;grid-template-columns:210px 300px}.seat-area{padding:8px}.seat-area-right{gap:8px}.seat-map-summary span{font-size:9px}}
+@media(max-width:600px){.seat-map{gap:8px;grid-template-columns:210px 300px;padding:2px}.seat-area{padding:9px}.seat-area-right{gap:8px}.seat-map-summary span{font-size:9px}.seat-area-tools{align-items:flex-start}.seat-block--vertical{height:350px}.seat-block--horizontal{min-width:250px;width:100%;height:132px}.seat-block--single{min-width:205px;height:132px}}
 .booking-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 0 14px}.booking-view-switch{display:flex;gap:5px;padding:4px;background:#f0f2e9;border-radius:13px}.booking-view-switch button{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700}.booking-view-switch button.active{background:white;color:var(--green2);box-shadow:0 2px 8px #53634a12}.booking-card{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:white;color:var(--ink)}.booking-card:hover{border-color:var(--sage2);background:#fffefa}.booking-time{flex:0 0 76px;color:var(--green2);font-weight:800;font-size:12px}.booking-card-details{min-width:0;flex:1}.booking-card-details strong{display:block;font-size:14px}.booking-card-details span{display:block;margin-top:3px;color:var(--muted);font-size:11px}.booking-card-details .booking-card-activity{width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:5px;padding:3px 8px;border-radius:99px;background:var(--rose);color:#714d55;font-size:11px;font-weight:750}.booking-card-details .booking-card-guide{color:var(--green2);font-size:10px}.booking-details{width:min(560px,calc(100% - 24px));max-height:85vh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:18px;background:var(--paper);color:var(--ink);box-shadow:0 20px 70px #26332244}.booking-details::backdrop{background:#1d271dd9}.booking-details h3{margin:0 0 5px}.booking-details .btnrow{margin-top:14px}.booking-details-close{float:right;border:0;background:transparent;color:var(--muted);font-size:23px;line-height:1}.availability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.availability-table{background:#f7f8f1;border-radius:12px;padding:10px;min-width:0}.availability-table b{display:block;font-size:12px}.availability-table small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.availability-table .spstatus{display:block;margin-top:7px}.availability-table .spstatus.busy{color:#a36a36}@media(max-width:719px){.availability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:390px){.booking-time{flex-basis:65px}.booking-card{gap:8px;padding:11px}}
 .group-category{padding:0;overflow:hidden}.group-category-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;padding:15px 16px;cursor:pointer}.group-category-summary::-webkit-details-marker{display:none}.group-category-summary::after{content:"＋";color:var(--green);font-weight:800}.group-category[open]>.group-category-summary::after{content:"−"}.group-category-title{min-width:0}.group-category-title strong{display:block}.group-category-title small{display:block;margin-top:3px;color:var(--muted);font-size:11px}.group-category-content{padding:0 16px 16px}.group-participant-form{padding:13px;border:1px solid var(--line);border-radius:14px;background:#fafaf5;margin:12px 0}.group-participant-form h4{margin:0 0 6px}.group-participant-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.group-participant-photo{width:48px;height:48px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}.group-arrival{display:inline-flex;align-items:center;gap:6px;color:var(--green2);font-size:12px;font-weight:700;white-space:nowrap}.group-arrival input{accent-color:var(--green);width:17px;height:17px}.group-reservation-card{border-left:3px solid var(--sage2);padding-left:12px}.group-reservation-card p{margin:5px 0}.group-proof-link{font-size:11px}
 .booking-card{display:block;text-align:left;padding:13px}.booking-card-top{display:flex;align-items:flex-start;gap:10px}.booking-card-top .booking-time{flex:0 0 auto;min-width:66px;padding-top:2px}.booking-card-details{display:block}.booking-card-name{display:block;padding:0;border:0;background:transparent;color:var(--ink);text-align:left;font-size:14px;font-weight:750}.booking-card-name:hover{text-decoration:underline}.booking-card-meta{display:block;margin-top:3px;color:var(--muted);font-size:11px}.booking-visit-status{display:inline-flex;align-items:center;margin-top:7px;padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800}.booking-visit-status--reserved{background:var(--gold);color:#87672e}.booking-visit-status--arrived{background:var(--rose);color:#854b52}.booking-visit-status--in_progress{background:#dcebd8;color:#3e6b42}.booking-visit-status--finished{background:#e8e9e1;color:#596052}.booking-card-timer{display:flex;flex-wrap:wrap;gap:4px 12px;margin:9px 0 0;padding:8px 10px;border-radius:11px;background:#f7f6ef;color:#53614e;font-size:11px}.booking-card-timer--overdue{background:#fff0ed;color:#8b4646}.booking-card-alert{flex-basis:100%;font-weight:800}.booking-card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.booking-card-actions .btn{min-height:34px}.booking-card--arrived{border-color:#ead6da}.booking-card--in_progress{border-color:#bdd4b7}.booking-card--finished{border-color:#d8dbd0}.booking-card--overdue{border-color:#e4b7ae;background:#fffafa}
@@ -86,7 +91,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div class="headrow"><div><div class="eyebrow">Tu estudio, organizado</div><h2 class="heading">Hola, bienvenida a STAIN ✿</h2><p class="desc">Todo lo que necesitas para que tu día fluya bonito.</p></div></div>
 <div class="stats"><div class="stat"><div class="ico">▦</div><strong id="statBookings">0</strong><span>Reservas registradas</span></div><div class="stat"><div class="ico">✿</div><strong id="statWorkshops">0</strong><span>Talleres en catálogo</span></div><div class="stat"><div class="ico">♧</div><strong id="statPieces">0</strong><span>Piezas en seguimiento</span></div><div class="stat"><div class="ico">▤</div><strong id="statInventory">0</strong><span>Artículos de inventario</span></div></div>
 <div class="card"><div class="eyebrow">Accesos rápidos</div><h3 style="margin-top:5px">¿Qué vamos a organizar hoy?</h3><div class="grid"><button class="btn" onclick="startNewBooking()">＋ Nueva reserva</button><button class="btn" onclick="show('reservas')">▦ Ver reservas</button><button class="btn" onclick="show('talleres')">✿ Crear taller guiado</button><button class="btn" onclick="show('piezas')">♧ Registrar una pieza</button></div></div>
-<div class="card"><div class="row"><div><h3>Distribución del estudio</h3><p class="muted">Espacios fijos · turnos de dos horas</p></div><span class="pill">9 a. m. – 7 p. m.</span></div><div class="spacegrid"><div class="spacebox"><b>Espacio A</b><small>2 mesas</small><span class="spstatus">8 cómodas · máximo aprox. 10</span></div><div class="spacebox"><b>Espacio B</b><small>3 mesas verticales pegadas</small><span class="spstatus">12 cómodas · máximo 16</span></div><div class="spacebox"><b>Espacio C</b><small>Mesa adicional</small><span class="spstatus">4 cómodas · máximo aprox. 5</span></div></div></div>
+<div class="card"><div class="row"><div><h3>Distribución del estudio</h3><p class="muted">Espacios fijos · turnos de dos horas</p></div><span class="pill">9 a. m. – 7 p. m.</span></div><div class="spacegrid"><div class="spacebox"><b>Espacio A</b><small>2 mesas</small><span class="spstatus">8 cómodas · máximo 10 (ampliable)</span></div><div class="spacebox"><b>Espacio B</b><small>3 mesas verticales pegadas</small><span class="spstatus">12 cómodas · máximo 16 (ampliable)</span></div><div class="spacebox"><b>Espacio C</b><small>Mesa adicional</small><span class="spstatus">4 sillas · capacidad fija</span></div></div></div>
 <div class="card"><h3>Próximas reservas</h3><div id="homeBookings"></div></div>
 </section>
 
@@ -113,7 +118,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div id="guidedFields" hidden><div class="field"><label>Elige un taller guiado *</label><select id="guidedWorkshop"></select><p class="hint">Se cargarán el precio y los datos del guía desde tu catálogo.</p></div><div class="field"><label>Guía / planner asignado</label><div id="bookingGuideInfo" class="muted">Selecciona un taller del catálogo.</div></div></div>
 <div class="field"><label>Precio total de la reserva ($)</label><input id="amount" type="number" min="0" step=".01" value="0" required><p class="hint">En talleres guiados se calcula desde el precio del catálogo × participantes; puedes ajustar el total si es un paquete.</p></div>
 <div class="moneybox"><div class="moneyline total"><span>Total</span><strong id="totalAmount">$0.00</strong></div><div class="moneyline"><span>Abono del 30%</span><strong id="deposit">$0.00</strong></div><div class="moneyline"><span>Saldo pendiente del 70%</span><strong id="balance">$0.00</strong></div></div>
-<div class="field"><label>Comprobante del abono</label><input id="receipt" type="file" accept="image/*,.pdf"><p class="hint">Puedes seleccionar una foto o PDF. En esta versión el archivo no se sube a la nube todavía.</p></div>
+<div class="field"><label>Comprobante del abono</label><input id="receipt" type="file" accept="image/*,.pdf"><p id="receiptHint" class="hint">Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.</p></div>
 <div class="field"><label>Observaciones</label><textarea id="notes" rows="3" placeholder="Preferencias, notas del cliente…"></textarea></div>
 <button id="bookingSubmit" class="btn primary full" type="submit">Guardar reserva ♡</button><button id="bookingCancelEdit" class="btn full" type="button" hidden onclick="cancelBookingEdit()">Cancelar edición</button>
 </form>
@@ -150,7 +155,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <section id="piezas" class="view">
 <div class="headrow"><div><div class="eyebrow">Del taller a la entrega</div><h2 class="heading">Seguimiento de piezas</h2><p class="desc">Registra fotos y controla cada etapa hasta la entrega.</p></div></div>
 <form id="pieceForm" class="card">
-<h3>＋ Agregar pieza</h3><div class="field"><label>Tipo de registro</label><select id="pieceSource"><option value="manual">Sin reserva · registro manual</option><option value="booking">Con reserva</option></select></div><div id="pieceBookingField" class="field" hidden><label>Reserva relacionada</label><select id="pieceBooking"></select><button id="loadPieceBooking" class="btn small" type="button" style="margin-top:8px">Usar datos de la reserva</button><p class="hint">Los campos se pueden editar antes de guardar.</p></div><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si es internacional.</p></div></div><div class="field"><label>Fecha de registro</label><input id="pieceDate" type="date" required></div>
+<h3>＋ Agregar pieza</h3><div class="field"><label>Tipo de registro</label><select id="pieceSource"><option value="manual">Sin reserva · registro manual</option><option value="booking">Con reserva</option></select></div><div id="pieceBookingField" class="field" hidden><label for="pieceBookingSearch">Buscar cliente con reserva</label><input id="pieceBookingSearch" type="search" autocomplete="off" placeholder="Escribe el nombre del cliente"><select id="pieceBooking" hidden aria-hidden="true" tabindex="-1"></select><div id="pieceBookingResults" class="piece-booking-results" role="listbox" aria-label="Reservas que coinciden"></div><p id="pieceBookingSearchStatus" class="hint" role="status">Escribe un nombre para buscar reservas.</p><button id="loadPieceBooking" class="btn small" type="button" style="margin-top:8px">Usar datos de la reserva</button><p class="hint">Selecciona la visita correcta. Los campos se pueden editar antes de guardar.</p></div><div class="field"><label>Nombre de la pieza *</label><input id="pieceName" required placeholder="Ej. Taza floral"></div><div class="grid"><div class="field"><label>Cliente</label><input id="pieceClient" placeholder="Nombre del cliente"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="piecePhone" type="tel" inputmode="tel" placeholder="507 6000 0000"><p class="hint">Incluye el código de país si es internacional.</p></div></div><div class="field"><label>Fecha de registro</label><input id="pieceDate" type="date" required></div>
 <input id="pieceStatus" type="hidden" value="En horno">
 <div class="field"><label>Foto de la pieza</label><input id="piecePhoto" type="file" accept="image/*"><p class="hint">Elige una foto; STAIN la ajustará para guardarla en la nube.</p></div><div class="field"><label>Notas</label><textarea id="pieceNotes" rows="2"></textarea></div><button class="btn primary full" type="submit">Guardar pieza</button>
 </form><div id="pieceList"></div>
@@ -171,7 +176,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div class="card"><h3>Módulos del estudio</h3><div class="grid"><button class="btn" onclick="show('talleres')">Talleres guiados</button><button class="btn" onclick="show('inventario')">Inventario</button><button class="btn" onclick="show('guias')">Guías</button></div></div>
 <div class="card"><h3>Mensajes y WhatsApp</h3><p class="muted">Genera un resumen de reserva para copiarlo y enviarlo por WhatsApp.</p><button class="btn primary" onclick="copySummary()">Copiar resumen de reservas</button></div>
 <div class="card"><h3>Enlaces para Google Calendar</h3><p class="muted">STAIN prepara un enlace para agregar cada actividad al calendario de quien lo abra. No requiere Google Cloud, OAuth, correo del guía ni conexión automática.</p><div class="grid"><div class="field"><label>Zona horaria de los eventos</label><input id="calendarTimezone" value="America/Panama" placeholder="America/Panama"></div><div class="field"><label>Ubicación predeterminada (opcional)</label><input id="calendarLocation" placeholder="No se agregará una ubicación si lo dejas vacío"></div></div><div class="btnrow"><button class="btn primary" type="button" onclick="saveCalendarSettings()">Guardar configuración</button><span id="calendarConfigStatus" class="hint" role="status"></span></div><p class="hint">Usa «Agregar a Google Calendar» en una reserva o taller para abrir el evento prellenado. «Compartir por WhatsApp» envía ese mismo enlace al guía. La persona deberá abrirlo y guardar el evento; si la actividad cambia, comparte el enlace actualizado. STAIN no puede saber si se guardó ni actualizar o cancelar el evento por el destinatario.</p><div id="calendarGlobalStatus" class="hint" role="status"></div></div>
-<div class="card"><h3>Respaldo completo</h3><p class="muted">Descarga un ZIP con reservas, inventario, guías, talleres, pagos, metadatos y fotos disponibles. La copia incluye las fotos originales almacenadas en Supabase Storage.</p><div class="btnrow"><button class="btn primary" type="button" onclick="downloadFullBackup()">Descargar copia de seguridad</button></div><div class="divider"></div><div class="field"><label>Restaurar una copia ZIP</label><input id="backupFile" type="file" accept=".zip,application/zip"></div><button class="btn" type="button" onclick="previewBackupRestore()">Analizar copia</button><div id="backupPreview" class="hint" role="status"></div><div class="btnrow"><button id="confirmBackupRestore" class="btn danger" type="button" hidden onclick="confirmBackupRestore()">Reemplazar datos con esta copia</button><button id="cancelBackupRestore" class="btn" type="button" hidden onclick="cancelBackupRestore()">Cancelar</button></div><p class="hint">La restauración reemplaza las seis categorías actuales después de confirmarlo. No borra objetos antiguos de Storage. Los comprobantes existentes en STAIN son nombres o referencias, no archivos digitales guardados.</p></div>
+<div class="card"><h3>Respaldo completo</h3><p class="muted">Descarga un ZIP con reservas, inventario, guías, talleres, pagos, configuraciones y fotos disponibles. Incluye las imágenes de piezas y comprobantes que estén guardadas en Supabase Storage.</p><div class="btnrow"><button class="btn primary" type="button" onclick="downloadFullBackup()">Descargar copia de seguridad</button></div><div class="divider"></div><div class="field"><label>Restaurar una copia ZIP</label><input id="backupFile" type="file" accept=".zip,application/zip"></div><button class="btn" type="button" onclick="previewBackupRestore()">Analizar copia</button><div id="backupPreview" class="hint" role="status"></div><div class="btnrow"><button id="confirmBackupRestore" class="btn danger" type="button" hidden onclick="confirmBackupRestore()">Reemplazar datos con esta copia</button><button id="cancelBackupRestore" class="btn" type="button" hidden onclick="cancelBackupRestore()">Cancelar</button></div><p class="hint">La restauración reemplaza los datos de las seis categorías originales y la configuración de sillas después de confirmarlo. No borra objetos antiguos de Storage. Los comprobantes históricos que solo conservaban el nombre del archivo no se pueden recuperar.</p></div>
 <div class="card"><h3>Excel e importación</h3><p class="muted">Exporta hojas separadas. Clientes, participantes y pagos se derivan de reservas y talleres; la copia ZIP es la opción para conservar relaciones y fotos.</p><div class="btnrow"><button class="btn primary" type="button" onclick="exportExcel()">Exportar a Excel (.xlsx)</button></div><div class="field"><label>Importar Excel o CSV</label><input id="spreadsheetFile" type="file" accept=".xlsx,.xls,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div><div class="field"><label>Tipo de registro para CSV o un Excel propio de una hoja</label><select id="spreadsheetCsvKind"><option value="bookings">Reservas</option><option value="pieces">Piezas</option><option value="workshops">Talleres guiados</option><option value="groups">Talleres grupales</option><option value="participants">Participantes (requiere ID de taller)</option></select></div><button class="btn" type="button" onclick="previewSpreadsheetImport()">Analizar archivo</button><div id="spreadsheetPreview" class="hint" role="status"></div><div class="btnrow"><button id="confirmSpreadsheetImport" class="btn primary" type="button" hidden onclick="confirmSpreadsheetImport()">Importar registros nuevos</button><button id="cancelSpreadsheetImport" class="btn" type="button" hidden onclick="cancelSpreadsheetImport()">Cancelar</button></div><p class="hint">La importación añade solo registros nuevos; detecta duplicados y no reemplaza los existentes. Usa el archivo Excel exportado por STAIN para preservar todos los campos. Clientes se importan mediante reservas/piezas; pagos y participantes se conservan dentro del taller o registro. Comprobantes adjuntos históricos no están disponibles en los datos actuales.</p></div>
 </section>
 <div class="bottomnote">STAIN Studio · Hecho con cariño y un toque de verde salvia ♡</div>
@@ -186,7 +191,7 @@ let currentUser=null,cloudReady=false,syncing=false,syncPending=false,accountGen
 const piecePhotoUrlCache={};
 const SLOTS=Array.from({length:9},(_,index)=>{const hour=9+index,endHour=hour+2,labelHour=hour%12||12,endDisplay=endHour%12||12;return {time:String(hour).padStart(2,"0")+":00",label:labelHour+":00 "+(hour<12?"a. m.":"p. m.")+" – "+endDisplay+":00 "+(endHour<12?"a. m.":"p. m.")}});
 const BOOKING_DURATION_MINUTES=120,BOOKING_OPEN_MINUTES=9*60,BOOKING_CLOSE_MINUTES=19*60;
-const SPACES={A:{name:"Área A · 2 mesas",max:10,comfortable:8,desc:"8 cómodas · máximo aproximado 10"},B:{name:"Área B · 3 mesas verticales pegadas",max:16,comfortable:12,desc:"12 cómodas · máximo 16"},C:{name:"Mesa C independiente",max:5,comfortable:4,desc:"4 cómodas · máximo aproximado 5"}};
+const SPACES={A:{name:"Área A · 2 mesas",max:10,comfortable:8,desc:"8 cómodas · máximo 10"},B:{name:"Área B · 3 mesas verticales pegadas",max:16,comfortable:12,desc:"12 cómodas · máximo 16"},C:{name:"Mesa C independiente",max:4,comfortable:4,desc:"4 sillas"}};
 const PHYSICAL_TABLES=[
  {id:"B1",area:"B",orientation:"vertical",seats:6,positions:["top-left","top-right","left-upper","right-upper","left-lower","right-lower"]},
  {id:"B2",area:"B",orientation:"vertical",seats:4,positions:["left-upper","right-upper","left-lower","right-lower"]},
@@ -195,13 +200,14 @@ const PHYSICAL_TABLES=[
  {id:"A2",area:"A",orientation:"horizontal",seats:5,positions:["top-left","top-right","left","right","bottom-center"]},
  {id:"C1",area:"C",orientation:"horizontal",seats:5,positions:["top-left","top-right","left","right","bottom-center"]}
 ].map(table=>({...table,seatIds:Array.from({length:table.seats},(_,index)=>table.id+"-"+(index+1))}));
+const BASE_AREA_SEATS={A:8,B:12,C:4},MAX_AREA_SEATS={A:10,B:16,C:4};
 const ALL_SEAT_IDS=PHYSICAL_TABLES.flatMap(table=>table.seatIds),SEAT_TABLE_BY_ID=new Map(PHYSICAL_TABLES.flatMap(table=>table.seatIds.map(id=>[id,table])));
 let bookingFormSpaces=[],bookingMapSpaces=[],bookingFormSeatIds=[],bookingMapSeatIds=[],bookingMapMode="manual",bookingEditingId=null,bookingView="calendar";
-let bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[];
+let bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[],seatExtensions=[];
 const $=id=>document.getElementById(id),money=n=>"$"+(Number(n)||0).toFixed(2);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-const dataKeys=["bookings","workshops","guides","groups","pieces","inventory"];
-const dataStateKeys={bookings:"bookings",workshops:"workshops",guides:"guides",groups:"groups",pieces:"pieces",inventory:"inventory"};
+const dataKeys=["bookings","workshops","guides","groups","pieces","inventory","seatExtensions"];
+const dataStateKeys={bookings:"bookings",workshops:"workshops",guides:"guides",groups:"groups",pieces:"pieces",inventory:"inventory",seatExtensions:"seatExtensions"};
 let pendingDataKeys=new Set(),dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0])),cloudVersions={},dataSnapshot={},groupEditingId=null;
 const externalLibraryPromises=new Map();
 let backupRestoreDraft=null,spreadsheetImportDraft=null;
@@ -209,12 +215,12 @@ function accountStorageKey(userId,key){return "stain_v2_user_"+encodeURIComponen
 function pendingStorageKey(userId){return accountStorageKey(userId,"pending")}
 function pendingVersionsStorageKey(userId){return accountStorageKey(userId,"pending_versions")}
 function isCurrentAccount(userId,generation){return Boolean(currentUser&&currentUser.id===userId&&accountGeneration===generation)}
-function setDataState(data){bookings=data.bookings||[];workshops=data.workshops||[];guides=data.guides||[];groups=data.groups||[];pieces=data.pieces||[];inventory=data.inventory||[]}
-function getDataState(){return {bookings,workshops,guides,groups,pieces,inventory}}
+function setDataState(data){bookings=data.bookings||[];workshops=data.workshops||[];guides=data.guides||[];groups=data.groups||[];pieces=data.pieces||[];inventory=data.inventory||[];seatExtensions=data.seatExtensions||[]}
+function getDataState(){return {bookings,workshops,guides,groups,pieces,inventory,seatExtensions}}
 function clearAccountData(){setDataState({});pendingDataKeys=new Set();dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0]));cloudVersions={};dataSnapshot={};Object.keys(piecePhotoUrlCache).forEach(path=>delete piecePhotoUrlCache[path])}
 function readLocalData(userId,key){try{const value=JSON.parse(localStorage.getItem(accountStorageKey(userId,key))||"[]");return Array.isArray(value)?value:[]}catch{return []}}
 function loadLocalData(userId){const data={};for(const key of dataKeys)data[key]=readLocalData(userId,key);setDataState(data);try{const pending=JSON.parse(localStorage.getItem(pendingStorageKey(userId))||"[]");pendingDataKeys=new Set(Array.isArray(pending)?pending.filter(key=>dataKeys.includes(key)):[])}catch{pendingDataKeys=new Set()}try{const versions=JSON.parse(localStorage.getItem(pendingVersionsStorageKey(userId))||"{}");cloudVersions=versions&&typeof versions==="object"&&!Array.isArray(versions)?versions:{}}catch{cloudVersions={}}dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(data[key])]))}
-function localSave(userId=currentUser?.id){if(!userId)return;for(const [k,v] of Object.entries({bookings,workshops,guides,groups,pieces,inventory}))localStorage.setItem(accountStorageKey(userId,k),JSON.stringify(v))}
+function localSave(userId=currentUser?.id){if(!userId)return;for(const [k,v] of Object.entries({bookings,workshops,guides,groups,pieces,inventory,seatExtensions}))localStorage.setItem(accountStorageKey(userId,k),JSON.stringify(v))}
 function persistPendingData(userId=currentUser?.id){if(!userId)return;localStorage.setItem(pendingStorageKey(userId),JSON.stringify([...pendingDataKeys]));localStorage.setItem(pendingVersionsStorageKey(userId),JSON.stringify(cloudVersions))}
 function setCloudStatus(message){const el=$("cloudStatus");if(el)el.textContent=message}
 function photoSrc(photo){if(!photo)return "";if(photo.startsWith("storage:"))return piecePhotoUrlCache[photo.slice(8)]||"";return photo}
@@ -236,6 +242,26 @@ async function storePiecePhotos(userId,generation,pieceData){
  }
  return pieceData;
 }
+async function storeBookingReceipts(userId,generation,bookingData){
+ for(const booking of bookingData){
+  if(!isCurrentAccount(userId,generation))return;
+  const receipt=booking.receiptPhoto;
+  if(!receipt||!receipt.startsWith("data:"))continue;
+  const blob=await (await fetch(receipt)).blob();
+  if(!isCurrentAccount(userId,generation))return;
+  const ext=blob.type.includes("png")?"png":blob.type.includes("webp")?"webp":"jpg";
+  const bookingId=String(booking.id||("booking-"+Date.now())).replace(/[^a-zA-Z0-9_-]/g,"_"),path=userId+"/booking-receipts/"+bookingId+"."+ext;
+  const upload=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:true,contentType:blob.type||"image/jpeg"});
+  if(upload.error)throw upload.error;
+  if(!isCurrentAccount(userId,generation))return;
+  booking.receiptPhoto="storage:"+path;
+  const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
+  if(!isCurrentAccount(userId,generation))return;
+  if(signed.error)throw new Error("El comprobante se guardó, pero no se pudo generar su enlace de vista previa: "+signed.error.message);
+  piecePhotoUrlCache[path]=signed.data.signedUrl;
+ }
+ return bookingData;
+}
 async function syncAllToCloud(user=currentUser,generation=accountGeneration){
  if(!user||!isCurrentAccount(user.id,generation))return;
  setCloudStatus("Guardando…");
@@ -248,6 +274,14 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
    if(!isCurrentAccount(user.id,generation))return;
    if(dataRevisions[key]!==revision)continue;
    pieces=value;
+   dataSnapshot[key]=JSON.stringify(value);
+   localSave(user.id);
+  }
+  if(key==="bookings"){
+   value=await storeBookingReceipts(user.id,generation,value);
+   if(!isCurrentAccount(user.id,generation))return;
+   if(dataRevisions[key]!==revision)continue;
+   bookings=value;
    dataSnapshot[key]=JSON.stringify(value);
    localSave(user.id);
   }
@@ -356,13 +390,23 @@ async function downloadFullBackup(){
    const safeId=String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_"),path="photos/piece-"+safeId+"-"+index+"."+photoExtension(blob);
    zip.file(path,blob);piece.photo="backup-photo:"+path;photoCount++;
   }
+  for(let index=0;index<snapshot.bookings.length;index++){
+   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
+   const booking=snapshot.bookings[index];
+   if(!booking.receiptPhoto)continue;
+   const blob=await getPiecePhotoBlob(booking.receiptPhoto);
+   if(!blob)throw new Error("No se pudo recuperar el comprobante de "+(booking.client||booking.id)+". La copia no se descargó para evitar omitir archivos.");
+   totalPhotoBytes+=blob.size;if(totalPhotoBytes>200*1024*1024)throw new Error("Las fotos y comprobantes superan el límite de 200 MB para una copia ZIP.");
+   const safeId=String(booking.id??index).replace(/[^a-zA-Z0-9_-]/g,"_"),path="photos/booking-receipt-"+safeId+"-"+index+"."+photoExtension(blob);
+   zip.file(path,blob);booking.receiptPhoto="backup-photo:"+path;photoCount++;
+  }
   const calendarSettings=readCalendarSettings();
-  zip.file("manifest.json",JSON.stringify({format:"stain-full-backup",version:1,createdAt:new Date().toISOString(),photoCount,receiptFilesIncluded:false,calendarSettings:{timezone:calendarSettings.timezone||"America/Panama",reminderMinutes:Number(calendarSettings.reminderMinutes??30),location:calendarSettings.location||""}}));
+  zip.file("manifest.json",JSON.stringify({format:"stain-full-backup",version:1,createdAt:new Date().toISOString(),photoCount,receiptFilesIncluded:true,calendarSettings:{timezone:calendarSettings.timezone||"America/Panama",reminderMinutes:Number(calendarSettings.reminderMinutes??30),location:calendarSettings.location||""}}));
   zip.file("data.json",JSON.stringify(snapshot,null,2));
   const blob=await zip.generateAsync({type:"blob",compression:"DEFLATE"});
   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
   downloadBlob(blob,"stain-backup-"+dateToday()+".zip");
-  output.textContent="Copia descargada. "+photoCount+" foto(s) incluidas. Los comprobantes solo se incluyen como referencias porque STAIN no conserva sus archivos.";
+  output.textContent="Copia descargada. "+photoCount+" foto(s) de piezas y comprobante(s) incluidos.";
  }catch(error){console.error("STAIN backup export error:",error);output.textContent="No se pudo crear el respaldo: "+(error.message||"error inesperado");}
 }
 async function previewBackupRestore(){
@@ -379,6 +423,7 @@ async function previewBackupRestore(){
   if(!manifestFile||!dataFile)throw new Error("No parece una copia STAIN válida (faltan manifest.json o data.json).");
   const manifest=JSON.parse(await manifestFile.async("string")),snapshot=JSON.parse(await dataFile.async("string"));
   if(manifest.format!=="stain-full-backup"||manifest.version!==1)throw new Error("Formato o versión de copia no compatible.");
+  if(!Array.isArray(snapshot.seatExtensions))snapshot.seatExtensions=[];
   if(manifest.calendarSettings){
    try{new Intl.DateTimeFormat("en",{timeZone:manifest.calendarSettings.timezone}).format(new Date())}catch{throw new Error("La copia contiene una zona horaria no válida.")}
    if(!Number.isInteger(Number(manifest.calendarSettings.reminderMinutes))||Number(manifest.calendarSettings.reminderMinutes)<0||Number(manifest.calendarSettings.reminderMinutes)>40320||typeof manifest.calendarSettings.location!=="string")throw new Error("La copia contiene configuración de calendario no válida.");
@@ -389,6 +434,11 @@ async function previewBackupRestore(){
   for(const piece of snapshot.pieces)if(typeof piece.photo==="string"&&piece.photo.startsWith("backup-photo:")){
    const path=piece.photo.slice("backup-photo:".length);
    if(!/^photos\/[A-Za-z0-9_-]+\.(jpg|png|webp|gif)$/.test(path)||!zip.file(path))throw new Error("Falta el archivo de foto asociado a la pieza "+(piece.name||piece.id)+".");
+   photoPaths.push(path);
+  }
+  for(const booking of snapshot.bookings)if(typeof booking.receiptPhoto==="string"&&booking.receiptPhoto.startsWith("backup-photo:")){
+   const path=booking.receiptPhoto.slice("backup-photo:".length);
+   if(!/^photos\/[A-Za-z0-9_-]+\.(jpg|png|webp|gif)$/.test(path)||!zip.file(path))throw new Error("Falta el comprobante asociado a la reserva "+(booking.client||booking.id)+".");
    photoPaths.push(path);
   }
   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante el análisis; selecciona y analiza la copia de nuevo.");
@@ -405,7 +455,7 @@ async function confirmBackupRestore(){
  if(!draft)return;
  if(!isCurrentAccount(draft.userId,draft.generation))return alert("La sesión cambió desde que se analizó esta copia. Analízala de nuevo antes de restaurar.");
  if(!cloudReady)return alert("Supabase no está conectado. Espera a que STAIN indique que la nube está sincronizada antes de restaurar, para no mezclar datos locales con datos pendientes.");
- if(!confirm("Vas a reemplazar reservas, talleres, guías, grupales, piezas e inventario por los datos de esta copia. No se borrarán objetos de Storage. ¿Continuar?"))return;
+ if(!confirm("Vas a reemplazar reservas, talleres, guías, grupales, piezas, inventario y capacidades de sillas por los datos de esta copia. No se borrarán objetos de Storage. ¿Continuar?"))return;
  const userId=currentUser.id,generation=accountGeneration;
  $("confirmBackupRestore").disabled=true;$("backupPreview").textContent="Restaurando fotos…";
  try{
@@ -421,6 +471,17 @@ async function confirmBackupRestore(){
    if(signed.error)throw new Error("La foto se subió, pero no se pudo crear su enlace temporal: "+signed.error.message);
    piecePhotoUrlCache[path]=signed.data.signedUrl;
    index++;
+  }
+  for(const booking of snapshot.bookings){
+   if(!String(booking.receiptPhoto||"").startsWith("backup-photo:"))continue;
+   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
+   const zipPath=booking.receiptPhoto.slice("backup-photo:".length),blob=await draft.zip.file(zipPath).async("blob"),ext=photoExtension(blob),path=userId+"/restore-booking-receipt-"+String(booking.id??index).replace(/[^a-zA-Z0-9_-]/g,"_")+"-"+Date.now()+"-"+index+"."+ext;
+   const upload=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:false,contentType:blob.type||"image/jpeg"});
+   if(upload.error)throw new Error("No se pudo guardar un comprobante de la copia en Supabase Storage: "+upload.error.message);
+   booking.receiptPhoto="storage:"+path;
+   const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
+   if(signed.error)throw new Error("El comprobante se subió, pero no se pudo crear su enlace temporal: "+signed.error.message);
+   piecePhotoUrlCache[path]=signed.data.signedUrl;index++;
   }
   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
   setDataState(snapshot);dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(snapshot[key])]));
@@ -626,10 +687,11 @@ function calendarActivityMarkup(kind,record){
 }
 async function refreshPiecePhotoUrls(userId=currentUser?.id,generation=accountGeneration){
  if(!userId)return;
- for(const p of pieces){
+ const storedPhotos=[...pieces.map(piece=>piece.photo),...bookings.map(booking=>booking.receiptPhoto)];
+ for(const photo of storedPhotos){
   if(!isCurrentAccount(userId,generation))return;
-  if(!p.photo||!p.photo.startsWith("storage:"))continue;
-  const path=p.photo.slice(8);
+  if(!photo||!photo.startsWith("storage:"))continue;
+  const path=photo.slice(8);
   const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
   if(!isCurrentAccount(userId,generation))return;
   if(!signed.error)piecePhotoUrlCache[path]=signed.data.signedUrl;
@@ -670,11 +732,13 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
  await refreshPiecePhotoUrls(user.id,generation);
  if(!isCurrentAccount(user.id,generation))return;
  dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(getDataState()[key])]));
+ const legacySeatExtensionsMigrated=migrateLegacySeatExtensions();
  localSave(user.id);persistPendingData(user.id);
  cloudReady=true;
  setCloudStatus(pendingDataKeys.size?"Guardando cambios pendientes…":"☁ Sincronizado");
- refreshSelects();capacityCheck();calcMoney();renderAll();
- if(pendingDataKeys.size)queueCloudSync();
+ refreshSelects();capacityCheck();calcMoney();
+ if(legacySeatExtensionsMigrated)save();
+ else{renderAll();if(pendingDataKeys.size)queueCloudSync()}
 }
 function showAuthenticatedApp(){document.body.classList.add("authenticated");$("loginScreen").hidden=true}
 async function initializeAccount(user,timeoutMs=20000){
@@ -691,6 +755,8 @@ async function initializeAccount(user,timeoutMs=20000){
  if(outcome.timedOut){
   if(isCurrentAccount(user.id,generation)){
    accountGeneration++;cloudReady=false;
+   const seatExtensionsBeforeMigration=JSON.stringify(seatExtensions),legacySeatExtensionsMigrated=migrateLegacySeatExtensions();
+   if(legacySeatExtensionsMigrated){dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(getDataState()[key])]));dataSnapshot.seatExtensions=seatExtensionsBeforeMigration;save()}
    setCloudStatus("La carga tardó demasiado · datos locales");
    refreshSelects();capacityCheck();calcMoney();renderAll();showAuthenticatedApp();
   }
@@ -700,10 +766,12 @@ async function initializeAccount(user,timeoutMs=20000){
   if(isCurrentAccount(user.id,generation)){
    console.error("STAIN data loading error:",outcome.error);
    cloudReady=false;
+   const seatExtensionsBeforeMigration=JSON.stringify(seatExtensions),legacySeatExtensionsMigrated=migrateLegacySeatExtensions();
    dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(getDataState()[key])]));
+   if(legacySeatExtensionsMigrated)dataSnapshot.seatExtensions=seatExtensionsBeforeMigration;
    localSave(user.id);persistPendingData(user.id);
    try{await refreshPiecePhotoUrls(user.id,generation)}catch(photoErr){console.error("STAIN piece photo loading error:",photoErr)}
-   if(isCurrentAccount(user.id,generation)){setCloudStatus("Sin conexión · datos locales");refreshSelects();capacityCheck();calcMoney();renderAll()}
+   if(isCurrentAccount(user.id,generation)){setCloudStatus("Sin conexión · datos locales");refreshSelects();capacityCheck();calcMoney();if(legacySeatExtensionsMigrated)save();else renderAll()}
   }
  }
  if(isCurrentAccount(user.id,generation))showAuthenticatedApp();
@@ -778,10 +846,61 @@ function peakOccupiedPeople(records,capacity){if(records.some(item=>!reservation
 function reservationConflicts(date,time,space,excludeId,excludeKind){if(timeToMinutes(time)===null)return true;const unresolved=groups.some(item=>(excludeKind==="booking"||item.id!==excludeId)&&item.date===date&&!groupTimeForSlot(item));if(unresolved)return true;const records=[...bookings.filter(item=>(excludeKind==="group"||item.id!==excludeId)&&item.date===date&&assignedSpaces(item).includes(space)),...groups.filter(item=>(excludeKind==="booking"||item.id!==excludeId)&&item.date===date&&(!groupTables(item).length||groupTables(item).includes(space))).map(item=>({id:item.id,date:item.date,time:groupTimeForSlot(item),durationMinutes:BOOKING_DURATION_MINUTES}))];return records.some(record=>intervalsOverlap(date,time,record))}
 function occupied(date,space,time){return reservationConflicts(date,time,space)}
 function groupBlockedSpaces(date,time,excludeGroupId){return new Set(Object.keys(SPACES).filter(space=>reservationConflicts(date,time,space,excludeGroupId,"group")))}
-function groupSpaceOptions(group){const time=groupTimeForSlot(group);if(!group.date||!time)return [];const blocked=groupBlockedSpaces(group.date,time,group.id),spaces=Object.keys(SPACES).filter(space=>!blocked.has(space)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+SPACES[space].max,0);if(capacity>=groupParticipantCount(group))options.push({spaces:selected,capacity})}return options.sort((a,b)=>(a.capacity-groupParticipantCount(group))-(b.capacity-groupParticipantCount(group))||a.spaces.length-b.spaces.length)}
-function allocationOptions(date,time,people,excludeId=bookingEditingId){const spaces=Object.keys(SPACES).filter(space=>!reservationConflicts(date,time,space,excludeId)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+SPACES[space].max,0);if(capacity>=people)options.push({spaces:selected,capacity,comfortable:selected.reduce((sum,space)=>sum+SPACES[space].comfortable,0)})}return options.sort((a,b)=>a.spaces.length-b.spaces.length||a.capacity-b.capacity)}
-function validateSpaceAllocation(date,time,people,spaces,excludeId){if(!Array.isArray(spaces)||!spaces.length)return "Selecciona al menos un área.";if(new Set(spaces).size!==spaces.length||spaces.some(space=>!SPACES[space]))return "La distribución contiene un área inválida.";const capacity=spaces.reduce((sum,space)=>sum+SPACES[space].max,0);if(people<1||people>capacity)return "La capacidad seleccionada no alcanza para este grupo.";const conflict=spaces.find(space=>reservationConflicts(date,time,space,excludeId));return conflict?"El área "+SPACES[conflict].name+" está ocupada durante esa reserva.":""}
+function groupSpaceOptions(group){const time=groupTimeForSlot(group);if(!group.date||!time)return [];const blocked=groupBlockedSpaces(group.date,time,group.id),spaces=Object.keys(SPACES).filter(space=>!blocked.has(space)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+areaSeatCount(space),0);if(capacity>=groupParticipantCount(group))options.push({spaces:selected,capacity})}return options.sort((a,b)=>(a.capacity-groupParticipantCount(group))-(b.capacity-groupParticipantCount(group))||a.spaces.length-b.spaces.length)}
+function allocationOptions(date,time,people,excludeId=bookingEditingId){const spaces=Object.keys(SPACES).filter(space=>!reservationConflicts(date,time,space,excludeId)),options=[];for(let mask=1;mask<(1<<spaces.length);mask++){const selected=spaces.filter((_,index)=>mask&(1<<index)),capacity=selected.reduce((sum,space)=>sum+areaSeatCount(space),0);if(capacity>=people)options.push({spaces:selected,capacity,comfortable:selected.reduce((sum,space)=>sum+SPACES[space].comfortable,0)})}return options.sort((a,b)=>a.spaces.length-b.spaces.length||a.capacity-b.capacity)}
+function validateSpaceAllocation(date,time,people,spaces,excludeId){if(!Array.isArray(spaces)||!spaces.length)return "Selecciona al menos un área.";if(new Set(spaces).size!==spaces.length||spaces.some(space=>!SPACES[space]))return "La distribución contiene un área inválida.";const capacity=spaces.reduce((sum,space)=>sum+areaSeatCount(space),0);if(people<1||people>capacity)return "La capacidad seleccionada no alcanza para este grupo.";const conflict=spaces.find(space=>reservationConflicts(date,time,space,excludeId));return conflict?"El área "+SPACES[conflict].name+" está ocupada durante esa reserva.":""}
 function allocationCapacity(spaces,field){return spaces.reduce((sum,space)=>sum+SPACES[space][field],0)}
+function areaAddedSeats(area){const entry=seatExtensions.find(item=>item.area===area);return Math.max(0,Math.min(MAX_AREA_SEATS[area]-BASE_AREA_SEATS[area],Number(entry?.count)||0))}
+function activeSeatIds(table){
+ const added=areaAddedSeats(table.area),count=table.area==="B"?table.id==="B1"?4+Math.min(2,added):table.id==="B2"?4:4+Math.max(0,added-2):table.area==="A"?4+(table.id==="A1"?Math.min(1,added):Math.max(0,added-1)):4;
+ return table.seatIds.slice(0,count);
+}
+function possibleAddedSeatIds(area){
+ if(area==="B")return ["B1-5","B1-6","B3-5","B3-6"];
+ if(area==="A")return ["A1-5","A2-5"];
+ return [];
+}
+function addedSeatIds(area){
+ return possibleAddedSeatIds(area).slice(0,areaAddedSeats(area));
+}
+function areaSeatCount(area){return PHYSICAL_TABLES.filter(table=>table.area===area).reduce((total,table)=>total+activeSeatIds(table).length,0)}
+function addSeatToArea(area){
+ if(!Object.prototype.hasOwnProperty.call(BASE_AREA_SEATS,area)||areaSeatCount(area)>=MAX_AREA_SEATS[area])return alert("Esta área ya alcanzó su capacidad máxima.");
+ let entry=seatExtensions.find(item=>item.area===area);
+ if(entry){entry.count=areaAddedSeats(area)+1;entry.manual=true}
+ else seatExtensions.push({id:{A:1,B:2,C:3}[area],area,count:1,manual:true});
+ save();renderSpaceMap();capacityCheck();
+}
+function seatAssignedToAnyRecord(seatId){
+ return bookings.some(record=>occupiedSeatIdsForRecord(record,"booking").includes(seatId))||groups.some(record=>occupiedSeatIdsForRecord(record,"group").includes(seatId));
+}
+function seatSelectedForEditing(seatId){return bookingFormSeatIds.includes(seatId)||bookingMapSeatIds.includes(seatId)}
+function migrateLegacySeatExtensions(){
+ let changed=false;
+ for(const entry of [...seatExtensions]){
+  if(!entry||entry.manual===true||!possibleAddedSeatIds(entry.area).length)continue;
+  const possible=possibleAddedSeatIds(entry.area);
+  let requiredCount=0;
+  possible.forEach((seatId,index)=>{if(seatAssignedToAnyRecord(seatId))requiredCount=index+1});
+  entry.count=requiredCount;
+  if(requiredCount){entry.manual=true}
+  else seatExtensions=seatExtensions.filter(item=>item!==entry);
+  changed=true;
+ }
+ return changed;
+}
+function removeSeatFromArea(area){
+ if(!Object.prototype.hasOwnProperty.call(BASE_AREA_SEATS,area)||areaAddedSeats(area)<1)return;
+ const lastAdded=addedSeatIds(area).at(-1);
+ if(!lastAdded)return;
+ if(seatAssignedToAnyRecord(lastAdded))return alert("No se puede retirar la silla "+lastAdded+" porque está asignada a una reserva o actividad.");
+ if(seatSelectedForEditing(lastAdded))return alert("Quita la silla "+lastAdded+" de la selección actual antes de retirarla.");
+ const entry=seatExtensions.find(item=>item.area===area);
+ if(!entry)return;
+ entry.count=areaAddedSeats(area)-1;
+ if(entry.count<1)seatExtensions=seatExtensions.filter(item=>item!==entry);
+ save();renderSpaceMap();capacityCheck();
+}
 function validSeatIds(ids){return Array.isArray(ids)?[...new Set(ids.filter(id=>SEAT_TABLE_BY_ID.has(id)))]:[]}
 function seatSpaces(seatIds){return [...new Set(validSeatIds(seatIds).map(id=>SEAT_TABLE_BY_ID.get(id).area))]}
 function recordSeatIds(record){return validSeatIds(record?.seatIds)}
@@ -789,9 +908,9 @@ function recordSpacesForOccupancy(record,kind){return kind==="group"?groupTables
 function occupiedSeatIdsForRecord(record,kind){
  const assigned=recordSeatIds(record),expected=kind==="group"?groupParticipantCount(record):Number(record.people)||0;if(assigned.length&&expected>0&&assigned.length>=expected)return assigned.slice(0,expected);
  const spaces=recordSpacesForOccupancy(record,kind);
- if(kind==="group")return spaces.length?PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(table=>table.seatIds):ALL_SEAT_IDS;
+ if(kind==="group")return spaces.length?PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(activeSeatIds):ALL_SEAT_IDS;
  if(!spaces.length)return assigned;
- const available=PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(table=>table.seatIds).filter(id=>!assigned.includes(id));
+ const available=PHYSICAL_TABLES.filter(table=>spaces.includes(table.area)).flatMap(activeSeatIds).filter(id=>!assigned.includes(id));
  return [...assigned,...available.slice(0,Math.max(0,expected-assigned.length))];
 }
 function seatOccupants(date,time,seatId,excludeId=null,excludeKind="booking"){
@@ -809,8 +928,8 @@ function seatOccupants(date,time,seatId,excludeId=null,excludeKind="booking"){
  }).map(item=>item.record);
 }
 function recommendSeatAllocation(date,time,people,excludeId=null,excludeKind="booking",preferredSpaces=[]){
- const count=Number(people)||0;if(!date||timeToMinutes(time)===null||count<1||count>ALL_SEAT_IDS.length)return null;
- const availableByTable=PHYSICAL_TABLES.map(table=>({...table,available:table.seatIds.filter(id=>!seatOccupants(date,time,id,excludeId,excludeKind).length)})).filter(table=>table.available.length);
+ const count=Number(people)||0,totalSeats=Object.keys(SPACES).reduce((total,area)=>total+areaSeatCount(area),0);if(!date||timeToMinutes(time)===null||count<1||count>totalSeats)return null;
+ const availableByTable=PHYSICAL_TABLES.map(table=>({...table,seatIds:activeSeatIds(table),available:activeSeatIds(table).filter(id=>!seatOccupants(date,time,id,excludeId,excludeKind).length)})).filter(table=>table.available.length);
  const candidates=[];
  for(let mask=1;mask<(1<<availableByTable.length);mask++){
   const tables=availableByTable.filter((_,index)=>mask&(1<<index)),available=tables.flatMap(table=>table.available);
@@ -828,6 +947,9 @@ function validateSeatAllocation(date,time,people,seatIds,excludeId=null,excludeK
  if(!date||!isWithinBookingHours(time))return "Selecciona una hora entre las 9:00 a. m. y las 7:00 p. m.";
  if(!Array.isArray(seatIds)||seats.length!==seatIds.length)return "La selección contiene una silla no válida o repetida.";
  if(count<1||seats.length!==count)return "Selecciona exactamente "+count+" silla"+(count===1?"":"s")+" para esta reserva.";
+ const previouslyAssigned=new Set(recordSeatIds(bookings.find(item=>String(item.id)===String(excludeId))));
+ const inactive=seats.find(id=>!activeSeatIds(SEAT_TABLE_BY_ID.get(id)).includes(id)&&!previouslyAssigned.has(id));
+ if(inactive)return "La silla "+inactive+" ya no está habilitada para nuevas asignaciones. Conserva o cambia la asignación existente.";
  const conflict=seats.find(id=>seatOccupants(date,time,id,excludeId,excludeKind).length);
  return conflict?"La silla "+conflict+" ya está ocupada durante esa reserva.":"";
 }
@@ -849,15 +971,32 @@ function renderSeatPlan(containerId,{date,time,selected=[],excludeId=null,exclud
  const container=$(containerId);if(!container)return;
  const selectedIds=validSeatIds(selected),selectedSet=new Set(selectedIds),areas={A:{occupied:0,selected:0,available:0},B:{occupied:0,selected:0,available:0},C:{occupied:0,selected:0,available:0}};
  for(const table of PHYSICAL_TABLES)for(const id of table.seatIds){
+  if(!activeSeatIds(table).includes(id)&&!selectedSet.has(id)&&!seatOccupants(date,time,id,excludeId,excludeKind).length)continue;
   const area=areas[table.area],taken=seatOccupants(date,time,id,excludeId,excludeKind).length>0;
   if(selectedSet.has(id))area.selected++;else if(taken)area.occupied++;else area.available++;
  }
- const renderTable=table=>'<div class="seat-table '+table.orientation+'"><div class="seat-table-surface"><span class="seat-table-badge">'+table.id+'</span></div>'+table.seatIds.map((id,index)=>{
-  const occupants=seatOccupants(date,time,id,excludeId,excludeKind),taken=occupants.length>0,selectedSeat=selectedSet.has(id),state=selectedSeat?(taken?"conflict":"selected"):taken?"occupied":"available",disabled=selectedSeat?!editable:taken||!editable||(people>0&&selectedIds.length>=people),owner=occupants.map(item=>item.client||item.name).filter(Boolean).join(", "),label=selectedSeat?(taken?"Silla "+id+" seleccionada con conflicto":"Silla "+id+" seleccionada"):taken?"Silla "+id+" ocupada"+(owner?" por "+owner:""):"Silla "+id+" disponible";
-  return '<button type="button" class="seat-chair '+state+' position-'+table.positions[index]+'" '+(disabled?"disabled ":"")+'aria-label="'+esc(label)+'" aria-pressed="'+selectedSeat+'" title="'+esc(label)+'" '+(editable?'onclick=\'toggleBookingSeat("'+target+'","'+id+'")\'':"")+'>'+(selectedSeat?"✓":taken?"×":index+1)+'</button>';
- }).join("")+'</div>';
- const areaSummary=area=>'<span>Área '+area+' · '+areas[area].occupied+' ocupadas · '+areas[area].selected+' seleccionadas · '+areas[area].available+' libres</span>';
- container.innerHTML='<div class="seat-map-legend"><span><i class="seat-legend-dot"></i>Disponible</span><span><i class="seat-legend-dot occupied"></i>Ocupada</span><span><i class="seat-legend-dot selected"></i>Seleccionada</span></div><div class="seat-map-shell"><div class="seat-map"><div class="seat-direction">FRENTE DEL LOCAL ↑</div><section class="seat-area seat-area-left"><h4 class="seat-area-heading">Izquierda · 3 mesas verticales</h4>'+PHYSICAL_TABLES.filter(table=>table.area==="B").map(table=>'<div class="seat-table-row">'+renderTable(table)+'</div>').join("")+'</section><div class="seat-area-right"><section class="seat-area"><h4 class="seat-area-heading">Derecha · 2 mesas horizontales</h4><div class="seat-table-row">'+PHYSICAL_TABLES.filter(table=>table.area==="A").map(renderTable).join("")+'</div></section><section class="seat-area"><h4 class="seat-area-heading">Fondo · mesa individual horizontal</h4><div class="seat-table-row">'+renderTable(PHYSICAL_TABLES.find(table=>table.area==="C"))+'</div></section></div><div class="seat-direction seat-back">FONDO DEL LOCAL ↓</div></div></div><div class="seat-map-summary">'+areaSummary("A")+areaSummary("B")+areaSummary("C")+'</div>';
+ const renderAreaBlock=(area,orientation,label)=>{
+  const tables=PHYSICAL_TABLES.filter(table=>table.area===area),activeIds=tables.flatMap(activeSeatIds),activeSet=new Set(activeIds),allIds=tables.flatMap(table=>table.seatIds);
+  const additionalSet=new Set(addedSeatIds(area).filter(id=>activeSet.has(id)));
+  const chairs=allIds.filter(id=>activeSet.has(id)||selectedSet.has(id)||seatOccupants(date,time,id,excludeId,excludeKind).length);
+  const counts=[chairs.filter((_,index)=>index%2===0).length,chairs.filter((_,index)=>index%2===1).length];
+  const blockClass=orientation==="vertical"?"seat-block--vertical":area==="C"?"seat-block--single":"seat-block--horizontal";
+  const positions=chairs.map((id,index)=>{
+   const side=index%2,sideIndex=Math.floor(index/2),percent=((sideIndex+1)/(counts[side]+1)*100).toFixed(2),sideClass=orientation==="vertical"?(side===0?"long-left":"long-right"):(side===0?"long-top":"long-bottom");
+   const occupants=seatOccupants(date,time,id,excludeId,excludeKind),taken=occupants.length>0,selectedSeat=selectedSet.has(id),legacy=!activeSet.has(id),additional=additionalSet.has(id),labelPrefix=additional?"Silla adicional "+id:"Silla "+id,state=selectedSeat?(taken?"conflict":"selected"):taken?"occupied":legacy?"legacy":"available",disabled=selectedSeat?!editable:legacy||taken||!editable||(people>0&&selectedIds.length>=people),owner=occupants.map(item=>item.client||item.name).filter(Boolean).join(", "),label=selectedSeat?(taken?labelPrefix+" seleccionada con conflicto":labelPrefix+" seleccionada"):taken?labelPrefix+" ocupada"+(owner?" por "+owner:""):legacy?"Silla histórica "+id+"; no disponible para nuevas asignaciones":labelPrefix+" disponible";
+   return '<button type="button" class="seat-chair '+state+(additional?" additional":"")+' position-'+sideClass+'" style="--seat-position:'+percent+'%" '+(disabled?"disabled ":"")+'aria-label="'+esc(label)+'" aria-pressed="'+selectedSeat+'" title="'+esc(label)+'" '+(editable?'onclick=\'toggleBookingSeat("'+target+'","'+id+'")\'':"")+'>'+(selectedSeat?"✓":taken?"×":index+1)+'</button>';
+  }).join("");
+  return '<div class="seat-area-plan"><div class="seat-block '+blockClass+'"><div class="seat-block-surface">'+label+'</div>'+positions+'</div></div>';
+ };
+ const areaSummary=area=>'<span>Área '+area+' · '+areaSeatCount(area)+' sillas · '+areaAddedSeats(area)+' adicionales · '+areas[area].occupied+' ocupadas · '+areas[area].selected+' asignadas · '+areas[area].available+' libres</span>';
+ const areaControls=area=>{
+  const heading=area==="B"?"Izquierda · Bloque de tres mesas":area==="A"?"Derecha · Bloque de dos mesas":"Fondo · Mesa individual";
+  if(MAX_AREA_SEATS[area]===BASE_AREA_SEATS[area])return '<div class="seat-area-tools"><h4 class="seat-area-heading">'+heading+'</h4><span class="seat-area-capacity">Capacidad fija · 4 sillas</span></div>';
+  const canAdd=areaSeatCount(area)<MAX_AREA_SEATS[area],extras=addedSeatIds(area),lastExtra=extras.at(-1),lastExtraAssigned=Boolean(lastExtra&&seatAssignedToAnyRecord(lastExtra)),lastExtraSelected=Boolean(lastExtra&&seatSelectedForEditing(lastExtra)),cannotRemove=lastExtraAssigned||lastExtraSelected;
+  const removeTitle=lastExtraAssigned?"La última silla adicional está asignada a una reserva o actividad":lastExtraSelected?"Quita la silla de la selección actual antes de retirarla":"Retirar la última silla adicional";
+  return '<div class="seat-area-tools"><h4 class="seat-area-heading">'+heading+'</h4><div class="seat-area-actions"><button type="button" class="btn small" onclick="addSeatToArea(\''+area+'\')" '+(canAdd?"":"disabled")+'>'+ (canAdd?"＋ Agregar silla":"Capacidad máxima")+'</button>'+(extras.length?'<button type="button" class="btn small" onclick="removeSeatFromArea(\''+area+'\')" '+(cannotRemove?"disabled ":"")+'title="'+esc(removeTitle)+'">− Retirar silla</button>':'')+'</div></div>';
+ };
+ container.innerHTML='<div class="seat-map-legend"><span><i class="seat-legend-dot"></i>Disponible</span><span><i class="seat-legend-dot occupied"></i>Reservada / ocupada</span><span><i class="seat-legend-dot selected"></i>Seleccionada</span><span><i class="seat-legend-dot additional"></i>Adicional</span><span><i class="seat-legend-dot" style="border-style:dashed;background:#f5eee4"></i>Silla histórica</span></div><div class="seat-map-shell"><div class="seat-map"><div class="seat-direction">FRENTE DEL LOCAL ↑</div><section class="seat-area seat-area-left">'+areaControls("B")+renderAreaBlock("B","vertical","Bloque de tres mesas")+'</section><div class="seat-area-right"><section class="seat-area">'+areaControls("A")+renderAreaBlock("A","horizontal","Bloque de dos mesas")+'</section><section class="seat-area">'+areaControls("C")+renderAreaBlock("C","horizontal","Mesa individual")+'</section></div><div class="seat-direction seat-back">FONDO DEL LOCAL ↓</div></div></div><div class="seat-map-summary">'+areaSummary("A")+areaSummary("B")+areaSummary("C")+'</div>';
 }
 function formatStartTime(time){const minutes=timeToMinutes(time);if(minutes===null)return String(time||"");const hour=Math.floor(minutes/60),minute=minutes%60,display=hour%12||12;return display+":"+String(minute).padStart(2,"0")+" "+(hour<12?"a. m.":"p. m.")}
 function setupScheduleControls(){$("time").value="09:00";$("tableMapTime").value="09:00";$("bookingDate").value=$("bookingDate").value||dateToday();$("agendaDate").value=$("agendaDate").value||dateToday();refreshBookingAllocation();renderSpaceMap()}
@@ -933,6 +1072,11 @@ function bookingActivityLabel(booking){
  const type=String(booking.activity||"").trim(),specific=String(booking.workshop||"").trim();
  return [type,specific&&specific!==type?specific:""].filter(Boolean).join(" · ");
 }
+function bookingReceiptMarkup(booking,bookingId){
+ const src=photoSrc(booking.receiptPhoto);
+ if(!src)return booking.receiptPhoto?'<span class="booking-card-receipt-unavailable" role="status">Comprobante no disponible</span>':"";
+ return '<button type="button" class="booking-card-receipt-button" aria-label="Ampliar comprobante de '+esc(booking.client||"la reserva")+'" onclick="event.stopPropagation();openBookingReceipt('+bookingId+')"><img class="booking-card-receipt" src="'+esc(src)+'" alt="Miniatura del comprobante"></button>';
+}
 const BOOKING_VISIT_DURATION_MS=2*60*60*1000;
 function bookingVisitStatus(booking){
  return ["arrived","in_progress","finished"].includes(booking.visitStatus)?booking.visitStatus:"reserved";
@@ -944,7 +1088,7 @@ function bookingVisitStatusMarkup(status){
 function bookingTimerMarkup(booking){
  if(!booking.arrivedAt)return "";
  const activity=bookingActivityLabel(booking)||"Reserva";
- return '<div class="booking-card-timer" data-booking-timer data-arrived-at="'+esc(booking.arrivedAt)+'" data-client="'+esc(booking.client||"Sin nombre")+'" data-activity="'+esc(activity)+'"><span>Llegó: <b data-booking-arrival></b></span><span>Transcurrido: <b data-booking-elapsed></b></span><span>Finaliza: <b data-booking-finish></b></span><span class="booking-card-alert" data-booking-alert role="alert" hidden></span></div>';
+ return '<div class="booking-card-timer" data-booking-timer data-arrived-at="'+esc(booking.arrivedAt)+'" data-finished-at="'+esc(booking.finishedAt||"")+'" data-client="'+esc(booking.client||"Sin nombre")+'" data-activity="'+esc(activity)+'"><span>Llegó: <b data-booking-arrival></b></span><span>Transcurrido: <b data-booking-elapsed></b></span><span><b data-booking-finish-label>Finaliza</b>: <b data-booking-finish></b></span><span class="booking-card-alert" data-booking-alert role="alert" hidden></span></div>';
 }
 function formatElapsedTime(milliseconds){
  const totalSeconds=Math.max(0,Math.floor(milliseconds/1000)),hours=Math.floor(totalSeconds/3600),minutes=Math.floor(totalSeconds%3600/60),seconds=totalSeconds%60;
@@ -953,13 +1097,15 @@ function formatElapsedTime(milliseconds){
 function updateBookingTimers(){
  const now=Date.now();
  for(const timer of document.querySelectorAll("[data-booking-timer]")){
-  const arrivedAt=Date.parse(timer.dataset.arrivedAt),elapsed=now-arrivedAt;
-  const arrivalElement=timer.querySelector("[data-booking-arrival]"),elapsedElement=timer.querySelector("[data-booking-elapsed]"),finishElement=timer.querySelector("[data-booking-finish]"),alertElement=timer.querySelector("[data-booking-alert]");
-  if(!Number.isFinite(arrivedAt)||!arrivalElement||!elapsedElement||!finishElement||!alertElement){if(elapsedElement)elapsedElement.textContent="Llegada no válida";continue}
+  const arrivedAt=Date.parse(timer.dataset.arrivedAt),status=timer.closest(".booking-card")?.dataset.visitStatus,finishedAt=Date.parse(timer.dataset.finishedAt||""),finished=status==="finished",hasFinish=finished&&Number.isFinite(finishedAt);
+  const stoppedAt=hasFinish?finishedAt:finished?null:now,elapsed=stoppedAt===null?null:stoppedAt-arrivedAt;
+  const arrivalElement=timer.querySelector("[data-booking-arrival]"),elapsedElement=timer.querySelector("[data-booking-elapsed]"),finishElement=timer.querySelector("[data-booking-finish]"),finishLabel=timer.querySelector("[data-booking-finish-label]"),alertElement=timer.querySelector("[data-booking-alert]");
+  if(!Number.isFinite(arrivedAt)||!arrivalElement||!elapsedElement||!finishElement||!finishLabel||!alertElement){if(elapsedElement)elapsedElement.textContent="Llegada no válida";continue}
   arrivalElement.textContent=new Date(arrivedAt).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"});
-  elapsedElement.textContent=formatElapsedTime(elapsed);
-  finishElement.textContent=new Date(arrivedAt+BOOKING_VISIT_DURATION_MS).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"});
-  const card=timer.closest(".booking-card"),overdue=elapsed>=BOOKING_VISIT_DURATION_MS&&card?.dataset.visitStatus!=="finished";
+  elapsedElement.textContent=elapsed===null?"—":formatElapsedTime(elapsed);
+  finishLabel.textContent=finished?"Finalizó":"Finaliza";
+  finishElement.textContent=finished?(hasFinish?new Date(finishedAt).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"}):"Hora no registrada"):new Date(arrivedAt+BOOKING_VISIT_DURATION_MS).toLocaleTimeString("es-PA",{hour:"numeric",minute:"2-digit"});
+  const card=timer.closest(".booking-card"),overdue=elapsed!==null&&elapsed>=BOOKING_VISIT_DURATION_MS&&!finished;
   timer.classList.toggle("booking-card-timer--overdue",overdue);
   card?.classList.toggle("booking-card--overdue",overdue);
   alertElement.hidden=!overdue;
@@ -975,7 +1121,7 @@ function setBookingVisitStatus(id,status){
  const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;
  const current=bookingVisitStatus(booking);
  if(status==="in_progress"&&current==="arrived")booking.visitStatus=status;
- else if(status==="finished"&&(current==="arrived"||current==="in_progress"))booking.visitStatus=status;
+ else if(status==="finished"&&(current==="arrived"||current==="in_progress")){booking.visitStatus=status;booking.finishedAt=new Date().toISOString()}
  else return alert("No se pudo cambiar el estado de llegada. Revisa el estado actual de la reserva.");
  save();
 }
@@ -989,7 +1135,7 @@ function renderDayBookings(date){
   ...list.map(booking=>{
    const activity=bookingActivityLabel(booking),areas=assignedSpaces(booking).map(space=>SPACES[space].name).join(" + ")||"Zona pendiente",status=bookingVisitStatus(booking),bookingId=esc(JSON.stringify(String(booking.id)));
    const actions=status==="reserved"?'<button type="button" class="btn primary small" onclick="markBookingArrived('+bookingId+')">Marcar como llegó</button>':status==="arrived"?'<button type="button" class="btn small" onclick="markBookingInProgress('+bookingId+')">Marcar en taller</button><button type="button" class="btn small" onclick="markBookingFinished('+bookingId+')">Finalizar</button>':status==="in_progress"?'<button type="button" class="btn small" onclick="markBookingFinished('+bookingId+')">Finalizar</button>':'<span class="muted">Actividad finalizada</span>';
-   return {minutes:timeToMinutes(booking.time)??Number.MAX_SAFE_INTEGER,html:'<article class="booking-card booking-card--'+status+'" data-visit-status="'+status+'"><div class="booking-card-top"><span class="booking-time">'+esc(formatStartTime(booking.time))+'</span><div class="booking-card-details"><button type="button" class="booking-card-name" onclick="openBookingDetails('+bookingId+')">'+esc(booking.client||"Sin nombre")+'</button><span class="booking-card-meta">'+esc(String(booking.people||0))+' personas · '+esc(areas)+'</span>'+(activity?'<span class="booking-card-activity">'+esc(activity)+'</span>':'')+(booking.guideName?'<span class="booking-card-guide">Guía: '+esc(booking.guideName)+'</span>':'')+bookingVisitStatusMarkup(status)+'</div></div>'+bookingTimerMarkup(booking)+'<div class="booking-card-actions">'+actions+'</div></article>'}
+   return {minutes:timeToMinutes(booking.time)??Number.MAX_SAFE_INTEGER,html:'<article class="booking-card booking-card--'+status+'" data-visit-status="'+status+'" onclick="if(!event.target.closest(&quot;button&quot;))openBookingDetails('+bookingId+')" tabindex="0" aria-label="Reserva de '+esc(booking.client||"Sin nombre")+'; toca para ver detalles" onkeydown="if(event.target===this&&(event.key===&quot;Enter&quot;||event.key===&quot; &quot;))openBookingDetails('+bookingId+')"><div class="booking-card-top"><span class="booking-time">'+esc(formatStartTime(booking.time))+'</span><div class="booking-card-details"><button type="button" class="booking-card-name" onclick="openBookingDetails('+bookingId+')">'+esc(booking.client||"Sin nombre")+'</button><span class="booking-card-meta">'+esc(String(booking.people||0))+' personas · '+esc(areas)+'</span>'+(activity?'<span class="booking-card-activity">'+esc(activity)+'</span>':'')+(booking.guideName?'<span class="booking-card-guide">Guía: '+esc(booking.guideName)+'</span>':'')+bookingVisitStatusMarkup(status)+'</div>'+bookingReceiptMarkup(booking,bookingId)+'</div>'+bookingTimerMarkup(booking)+'<div class="booking-card-actions">'+actions+'</div></article>'}
   }),
   ...groupList.map(group=>({minutes:timeToMinutes(groupTimeForSlot(group))??Number.MAX_SAFE_INTEGER,html:'<div class="item group-reservation-card"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+esc(formatStartTime(groupTimeForSlot(group))||group.time||"Horario pendiente")+'</span></div><p>'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+' inscrito'+(groupParticipantCount(group)===1?'':'s')+' · van '+groupParticipantCount(group)+' personas</p><p class="muted">Mesas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+' · Guía: '+esc(group.guideName||"Sin asignar")+'</p><div class="btnrow"><button class="btn small" onclick="openGroupCategory('+group.id+')">Ver taller y participantes</button><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas</button></div></div>'}))
  ].sort((a,b)=>a.minutes-b.minutes);
@@ -1009,7 +1155,7 @@ function showBookingForm(){
  $("bookingToolbar").hidden=true;$("bookingCalendarPanel").hidden=true;$("bookingMapPanel").hidden=true;$("bookingFormPanel").hidden=false;
 }
 function startNewBooking(){
- bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingForm").reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("space").value="A";$("time").value="09:00";$("people").value=2;$("amount").value="0";$("guidedFields").hidden=true;$("bookingFormTitle").textContent="Nueva reserva";$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;showBookingForm();calcMoney();capacityCheck();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})
+ bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingForm").reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("space").value="A";$("time").value="09:00";$("people").value=2;$("amount").value="0";$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("guidedFields").hidden=true;$("bookingFormTitle").textContent="Nueva reserva";$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;showBookingForm();calcMoney();capacityCheck();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})
 }
 function prepareBooking(space,time){startNewBooking();$("bookingDate").value=$("agendaDate").value;$("space").value=space;$("time").value=time;$("people").value=Math.min(SPACES[space].comfortable,2);bookingFormSpaces=[];capacityCheck()}
 function capacityCheck(){const preferred=$("space").value,n=Number($("people").value)||0;$("capacityHint").textContent=SPACES[preferred].desc+" · La recomendación puede combinar mesas disponibles.";renderBookingAllocation();const useB=bookingFormSpaces.includes("B"),beyondComfort=n>SPACES.B.comfortable&&useB;$("approvalBox").hidden=!beyondComfort;if(!beyondComfort)$("approved").checked=false}
@@ -1024,16 +1170,33 @@ $("amount").addEventListener("input",calcMoney);
 $("activity").addEventListener("change",()=>{$("guidedFields").hidden=$("activity").value!=="Taller guiado";if($("activity").value==="Taller guiado")applyWorkshop()});
 function applyWorkshop(){const w=workshops[Number($("guidedWorkshop").value)];if(!w){$("bookingGuideInfo").textContent="Agrega primero un taller y un guía si corresponde.";return}const n=Math.max(1,Number($("people").value)||1);$("amount").value=(w.price*n).toFixed(2);$("bookingGuideInfo").textContent=w.guideName?(w.guideName+" · "+w.guidePhone):"Este taller no tiene guía asignado.";calcMoney()}
 $("guidedWorkshop").addEventListener("change",applyWorkshop);$("people").addEventListener("change",()=>{if($("activity").value==="Taller guiado")applyWorkshop()});
-$("bookingForm").addEventListener("submit",e=>{e.preventDefault();const date=$("bookingDate").value,time=$("time").value,n=Number($("people").value),act=$("activity").value,existing=bookings.find(item=>String(item.id)===String(bookingEditingId));renderBookingAllocation();const allocationError=validateSeatAllocation(date,time,n,bookingFormSeatIds,bookingEditingId,"booking");if(allocationError)return alert(allocationError);if(bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable&&!$("approved").checked)return alert("Confirma la distribución especial del área B antes de guardar.");const w=act==="Taller guiado"?workshops[Number($("guidedWorkshop").value)]:null;if(act==="Taller guiado"&&!w&&!existing)return alert("Primero crea y selecciona un taller guiado.");const amount=Number($("amount").value)||0,deposit=existing?(Number(existing.deposit)||0):amount*.3,record={id:existing?.id||Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space:bookingFormSpaces[0],spaces:bookingFormSpaces.slice(),seatIds:bookingFormSeatIds.slice(),assignmentMode:$("bookingAssignmentMode").value,time,people:n,activity:act,workshop:w?w.name:(act==="Taller guiado"?existing?.workshop||"":""),guideId:w?.guideId||(act==="Taller guiado"?existing?.guideId||null:null),guideName:w?w.guideName:(act==="Taller guiado"?existing?.guideName||"":""),guidePhone:w?w.guidePhone:(act==="Taller guiado"?existing?.guidePhone||"":""),amount,deposit,balance:Math.max(0,amount-deposit),receiptName:$("receipt").files[0]?.name||existing?.receiptName||"",notes:$("notes").value.trim(),status:existing?.status||"Registrada",authorized:bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable};if(existing)Object.assign(existing,record);else bookings.push(record);bookingEditingId=null;$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");save();e.target.reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("amount").value="0";bookingFormSpaces=[];bookingFormSeatIds=[];$("guidedFields").hidden=true;calcMoney();capacityCheck();$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;setBookingView("calendar");show("reservas")});
+async function compressReceiptPhoto(file){return new Promise(resolve=>compressPiecePhoto(file,resolve))}
+$("bookingForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const userId=currentUser?.id,generation=accountGeneration;if(!userId)return;
+ const date=$("bookingDate").value,time=$("time").value,n=Number($("people").value),act=$("activity").value,existing=bookings.find(item=>String(item.id)===String(bookingEditingId));
+ renderBookingAllocation();
+ const allocationError=validateSeatAllocation(date,time,n,bookingFormSeatIds,bookingEditingId,"booking");
+ if(allocationError)return alert(allocationError);
+ if(bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable&&!$("approved").checked)return alert("Confirma la distribución especial del área B antes de guardar.");
+ const w=act==="Taller guiado"?workshops[Number($("guidedWorkshop").value)]:null;
+ if(act==="Taller guiado"&&!w&&!existing)return alert("Primero crea y selecciona un taller guiado.");
+ const receiptFile=$("receipt").files[0];let receiptPhoto=receiptFile?(receiptFile.type.startsWith("image/")?await compressReceiptPhoto(receiptFile):""):(existing?.receiptPhoto||"");
+ if(receiptFile&&receiptFile.type.startsWith("image/")&&!receiptPhoto)return;
+ if(!isCurrentAccount(userId,generation))return;
+ const amount=Number($("amount").value)||0,deposit=existing?(Number(existing.deposit)||0):amount*.3,record={id:existing?.id||Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space:bookingFormSpaces[0],spaces:bookingFormSpaces.slice(),seatIds:bookingFormSeatIds.slice(),assignmentMode:$("bookingAssignmentMode").value,time,people:n,activity:act,workshop:w?w.name:(act==="Taller guiado"?existing?.workshop||"":""),guideId:w?.guideId||(act==="Taller guiado"?existing?.guideId||null:null),guideName:w?w.guideName:(act==="Taller guiado"?existing?.guideName||"":""),guidePhone:w?w.guidePhone:(act==="Taller guiado"?existing?.guidePhone||"":""),amount,deposit,balance:Math.max(0,amount-deposit),receiptName:receiptFile?.name||existing?.receiptName||"",receiptPhoto,notes:$("notes").value.trim(),status:existing?.status||"Registrada",authorized:bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable};
+ if(existing)Object.assign(existing,record);else bookings.push(record);
+ bookingEditingId=null;$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");save();e.target.reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("amount").value="0";bookingFormSpaces=[];bookingFormSeatIds=[];$("guidedFields").hidden=true;calcMoney();capacityCheck();$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;setBookingView("calendar");show("reservas");
+});
 function openBookingDetails(id){
  const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;
  const spaces=assignedSpaces(booking).map(space=>esc(SPACES[space].name)).join(" + ")||"Zona pendiente",seats=recordSeatIds(booking).join(", ")||"Asignación automática";
- const bookingId=esc(JSON.stringify(String(booking.id)));
- $("bookingDetailsContent").innerHTML='<button class="booking-details-close" type="button" aria-label="Cerrar" onclick="document.getElementById(\'bookingDetailsDialog\').close()">×</button><div class="eyebrow">Detalle de la reserva</div><h3>'+esc(booking.client||"Sin nombre")+'</h3><p class="muted">'+esc(booking.date)+' · '+esc(formatStartTime(booking.time))+' · '+esc(String(booking.people||0))+' personas</p><p><b>Zona:</b> '+spaces+'</p><p><b>Sillas:</b> '+esc(seats)+'</p><p><b>Actividad:</b> '+esc(booking.activity||"")+(booking.workshop?' · '+esc(booking.workshop):'')+'</p>'+(booking.phone?'<p><b>Teléfono:</b> '+esc(booking.phone)+'</p>':'')+(booking.guideName?'<p><b>Guía:</b> '+esc(booking.guideName)+' · '+esc(booking.guidePhone||"")+'</p>':'')+'<div class="moneyline"><span>Total '+money(booking.amount)+'</span><span>Abono '+money(booking.deposit)+'</span><span>Saldo '+money(booking.balance)+'</span></div><p class="muted">'+esc(booking.notes||"Sin observaciones")+'</p><p class="muted">Comprobante: '+esc(booking.receiptName||"No adjuntado")+'</p>'+calendarActivityMarkup("booking",booking)+'<div class="btnrow"><button class="btn primary" type="button" onclick="editBooking('+bookingId+')">Editar reserva</button><button class="btn" type="button" onclick="openBookingInMap('+bookingId+')">Ver en el plano</button>'+(booking.activity==="Taller guiado"?'<button class="btn" type="button" onclick="markBookingRealized('+bookingId+');openBookingDetails('+bookingId+')">'+(booking.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>':'')+'<button class="btn danger" type="button" onclick="deleteBooking('+bookingId+');document.getElementById(\'bookingDetailsDialog\').close()">Eliminar reserva</button></div>';
+ const bookingId=esc(JSON.stringify(String(booking.id))),receiptPreview=bookingReceiptMarkup(booking,bookingId);
+ $("bookingDetailsContent").innerHTML='<button class="booking-details-close" type="button" aria-label="Cerrar" onclick="document.getElementById(\'bookingDetailsDialog\').close()">×</button><div class="eyebrow">Detalle de la reserva</div><h3>'+esc(booking.client||"Sin nombre")+'</h3><p class="muted">'+esc(booking.date)+' · '+esc(formatStartTime(booking.time))+' · '+esc(String(booking.people||0))+' personas</p><p><b>Zona:</b> '+spaces+'</p><p><b>Sillas:</b> '+esc(seats)+'</p><p><b>Actividad:</b> '+esc(booking.activity||"")+(booking.workshop?' · '+esc(booking.workshop):'')+'</p>'+(booking.phone?'<p><b>Teléfono:</b> '+esc(booking.phone)+'</p>':'')+(booking.guideName?'<p><b>Guía:</b> '+esc(booking.guideName)+' · '+esc(booking.guidePhone||"")+'</p>':'')+'<div class="moneyline"><span>Total '+money(booking.amount)+'</span><span>Abono '+money(booking.deposit)+'</span><span>Saldo '+money(booking.balance)+'</span></div><p class="muted">'+esc(booking.notes||"Sin observaciones")+'</p><p class="muted">Comprobante: '+esc(booking.receiptName||"No adjuntado")+'</p>'+receiptPreview+calendarActivityMarkup("booking",booking)+'<div class="btnrow"><button class="btn primary" type="button" onclick="editBooking('+bookingId+')">Editar reserva</button><button class="btn" type="button" onclick="openBookingInMap('+bookingId+')">Ver en el plano</button>'+(booking.activity==="Taller guiado"?'<button class="btn" type="button" onclick="markBookingRealized('+bookingId+');openBookingDetails('+bookingId+')">'+(booking.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>':'')+'<button class="btn danger" type="button" onclick="deleteBooking('+bookingId+');document.getElementById(\'bookingDetailsDialog\').close()">Eliminar reserva</button></div>';
  $("bookingDetailsDialog").showModal();
 }
-function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>item.name===booking.workshop);if(workshopIndex>=0)$("guidedWorkshop").value=String(workshopIndex);$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
-function cancelBookingEdit(){$("bookingForm").reset();bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("bookingDate").value=dateToday();$("amount").value="0";$("guidedFields").hidden=true;$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;calcMoney();setBookingView("calendar");capacityCheck()}
+function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>item.name===booking.workshop);if(workshopIndex>=0)$("guidedWorkshop").value=String(workshopIndex);$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";$("receipt").value="";$("receiptHint").textContent=booking.receiptName?"Comprobante actual: "+booking.receiptName+". Selecciona otro archivo solo si deseas reemplazarlo.":"No hay un comprobante adjunto.";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
+function cancelBookingEdit(){$("bookingForm").reset();bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("bookingDate").value=dateToday();$("amount").value="0";$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("guidedFields").hidden=true;$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;calcMoney();setBookingView("calendar");capacityCheck()}
 function renderBookings(){const arr=bookings.slice().reverse();$("bookingList").innerHTML=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</p><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button></div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>'}
 function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderBookings()}}
 $("workshopForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("workshopGuide").value)];workshops.push({id:Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideId:g?.id||null,guideName:g?.name||"",guidePhone:g?.phone||"",materials:$("workshopMaterials").value.trim(),details:$("workshopDetails").value.trim()});save();e.target.reset();$("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;renderWorkshops()});
@@ -1104,12 +1267,33 @@ function openGroupCategory(id){
 function deleteGroup(id){const group=groups.find(g=>g.id===id);if(isGroupCompleted(group||{}))return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar este taller grupal y su lista?")){groups=groups.filter(g=>g.id!==id);save();renderAll()}}
 function compressPiecePhoto(file,done){const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement("canvas");const scale=Math.min(1,1200/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);let quality=.82;let data=canvas.toDataURL("image/jpeg",quality);while(data.length>400000&&quality>.35){quality-=.1;data=canvas.toDataURL("image/jpeg",quality)}done(data)};img.onerror=()=>{alert("No pude leer esa foto. Prueba con otra imagen.");done("")};img.src=reader.result};reader.onerror=()=>{alert("No pude abrir esa foto. Prueba otra vez.");done("")};reader.readAsDataURL(file)}
 $("pieceForm").addEventListener("submit",e=>{e.preventDefault();const userId=currentUser?.id,generation=accountGeneration;if(!userId)return;const source=$("pieceSource").value,booking=source==="booking"?bookings.find(item=>String(item.id)===String($("pieceBooking").value)):null;if(source==="booking"&&!booking)return alert("Selecciona la reserva relacionada o cambia el tipo a registro manual.");const file=$("piecePhoto").files[0];const add=photo=>{if(!isCurrentAccount(userId,generation))return;pieces.push({id:Date.now(),name:$("pieceName").value.trim(),client:$("pieceClient").value.trim(),phone:$("piecePhone").value.trim(),date:$("pieceDate").value,status:$("pieceStatus").value,notes:$("pieceNotes").value.trim(),photo:photo||"",source,bookingId:booking?.id||null});save();e.target.reset();$("pieceDate").value=dateToday();updatePieceSourceFields();renderPieces()};if(file)compressPiecePhoto(file,add);else add("")});
-function refreshPieceBookingOptions(){const select=$("pieceBooking"),selected=String(select.value||"");select.innerHTML='<option value="">Selecciona una reserva</option>'+bookings.map(item=>'<option value="'+item.id+'">'+esc(item.client)+' · '+esc(item.date)+' · '+formatStartTime(item.time)+'</option>').join("");if(bookings.some(item=>String(item.id)===selected))select.value=selected}
-function updatePieceSourceFields(){const linked=$("pieceSource").value==="booking";$("pieceBookingField").hidden=!linked;$("pieceBooking").required=linked;refreshPieceBookingOptions()}
-function loadSelectedPieceBooking(){const booking=bookings.find(item=>String(item.id)===String($("pieceBooking").value));if(!booking)return alert("Selecciona una reserva primero.");$("pieceClient").value=booking.client||"";$("piecePhone").value=booking.phone||""}
+function renderPieceBookingResults(query=$("pieceBookingSearch").value){
+ const term=String(query||"").trim().toLocaleLowerCase(),results=$("pieceBookingResults"),status=$("pieceBookingSearchStatus"),selected=String($("pieceBooking").value||"");
+ if(!term){results.innerHTML="";status.textContent="Escribe un nombre para buscar reservas.";return}
+ const matches=bookings.filter(item=>(String(item.client||"")+" "+String(item.date||"")+" "+formatStartTime(item.time)).toLocaleLowerCase().includes(term)).sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(timeToMinutes(b.time)||0)-(timeToMinutes(a.time)||0));
+ if(!matches.length){results.innerHTML='<div class="piece-booking-no-results">No encontramos reservas que coincidan. Revisa el nombre o cambia a registro manual.</div>';status.textContent="Sin coincidencias.";return}
+ results.innerHTML=matches.map(item=>'<button type="button" class="piece-booking-result" role="option" aria-selected="'+(String(item.id)===selected)+'" onclick="selectPieceBooking('+esc(JSON.stringify(String(item.id)))+')"><span><b>'+esc(item.client||"Sin nombre")+'</b><small>'+esc(item.date||"Fecha pendiente")+' · '+esc(formatStartTime(item.time)||"Hora pendiente")+'</small></span><span class="muted">'+esc(String(item.people||0))+' pers.</span></button>').join("");
+ status.textContent=matches.length+" reserva"+(matches.length===1?" encontrada.":"s encontradas.");
+}
+function refreshPieceBookingOptions(){
+ const select=$("pieceBooking"),selected=String(select.value||"");
+ select.innerHTML='<option value="">Selecciona una reserva</option>'+bookings.map(item=>'<option value="'+esc(String(item.id))+'">'+esc(item.client)+' · '+esc(item.date)+' · '+formatStartTime(item.time)+'</option>').join("");
+ if(bookings.some(item=>String(item.id)===selected))select.value=selected;
+ else if(selected){select.value="";$("pieceBookingSearch").value="";$("pieceBookingSearchStatus").textContent="La reserva seleccionada ya no está disponible. Busca otra."; }
+ renderPieceBookingResults();
+}
+function updatePieceSourceFields(){const linked=$("pieceSource").value==="booking";$("pieceBookingField").hidden=!linked;$("pieceBookingSearch").required=linked;$("pieceBooking").required=false;refreshPieceBookingOptions()}
+function selectPieceBooking(id){
+ const select=$("pieceBooking"),booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return alert("Esa reserva ya no está disponible. Vuelve a buscar al cliente.");
+ select.value=String(booking.id);$("pieceBookingSearch").value=booking.client||"";loadSelectedPieceBooking();renderPieceBookingResults();
+ $("pieceBookingSearchStatus").textContent="Reserva seleccionada · "+booking.date+" · "+formatStartTime(booking.time)+". Los datos se cargaron; puedes editarlos antes de guardar.";
+}
+function loadSelectedPieceBooking(){const booking=bookings.find(item=>String(item.id)===String($("pieceBooking").value));if(!booking)return alert("Selecciona una reserva de los resultados primero.");$("pieceClient").value=booking.client||"";$("piecePhone").value=booking.phone||"";return true}
 $("pieceSource").addEventListener("change",updatePieceSourceFields);
+$("pieceBookingSearch").addEventListener("input",()=>{$("pieceBooking").value="";renderPieceBookingResults()});
 $("loadPieceBooking").addEventListener("click",loadSelectedPieceBooking);
 function openPiecePhoto(id){const p=pieces.find(x=>String(x.id)===String(id));if(!p)return;const src=photoSrc(p.photo);if(!src){alert("La foto no está disponible todavía. Revisa la conexión de la nube.");return} $("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
+function openBookingReceipt(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;const src=photoSrc(booking.receiptPhoto);if(!src){alert("El comprobante no está disponible todavía. Revisa la conexión de la nube.");return}$("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
 function closePiecePhoto(){$("piecePhotoModal").classList.remove("open");$("piecePhotoLarge").src=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePiecePhoto()});
 function renderPieces(){
@@ -1155,7 +1339,7 @@ function renderInventory(){$("inventoryList").innerHTML=inventory.map(i=>'<div c
 function changeStock(id,n){const i=inventory.find(x=>x.id===id);if(i){i.qty=Math.max(0,i.qty+n);save();renderInventory()}}
 function deleteStock(id){if(confirm("¿Eliminar artículo del inventario?")){inventory=inventory.filter(i=>i.id!==id);save();renderInventory()}}
 function copySummary(){const text=bookings.map(b=>b.client+" — "+b.date+" "+b.time+" — "+SPACES[b.space].name+" — "+b.people+" personas — "+b.activity+" — Total "+money(b.amount)+" — Abono "+money(b.deposit)+" — Saldo "+money(b.balance)).join("\n")||"No hay reservas registradas.";if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert("Resumen copiado."),()=>prompt("Copia el resumen:",text));else prompt("Copia el resumen:",text)}
-function exportData(){const data={bookings,workshops,guides,groups,pieces:pieces.map(({photo,...p})=>p),inventory};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="STAIN-respaldo.json";a.click();URL.revokeObjectURL(url)}
+function exportData(){const data={bookings,workshops,guides,groups,pieces:pieces.map(({photo,...p})=>p),inventory,seatExtensions};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="STAIN-respaldo.json";a.click();URL.revokeObjectURL(url)}
 function renderHome(){ $("statBookings").textContent=bookings.length;$("statWorkshops").textContent=workshops.length;$("statPieces").textContent=pieces.length;$("statInventory").textContent=inventory.length;const today=dateToday(),arr=bookings.filter(b=>b.date===today);$("homeBookings").innerHTML=arr.map(b=>'<div class="row"><div><b>'+esc(b.client)+'</b><p class="muted">'+esc(b.time)+' · '+esc(SPACES[b.space].name)+'</p></div><span class="pill">'+b.people+' pers.</span></div>').join("")||'<div class="empty">No hay reservas para hoy. Un espacio listo para crear ✿</div>'}
 function renderAll(){renderHome();renderCalendar();renderBookings();renderWorkshops();renderGroups();renderPieces();renderInventory();renderGuides()}
 const renderBookingsCore=renderBookings,renderGroupsCore=renderGroups,renderGuidesCore=renderGuides,renderGuideActivityCore=renderGuideActivityItem;
