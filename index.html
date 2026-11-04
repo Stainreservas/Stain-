@@ -18,6 +18,13 @@ main{max-width:1050px;margin:auto;padding:18px 15px 95px}.view{display:none}.vie
 .pill.completed{background:#dcebd8;color:#3e6b42}.completed-text{text-decoration:line-through;text-decoration-color:#73966b}.guide-section-title{margin:18px 0 8px;font-size:14px}.group-participant{padding:9px 0;border-top:1px solid var(--line)}.spacebox.selected{outline:2px solid var(--green);background:var(--sage)}.spacebox:disabled{opacity:.55;cursor:not-allowed}.spacegrid button.spacebox{border:0;text-align:left;color:var(--ink);font:inherit}
 body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.authenticated) main{display:none!important}
 #loginScreen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#fdfbf5,#e6eee0)}#loginScreen[hidden]{display:none!important}.login-card{width:100%;max-width:380px;background:#fffefa;border:1px solid #e6e9df;border-radius:24px;padding:28px;box-shadow:0 12px 36px #53634a12}.login-card h1{font-size:27px;letter-spacing:5px;color:var(--green);margin:0}.login-card p{color:var(--muted);font-size:13px}.login-card label{display:block;font-size:12px;font-weight:650;margin:14px 0 6px}.login-card input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;color:var(--ink)}.login-card button{width:100%;border:0;border-radius:12px;background:var(--green);color:white;padding:12px;margin-top:18px;font-weight:700}.login-error{color:#a33b45!important;min-height:18px}.topnote{display:flex;align-items:center;gap:9px}.topnote button{border:1px solid #dfe7d9;background:#fffefa;color:var(--green);border-radius:99px;padding:6px 10px;font-size:11px}
+.sync-conflict-panel{max-width:1010px;margin:12px auto;padding:0 15px}
+.sync-conflict-card{border:1px solid #e8cfd5;border-radius:15px;background:#fff9f8;padding:14px;color:#66484e}
+.sync-conflict-card h3{margin:0 0 5px;font-size:14px}.sync-conflict-card p{margin:4px 0 10px;font-size:12px;color:#755e62}
+.sync-conflict-list{display:grid;gap:8px}.sync-conflict-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;background:#fffefa;border:1px solid #f0e2e3;border-radius:11px}
+.sync-conflict-row label{font-size:12px;font-weight:650}.sync-conflict-row select{max-width:210px;padding:7px;border:1px solid #e6d7cd;border-radius:9px;background:white;color:var(--ink);font-size:12px}
+.sync-conflict-card .btn{margin-top:10px}
+@media(max-width:600px){.sync-conflict-panel{padding:0 10px}.sync-conflict-row{align-items:flex-start;flex-direction:column}.sync-conflict-row select{width:100%;max-width:none}}
 </style>
 <style>
 .booking-card-receipt{width:48px;height:48px;flex:0 0 48px;object-fit:cover;border:1px solid var(--line);border-radius:10px}.booking-card-receipt-button{border:0;background:transparent;padding:0;cursor:zoom-in}.booking-card-receipt-unavailable{max-width:76px;color:#8a555a;font-size:9px;line-height:1.2}.piece-booking-results{display:grid;gap:6px;margin-top:8px}.piece-booking-result{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-radius:11px;background:#fffefa;padding:9px 11px;color:var(--ink)}.piece-booking-result:hover,.piece-booking-result[aria-selected="true"]{border-color:var(--sage2);background:#f4f7ef}.piece-booking-result small{display:block;color:var(--muted);font-size:10px}.piece-booking-no-results{border:1px dashed var(--line);border-radius:11px;padding:10px;color:var(--muted);font-size:11px}
@@ -83,6 +90,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
  <button id="loginButton" type="submit">Entrar a STAIN</button><p id="loginError" class="login-error" role="status"></p></form></div>
 </div>
 <header class="top"><div class="brandline"><div><h1 class="brand">STAIN</h1><div class="sub">CREATIVE STUDIO · PANEL DE ADMINISTRACIÓN</div></div><div class="topnote"><span id="cloudStatus">✿ Un espacio para crear</span><button id="logoutBtn" type="button">Salir</button></div></div></header>
+<div id="syncConflictPanel" class="sync-conflict-panel" hidden></div>
 <nav class="nav" id="nav">
 <button class="active" data-view="inicio">Inicio</button><button data-view="reservas">Reservas</button><button data-view="grupales">Grupales</button><button data-view="piezas">Piezas</button><button data-view="mas">Más ···</button>
 </nav>
@@ -203,22 +211,23 @@ const PHYSICAL_TABLES=[
 const BASE_AREA_SEATS={A:8,B:12,C:4},MAX_AREA_SEATS={A:10,B:16,C:4};
 const ALL_SEAT_IDS=PHYSICAL_TABLES.flatMap(table=>table.seatIds),SEAT_TABLE_BY_ID=new Map(PHYSICAL_TABLES.flatMap(table=>table.seatIds.map(id=>[id,table])));
 let bookingFormSpaces=[],bookingMapSpaces=[],bookingFormSeatIds=[],bookingMapSeatIds=[],bookingMapMode="manual",bookingEditingId=null,bookingView="calendar";
-let bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[],seatExtensions=[];
+let syncTombstones=[],bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[],seatExtensions=[];
 const $=id=>document.getElementById(id),money=n=>"$"+(Number(n)||0).toFixed(2);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-const dataKeys=["bookings","workshops","guides","groups","pieces","inventory","seatExtensions"];
-const dataStateKeys={bookings:"bookings",workshops:"workshops",guides:"guides",groups:"groups",pieces:"pieces",inventory:"inventory",seatExtensions:"seatExtensions"};
-let pendingDataKeys=new Set(),dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0])),cloudVersions={},dataSnapshot={},groupEditingId=null;
+const dataKeys=["syncTombstones","bookings","workshops","guides","groups","pieces","inventory","seatExtensions"];
+const dataStateKeys={syncTombstones:"syncTombstones",bookings:"bookings",workshops:"workshops",guides:"guides",groups:"groups",pieces:"pieces",inventory:"inventory",seatExtensions:"seatExtensions"};
+let pendingDataKeys=new Set(),dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0])),cloudVersions={},cloudDataSnapshot={},dataSnapshot={},pendingSyncConflicts={},groupEditingId=null;
 const externalLibraryPromises=new Map();
 let backupRestoreDraft=null,spreadsheetImportDraft=null;
 function accountStorageKey(userId,key){return "stain_v2_user_"+encodeURIComponent(userId)+"_"+key}
 function pendingStorageKey(userId){return accountStorageKey(userId,"pending")}
 function pendingVersionsStorageKey(userId){return accountStorageKey(userId,"pending_versions")}
 function isCurrentAccount(userId,generation){return Boolean(currentUser&&currentUser.id===userId&&accountGeneration===generation)}
-function setDataState(data){bookings=data.bookings||[];workshops=data.workshops||[];guides=data.guides||[];groups=data.groups||[];pieces=data.pieces||[];inventory=data.inventory||[];seatExtensions=data.seatExtensions||[]}
+function setDataState(data){syncTombstones=data.syncTombstones||[];bookings=data.bookings||[];workshops=data.workshops||[];guides=data.guides||[];groups=data.groups||[];pieces=data.pieces||[];inventory=data.inventory||[];seatExtensions=data.seatExtensions||[]}
 function setDataCategory(key,value){
  if(!dataKeys.includes(key)||!Array.isArray(value))throw new Error("Categoría de sincronización no válida: "+key);
- if(key==="bookings")bookings=value;
+ if(key==="syncTombstones")syncTombstones=value;
+ else if(key==="bookings")bookings=value;
  else if(key==="workshops")workshops=value;
  else if(key==="guides")guides=value;
  else if(key==="groups")groups=value;
@@ -226,29 +235,173 @@ function setDataCategory(key,value){
  else if(key==="inventory")inventory=value;
  else seatExtensions=value;
 }
-function getDataState(){return {bookings,workshops,guides,groups,pieces,inventory,seatExtensions}}
-function clearAccountData(){stopCloudRefresh();setDataState({});pendingDataKeys=new Set();dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0]));cloudVersions={};dataSnapshot={};Object.keys(piecePhotoUrlCache).forEach(path=>delete piecePhotoUrlCache[path])}
+function getDataState(){return {syncTombstones,bookings,workshops,guides,groups,pieces,inventory,seatExtensions}}
+function clearAccountData(){stopCloudRefresh();setDataState({});pendingDataKeys=new Set();dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0]));cloudVersions={};cloudDataSnapshot={};dataSnapshot={};pendingSyncConflicts={};renderSyncConflictPanel();Object.keys(piecePhotoUrlCache).forEach(path=>delete piecePhotoUrlCache[path])}
 function readLocalData(userId,key){try{const value=JSON.parse(localStorage.getItem(accountStorageKey(userId,key))||"[]");return Array.isArray(value)?value:[]}catch{return []}}
-function loadLocalData(userId){const data={};for(const key of dataKeys)data[key]=readLocalData(userId,key);setDataState(data);try{const pending=JSON.parse(localStorage.getItem(pendingStorageKey(userId))||"[]");pendingDataKeys=new Set(Array.isArray(pending)?pending.filter(key=>dataKeys.includes(key)):[])}catch{pendingDataKeys=new Set()}try{const versions=JSON.parse(localStorage.getItem(pendingVersionsStorageKey(userId))||"{}");cloudVersions=versions&&typeof versions==="object"&&!Array.isArray(versions)?versions:{}}catch{cloudVersions={}}dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(data[key])]))}
-function localSave(userId=currentUser?.id){if(!userId)return;for(const [k,v] of Object.entries({bookings,workshops,guides,groups,pieces,inventory,seatExtensions}))localStorage.setItem(accountStorageKey(userId,k),JSON.stringify(v))}
-function persistPendingData(userId=currentUser?.id){if(!userId)return;localStorage.setItem(pendingStorageKey(userId),JSON.stringify([...pendingDataKeys]));localStorage.setItem(pendingVersionsStorageKey(userId),JSON.stringify(cloudVersions))}
+function loadLocalData(userId){const data={};for(const key of dataKeys)data[key]=readLocalData(userId,key);setDataState(data);try{const pending=JSON.parse(localStorage.getItem(pendingStorageKey(userId))||"[]");pendingDataKeys=new Set(Array.isArray(pending)?pending.filter(key=>dataKeys.includes(key)):[])}catch{pendingDataKeys=new Set()}try{const versions=JSON.parse(localStorage.getItem(pendingVersionsStorageKey(userId))||"{}");cloudVersions=versions&&typeof versions==="object"&&!Array.isArray(versions)?versions:{}}catch{cloudVersions={}}try{const snapshot=JSON.parse(localStorage.getItem(accountStorageKey(userId,"cloud_snapshot"))||"{}");cloudDataSnapshot=snapshot&&typeof snapshot==="object"&&!Array.isArray(snapshot)?snapshot:{}}catch{cloudDataSnapshot={}}try{const conflicts=JSON.parse(localStorage.getItem(accountStorageKey(userId,"sync_conflicts"))||"{}");pendingSyncConflicts=conflicts&&typeof conflicts==="object"&&!Array.isArray(conflicts)?conflicts:{}}catch{pendingSyncConflicts={}}dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(data[key])]))}
+function localSave(userId=currentUser?.id){if(!userId)return;for(const [k,v] of Object.entries({syncTombstones,bookings,workshops,guides,groups,pieces,inventory,seatExtensions}))localStorage.setItem(accountStorageKey(userId,k),JSON.stringify(v))}
+function persistPendingData(userId=currentUser?.id){if(!userId)return;localStorage.setItem(pendingStorageKey(userId),JSON.stringify([...pendingDataKeys]));localStorage.setItem(pendingVersionsStorageKey(userId),JSON.stringify(cloudVersions));localStorage.setItem(accountStorageKey(userId,"cloud_snapshot"),JSON.stringify(cloudDataSnapshot));localStorage.setItem(accountStorageKey(userId,"sync_conflicts"),JSON.stringify(pendingSyncConflicts))}
+function stableSyncValue(value){if(Array.isArray(value))return value.map(stableSyncValue);if(value&&typeof value==="object")return Object.fromEntries(Object.keys(value).sort().map(key=>[key,stableSyncValue(value[key])]));return value}
+function syncRecordKey(record){return record&&record.id!==undefined&&record.id!==null?"id:"+String(record.id):"value:"+JSON.stringify(stableSyncValue(record))}
+function syncRecordLabel(record){return String(record?.client||record?.name||record?.participant||record?.title||record?.id||"Registro sin nombre")}
+function sameSyncRecord(leftPresent,left,rightPresent,right){return leftPresent===rightPresent&&(!leftPresent||JSON.stringify(stableSyncValue(left))===JSON.stringify(stableSyncValue(right)))}
+function mergeSyncCategory(localData,remoteData,baseData,category=null,localTombstoneData=syncTombstones,remoteTombstoneData=syncTombstones,baseTombstoneData=cloudDataSnapshot.syncTombstones){
+ const local=Array.isArray(localData)?localData:[],remote=Array.isArray(remoteData)?remoteData:[],hasBase=Array.isArray(baseData),base=hasBase?baseData:[],localById=new Map(local.map(record=>[syncRecordKey(record),record])),remoteById=new Map(remote.map(record=>[syncRecordKey(record),record])),baseById=new Map(base.map(record=>[syncRecordKey(record),record])),keys=[...new Set([...localById.keys(),...remoteById.keys(),...baseById.keys()])],merged=[],conflicts=[],equivalent=(leftPresent,left,rightPresent,right)=>category==="syncTombstones"?leftPresent===rightPresent&&(!leftPresent||left.id===right.id&&left.category===right.category&&left.recordKey===right.recordKey):sameSyncRecord(leftPresent,left,rightPresent,right);
+ for(const id of keys){
+  const hasLocal=localById.has(id),hasRemote=remoteById.has(id),hasOriginal=baseById.has(id),localRecord=localById.get(id),remoteRecord=remoteById.get(id),original=baseById.get(id);
+  if(!hasBase){
+   if(hasLocal&&hasRemote&&!equivalent(hasLocal,localRecord,hasRemote,remoteRecord)){
+    conflicts.push({id,label:syncRecordLabel(localRecord),localRecord,remoteRecord});merged.push(localRecord);
+   }else if(hasLocal)merged.push(localRecord);
+   else if(hasRemote)merged.push(remoteRecord);
+   continue;
+  }
+  const localChanged=!equivalent(hasLocal,localRecord,hasOriginal,original),remoteChanged=!equivalent(hasRemote,remoteRecord,hasOriginal,original);
+  if(localChanged&&remoteChanged&&!equivalent(hasLocal,localRecord,hasRemote,remoteRecord)){
+   conflicts.push({id,label:syncRecordLabel(localRecord||remoteRecord),localRecord:hasLocal?localRecord:null,remoteRecord:hasRemote?remoteRecord:null});
+   if(hasLocal)merged.push(localRecord);
+  }else if(localChanged){if(hasLocal)merged.push(localRecord)}
+  else if(hasRemote)merged.push(remoteRecord);
+ }
+ if(category==="pieces"){
+  for(let index=0;index<merged.length;index++){
+   const id=syncRecordKey(merged[index]),localRecord=localById.get(id),remoteRecord=remoteById.get(id);
+   if(localRecord&&remoteRecord)merged[index]=mergePiecePhotoReferences(merged[index],merged[index]===localRecord?remoteRecord:localRecord);
+  }
+ }
+ if(category&&category!=="syncTombstones"){
+  const localTombstones=new Set((Array.isArray(localTombstoneData)?localTombstoneData:[]).filter(item=>item.category===category).map(item=>item.recordKey));
+  const remoteTombstones=new Set((Array.isArray(remoteTombstoneData)?remoteTombstoneData:[]).filter(item=>item.category===category).map(item=>item.recordKey));
+  const baseTombstones=new Set((Array.isArray(baseTombstoneData)?baseTombstoneData:[]).filter(item=>item.category===category).map(item=>item.recordKey));
+  for(const recordKey of new Set([...localTombstones,...remoteTombstones])){
+   if(baseTombstones.has(recordKey))continue;
+   const deletedLocally=localTombstones.has(recordKey),deletedRemotely=remoteTombstones.has(recordKey);
+   if(deletedLocally===deletedRemotely)continue;
+   const localRecord=localById.get(recordKey),remoteRecord=remoteById.get(recordKey),original=baseById.get(recordKey);
+   const otherRecord=deletedLocally?remoteRecord:localRecord,otherChanged=otherRecord&&(!hasBase||!sameSyncRecord(true,otherRecord,baseById.has(recordKey),original));
+   if(otherChanged){
+    const existingConflict=conflicts.find(conflict=>conflict.id===recordKey);
+    if(existingConflict){existingConflict.deletionConflict=true;existingConflict.tombstoneId=category+"|"+recordKey}
+    else conflicts.push({id:recordKey,label:syncRecordLabel(otherRecord)+" (eliminación y edición)",localRecord:localRecord||null,remoteRecord:remoteRecord||null,deletionConflict:true,tombstoneId:category+"|"+recordKey});
+   }
+  }
+  const deleted=new Set([...localTombstones,...remoteTombstones]);
+  return {merged:merged.filter(record=>!deleted.has(syncRecordKey(record))),conflicts};
+ }
+ return {merged,conflicts};
+}
+function syncDeviceId(){
+ const key=accountStorageKey(currentUser?.id,"device_id");
+ let id=localStorage.getItem(key);
+ if(!id){id=globalThis.crypto?.randomUUID?.()||"device-"+Date.now()+"-"+Math.random().toString(36).slice(2);localStorage.setItem(key,id)}
+ return id;
+}
+function addRecordTombstone(category,record){
+ if(!dataKeys.includes(category)||category==="syncTombstones"||!record)return;
+ const recordKey=syncRecordKey(record),id=category+"|"+recordKey;
+ if(syncTombstones.some(item=>item.id===id))return;
+ syncTombstones.push({id,category,recordKey,deletedAt:new Date().toISOString(),deviceId:syncDeviceId()});
+}
+function deleteSyncRecord(category,id){
+ const records=getDataState()[category];
+ if(!Array.isArray(records))return false;
+ const record=records.find(item=>String(item.id)===String(id));
+ if(!record)return false;
+ addRecordTombstone(category,record);
+ setDataCategory(category,records.filter(item=>String(item.id)!==String(id)));
+ return true;
+}
+function captureLocalDeletions(state=getDataState()){
+ let changed=false;
+ for(const key of dataKeys){
+  if(key==="syncTombstones"||!Array.isArray(cloudDataSnapshot[key]))continue;
+  const current=new Set((state[key]||[]).map(syncRecordKey));
+  for(const record of cloudDataSnapshot[key])if(!current.has(syncRecordKey(record))){
+   const before=syncTombstones.length;addRecordTombstone(key,record);if(syncTombstones.length!==before)changed=true;
+  }
+ }
+ return changed;
+}
+function mergePiecePhotoReferences(primary,secondary){
+ if(!primary||!secondary)return primary||secondary||null;
+ const refs=[primary.photo,...(primary.photos||[]),secondary.photo,...(secondary.photos||[])].filter(Boolean);
+ const unique=[...new Set(refs)];
+ return {...primary,photo:primary.photo||secondary.photo||"",photos:unique};
+}
+function filterDeletedRecords(category,records,tombstones=syncTombstones){
+ if(category==="syncTombstones")return records;
+ const deleted=new Set((tombstones||[]).filter(item=>item.category===category).map(item=>item.recordKey));
+ return records.filter(record=>!deleted.has(syncRecordKey(record)));
+}
+function renderSyncConflictPanel(){
+ const panel=$("syncConflictPanel");if(!panel)return;
+ const categories=Object.entries(pendingSyncConflicts).filter(([,conflict])=>conflict?.records?.length);
+ if(!categories.length){panel.hidden=true;panel.innerHTML="";return}
+ panel.hidden=false;
+ const rows=categories.flatMap(([key,conflict])=>conflict.records.map(record=>'<div class="sync-conflict-row"><label>'+esc(record.label)+' · '+esc(key)+'</label><select data-sync-key="'+esc(key)+'" data-sync-record="'+esc(record.id)+'"><option value="">Elige qué versión conservar</option><option value="local" '+(record.choice==="local"?"selected":"")+'>Conservar mi versión</option><option value="remote" '+(record.choice==="remote"?"selected":"")+'>Conservar versión de la nube</option></select></div>')).join("");
+ const allResolved=categories.every(([,conflict])=>conflict.records.every(record=>record.choice==="local"||record.choice==="remote"));
+ panel.innerHTML='<div class="sync-conflict-card"><h3>Hay cambios distintos en el mismo registro</h3><p>Los registros diferentes se combinan automáticamente. Elige qué versión conservar para cada registro que ambos dispositivos modificaron. Ningún cambio se descarta hasta que confirmes.</p><div class="sync-conflict-list">'+rows+'</div><button id="applySyncConflictResolutions" type="button" class="btn primary small" '+(allResolved?"":"disabled")+'>Aplicar selección y sincronizar</button></div>';
+}
+function updateSyncConflictChoice(key,id,choice){
+ const record=pendingSyncConflicts[key]?.records.find(item=>item.id===id);if(!record)return;
+ record.choice=choice==="local"||choice==="remote"?choice:"";
+ renderSyncConflictPanel();
+}
+function applySyncConflictResolutions(){
+ const categories=Object.entries(pendingSyncConflicts).filter(([,conflict])=>conflict?.records?.length);
+ if(categories.some(([,conflict])=>conflict.records.some(record=>record.choice!=="local"&&record.choice!=="remote")))return alert("Elige una versión para cada registro en conflicto.");
+ for(const [key,conflict] of categories){
+  const current=getDataState()[key];
+  if(JSON.stringify(stableSyncValue(current))!==JSON.stringify(stableSyncValue(conflict.localData))){
+   const refreshed=mergeSyncCategory(current,conflict.remoteData,conflict.baseData);
+   if(refreshed.conflicts.length){pendingSyncConflicts[key]={...conflict,localData:current,merged:refreshed.merged,records:refreshed.conflicts};renderSyncConflictPanel();return alert("Este registro volvió a cambiar mientras resolvías el conflicto. Revisa la versión actualizada antes de sincronizar.")}
+   conflict.merged=refreshed.merged;conflict.records=[];
+  }
+ }
+ for(const [key,conflict] of categories){
+  for(const record of conflict.records){
+   const index=conflict.merged.findIndex(item=>syncRecordKey(item)===record.id),chosen=record.choice==="local"?record.localRecord:record.remoteRecord;
+   const alternate=record.choice==="local"?record.remoteRecord:record.localRecord;
+   if(index>=0)conflict.merged.splice(index,1);
+   if(chosen){
+    const resolved=key==="pieces"&&!record.deletionConflict?mergePiecePhotoReferences(chosen,alternate):chosen;
+    conflict.merged.splice(index<0?conflict.merged.length:index,0,resolved);
+    if(record.deletionConflict)syncTombstones=syncTombstones.filter(item=>item.id!==record.tombstoneId);
+   }else if(record.deletionConflict){
+    const source=record.localRecord||record.remoteRecord;
+    if(source)addRecordTombstone(key,source);
+   }
+  }
+  setDataCategory(key,conflict.merged);cloudDataSnapshot[key]=conflict.remoteData;cloudVersions[key]=conflict.remoteVersion||null;pendingDataKeys.add(key);delete pendingSyncConflicts[key];
+ }
+ persistPendingData();renderSyncConflictPanel();save();
+}
 function setCloudStatus(message){const el=$("cloudStatus");if(el)el.textContent=message}
+const syncConflictPanel=$("syncConflictPanel");
+if(syncConflictPanel){
+ syncConflictPanel.addEventListener("change",event=>{const select=event.target.closest("select[data-sync-key][data-sync-record]");if(select)updateSyncConflictChoice(select.dataset.syncKey,select.dataset.syncRecord,select.value)});
+ syncConflictPanel.addEventListener("click",event=>{if(event.target.closest("#applySyncConflictResolutions"))applySyncConflictResolutions()});
+}
 function photoSrc(photo){if(!photo)return "";if(photo.startsWith("storage:"))return piecePhotoUrlCache[photo.slice(8)]||"";return photo}
 async function storePiecePhotos(userId,generation,pieceData){
  for(const p of pieceData){
   if(!isCurrentAccount(userId,generation))return;
-  if(!p.photo||!p.photo.startsWith("data:"))continue;
-  const blob=await (await fetch(p.photo)).blob();
-  if(!isCurrentAccount(userId,generation))return;
-  const ext=blob.type.includes("png")?"png":blob.type.includes("webp")?"webp":"jpg";
-  const path=userId+"/"+String(p.id||("piece-"+Date.now()))+"."+ext;
-  const up=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:true,contentType:blob.type||"image/jpeg"});
-  if(up.error)throw up.error;
-  if(!isCurrentAccount(userId,generation))return;
-  p.photo="storage:"+path;
-  const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
-  if(!isCurrentAccount(userId,generation))return;
-  if(!signed.error)piecePhotoUrlCache[path]=signed.data.signedUrl;
+  const refs=[...new Set([p.photo,...(Array.isArray(p.photos)?p.photos:[])].filter(Boolean))],stored=[];
+  for(const ref of refs){
+   if(!ref.startsWith("data:")){stored.push(ref);continue}
+   const blob=await (await fetch(ref)).blob();
+   if(!isCurrentAccount(userId,generation))return;
+   const ext=blob.type.includes("png")?"png":blob.type.includes("webp")?"webp":"jpg",uniqueId=globalThis.crypto?.randomUUID?.()||Date.now()+"-"+Math.random().toString(36).slice(2),path=userId+"/pieces/"+String(p.id||"piece")+"-"+uniqueId+"."+ext;
+   const up=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:false,contentType:blob.type||"image/jpeg"});
+   if(up.error)throw up.error;
+   if(!isCurrentAccount(userId,generation))return;
+   const storedRef="storage:"+path;stored.push(storedRef);
+   const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
+   if(!isCurrentAccount(userId,generation))return;
+   if(!signed.error)piecePhotoUrlCache[path]=signed.data.signedUrl;
+  }
+  p.photos=[...new Set(stored)];
+  p.photo=p.photo?.startsWith("data:")?p.photos[refs.indexOf(p.photo)]:p.photo||p.photos[0]||"";
  }
  return pieceData;
 }
@@ -277,6 +430,7 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
  setCloudStatus("Guardando…");
  for(const key of [...pendingDataKeys]){
   if(!isCurrentAccount(user.id,generation))return;
+  if(pendingSyncConflicts[key])continue;
   const revision=dataRevisions[key],state=getDataState();
   let value=JSON.parse(JSON.stringify(state[dataStateKeys[key]]));
   if(key==="pieces"){
@@ -295,12 +449,32 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
    dataSnapshot[key]=JSON.stringify(value);
    localSave(user.id);
   }
-  const current=await supabaseClient.from("stain_data").select(key==="bookings"||key==="groups"?"updated_at,data":"updated_at").eq("user_id",user.id).eq("data_key",key).maybeSingle();
+  const current=await supabaseClient.from("stain_data").select("updated_at,data").eq("user_id",user.id).eq("data_key",key).maybeSingle();
   if(current.error)throw current.error;
   if(!isCurrentAccount(user.id,generation))return;
   const remoteVersion=current.data?.updated_at||null;
   let knownVersion=cloudVersions[key]||null;
-  if(remoteVersion!==knownVersion){
+  const remoteData=Array.isArray(current.data?.data)?current.data.data:[],baseTombstones=cloudDataSnapshot.syncTombstones||[];
+  let remoteTombstones=key==="syncTombstones"?remoteData:syncTombstones;
+  if(key!=="syncTombstones"){
+   const tombstoneResult=await supabaseClient.from("stain_data").select("updated_at,data").eq("user_id",user.id).eq("data_key","syncTombstones").maybeSingle();
+   if(tombstoneResult.error)throw tombstoneResult.error;
+   if(!isCurrentAccount(user.id,generation))return;
+   remoteTombstones=Array.isArray(tombstoneResult.data?.data)?tombstoneResult.data.data:[];
+   const tombstoneMerge=mergeSyncCategory(syncTombstones,remoteTombstones,baseTombstones,"syncTombstones");
+   syncTombstones=tombstoneMerge.merged;cloudVersions.syncTombstones=tombstoneResult.data?.updated_at||null;cloudDataSnapshot.syncTombstones=remoteTombstones;
+   if(JSON.stringify(syncTombstones)!==JSON.stringify(remoteTombstones)){pendingDataKeys.add("syncTombstones");dataRevisions.syncTombstones++;dataSnapshot.syncTombstones=JSON.stringify(syncTombstones);localSave(user.id);persistPendingData(user.id);syncPending=true}
+   else pendingDataKeys.delete("syncTombstones");
+  }
+  if(remoteVersion!==knownVersion||JSON.stringify(remoteTombstones)!==JSON.stringify(baseTombstones)){
+   const merge=mergeSyncCategory(value,remoteData,cloudDataSnapshot[key],key,syncTombstones,remoteTombstones,baseTombstones);
+   if(merge.conflicts.length){
+    pendingSyncConflicts[key]={remoteVersion,remoteData,baseData:cloudDataSnapshot[key],localData:JSON.parse(JSON.stringify(merge.merged)),merged:merge.merged,records:merge.conflicts,localTombstones:syncTombstones,remoteTombstones,baseTombstones};
+    setDataCategory(key,merge.merged);cloudVersions[key]=remoteVersion;dataRevisions[key]++;dataSnapshot[key]=JSON.stringify(merge.merged);
+    localSave(user.id);persistPendingData(user.id);renderAll();renderSyncConflictPanel();
+    continue;
+   }
+   value=merge.merged;knownVersion=remoteVersion;cloudVersions[key]=remoteVersion;cloudDataSnapshot[key]=remoteData;setDataCategory(key,value);
    if(key==="bookings"||key==="groups"){
     const [remoteBookingsResult,remoteGroupsResult]=await Promise.all([
      key==="bookings"?Promise.resolve({data:current.data,error:null}):supabaseClient.from("stain_data").select("data").eq("user_id",user.id).eq("data_key","bookings").maybeSingle(),
@@ -314,8 +488,6 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
     const collision=findSeatConflictAcrossSnapshots(localBookings,remoteBookings,localGroups,remoteGroups);
     if(collision)throw new Error("Conflicto de sillas en la nube: la silla "+collision.seatId+" ya está asignada a otra actividad en un horario incompatible. No se sobrescribió la versión de Supabase; actualiza los datos y vuelve a elegir sillas.");
    }
-   if(!confirm("Los datos de "+key+" cambiaron en otro dispositivo. ¿Quieres reemplazar la versión más reciente de Supabase con los cambios de este dispositivo? Cancelar conserva los cambios localmente sin sincronizarlos."))throw new Error("Conflicto de sincronización en "+key+". Los cambios locales se conservaron.");
-   knownVersion=remoteVersion;cloudVersions[key]=remoteVersion;persistPendingData(user.id);
   }
   if(dataRevisions[key]!==revision)continue;
   const timestamp=Date.now(),knownTime=knownVersion?Date.parse(knownVersion):0;
@@ -331,6 +503,7 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
   if(!write.data)throw new Error("Conflicto de sincronización en "+key+". Hay una versión más reciente en Supabase; los cambios locales se conservaron.");
   if(!isCurrentAccount(user.id,generation))return;
   cloudVersions[key]=write.data.updated_at||updatedAt;
+  cloudDataSnapshot[key]=value;
   if(dataRevisions[key]===revision){
    pendingDataKeys.delete(key);
    dataSnapshot[key]=JSON.stringify(value);
@@ -338,7 +511,9 @@ async function syncAllToCloud(user=currentUser,generation=accountGeneration){
   localSave(user.id);persistPendingData(user.id);
  }
  if(!isCurrentAccount(user.id,generation))return;
- setCloudStatus(pendingDataKeys.size?"Cambios pendientes de resolver":"☁ Sincronizado");
+ persistPendingData(user.id);renderSyncConflictPanel();
+ const unresolved=Object.keys(pendingSyncConflicts).length;
+ setCloudStatus(unresolved?"Conflictos por resolver · "+unresolved:pendingDataKeys.size?"Cambios pendientes de resolver":"☁ Sincronizado");
 }
 async function queueCloudSync(){
  const user=currentUser,generation=accountGeneration;
@@ -350,6 +525,7 @@ async function queueCloudSync(){
  finally{const pending=syncPending;syncPending=false;syncing=false;if(pending&&currentUser)queueCloudSync()}
 }
 function save(){
+ captureLocalDeletions();
  const state=getDataState();
  for(const key of dataKeys){
   const serialized=JSON.stringify(state[dataStateKeys[key]]);
@@ -393,12 +569,15 @@ async function downloadFullBackup(){
   for(let index=0;index<snapshot.pieces.length;index++){
    if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
    const piece=snapshot.pieces[index];
-   if(!piece.photo)continue;
-   const blob=await getPiecePhotoBlob(piece.photo);
-   if(!blob)throw new Error("No se pudo recuperar la foto de la pieza "+(piece.name||piece.id)+". La copia no se descargó para evitar omitir archivos.");
-   totalPhotoBytes+=blob.size;if(totalPhotoBytes>200*1024*1024)throw new Error("Las fotos superan el límite de 200 MB para una copia ZIP.");
-   const safeId=String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_"),path="photos/piece-"+safeId+"-"+index+"."+photoExtension(blob);
-   zip.file(path,blob);piece.photo="backup-photo:"+path;photoCount++;
+   const refs=[...new Set([piece.photo,...(Array.isArray(piece.photos)?piece.photos:[])].filter(Boolean))],backedRefs=[];
+   for(let photoIndex=0;photoIndex<refs.length;photoIndex++){
+    const blob=await getPiecePhotoBlob(refs[photoIndex]);
+    if(!blob)throw new Error("No se pudo recuperar una foto de la pieza "+(piece.name||piece.id)+". La copia no se descargó para evitar omitir archivos.");
+    totalPhotoBytes+=blob.size;if(totalPhotoBytes>200*1024*1024)throw new Error("Las fotos superan el límite de 200 MB para una copia ZIP.");
+    const safeId=String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_"),path="photos/piece-"+safeId+"-"+index+"-"+photoIndex+"."+photoExtension(blob);
+    zip.file(path,blob);backedRefs.push("backup-photo:"+path);photoCount++;
+   }
+   if(refs.length){const replacements=new Map(refs.map((ref,refIndex)=>[ref,backedRefs[refIndex]]));piece.photo=replacements.get(piece.photo)||backedRefs[0];piece.photos=backedRefs}
   }
   for(let index=0;index<snapshot.bookings.length;index++){
    if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la copia; descarga otra vez.");
@@ -434,6 +613,7 @@ async function previewBackupRestore(){
   const manifest=JSON.parse(await manifestFile.async("string")),snapshot=JSON.parse(await dataFile.async("string"));
   if(manifest.format!=="stain-full-backup"||manifest.version!==1)throw new Error("Formato o versión de copia no compatible.");
   if(!Array.isArray(snapshot.seatExtensions))snapshot.seatExtensions=[];
+  if(!Array.isArray(snapshot.syncTombstones))snapshot.syncTombstones=[];
   if(manifest.calendarSettings){
    try{new Intl.DateTimeFormat("en",{timeZone:manifest.calendarSettings.timezone}).format(new Date())}catch{throw new Error("La copia contiene una zona horaria no válida.")}
    if(!Number.isInteger(Number(manifest.calendarSettings.reminderMinutes))||Number(manifest.calendarSettings.reminderMinutes)<0||Number(manifest.calendarSettings.reminderMinutes)>40320||typeof manifest.calendarSettings.location!=="string")throw new Error("La copia contiene configuración de calendario no válida.");
@@ -441,8 +621,8 @@ async function previewBackupRestore(){
   for(const key of dataKeys)if(!Array.isArray(snapshot[key]))throw new Error("La copia no contiene la categoría "+key+" con el formato esperado.");
   for(const key of dataKeys){const ids=new Set();for(const record of snapshot[key]){if(!record||typeof record!=="object"||Array.isArray(record)||(record.id!==undefined&&!/^\d{1,20}$/.test(String(record.id))))throw new Error("La categoría "+key+" contiene un registro con formato o ID no válido.");if(record.id!==undefined){const id=String(record.id);if(ids.has(id))throw new Error("La categoría "+key+" contiene IDs duplicados.");ids.add(id)}}}
   const photoPaths=[];
-  for(const piece of snapshot.pieces)if(typeof piece.photo==="string"&&piece.photo.startsWith("backup-photo:")){
-   const path=piece.photo.slice("backup-photo:".length);
+  for(const piece of snapshot.pieces)for(const photo of new Set([piece.photo,...(Array.isArray(piece.photos)?piece.photos:[])]))if(typeof photo==="string"&&photo.startsWith("backup-photo:")){
+   const path=photo.slice("backup-photo:".length);
    if(!/^photos\/[A-Za-z0-9_-]+\.(jpg|png|webp|gif)$/.test(path)||!zip.file(path))throw new Error("Falta el archivo de foto asociado a la pieza "+(piece.name||piece.id)+".");
    photoPaths.push(path);
   }
@@ -471,16 +651,17 @@ async function confirmBackupRestore(){
  try{
   const snapshot=JSON.parse(JSON.stringify(draft.snapshot));let index=0;
   for(const piece of snapshot.pieces){
-   if(!String(piece.photo||"").startsWith("backup-photo:"))continue;
-   if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
-   const zipPath=piece.photo.slice("backup-photo:".length),blob=await draft.zip.file(zipPath).async("blob"),ext=photoExtension(blob),path=userId+"/restore-"+String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_")+"-"+Date.now()+"-"+index+"."+ext;
-   const upload=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:false,contentType:blob.type||"image/jpeg"});
-   if(upload.error)throw new Error("No se pudo guardar una foto de la copia en Supabase Storage: "+upload.error.message);
-   piece.photo="storage:"+path;
-   const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
-   if(signed.error)throw new Error("La foto se subió, pero no se pudo crear su enlace temporal: "+signed.error.message);
-   piecePhotoUrlCache[path]=signed.data.signedUrl;
-   index++;
+   const refs=[...new Set([piece.photo,...(Array.isArray(piece.photos)?piece.photos:[])].filter(photo=>String(photo).startsWith("backup-photo:")))],replacements=new Map();
+   for(const photo of refs){
+    if(!isCurrentAccount(userId,generation))throw new Error("La sesión cambió durante la restauración; no se aplicaron los registros.");
+    const zipPath=photo.slice("backup-photo:".length),blob=await draft.zip.file(zipPath).async("blob"),ext=photoExtension(blob),path=userId+"/restore-"+String(piece.id??index).replace(/[^a-zA-Z0-9_-]/g,"_")+"-"+Date.now()+"-"+index+"."+ext;
+    const upload=await supabaseClient.storage.from("stain-pieces").upload(path,blob,{upsert:false,contentType:blob.type||"image/jpeg"});
+    if(upload.error)throw new Error("No se pudo guardar una foto de la copia en Supabase Storage: "+upload.error.message);
+    const signed=await supabaseClient.storage.from("stain-pieces").createSignedUrl(path,3600);
+    if(signed.error)throw new Error("La foto se subió, pero no se pudo crear su enlace temporal: "+signed.error.message);
+    piecePhotoUrlCache[path]=signed.data.signedUrl;replacements.set(photo,"storage:"+path);index++;
+   }
+   if(replacements.size){piece.photo=replacements.get(piece.photo)||piece.photo;piece.photos=(piece.photos||[]).map(photo=>replacements.get(photo)||photo)}
   }
   for(const booking of snapshot.bookings){
    if(!String(booking.receiptPhoto||"").startsWith("backup-photo:"))continue;
@@ -697,7 +878,7 @@ function calendarActivityMarkup(kind,record){
 }
 async function refreshPiecePhotoUrls(userId=currentUser?.id,generation=accountGeneration){
  if(!userId)return;
- const storedPhotos=[...pieces.map(piece=>piece.photo),...bookings.map(booking=>booking.receiptPhoto)];
+ const storedPhotos=[...pieces.flatMap(piece=>[piece.photo,...(Array.isArray(piece.photos)?piece.photos:[])]),...bookings.map(booking=>booking.receiptPhoto)];
  for(const photo of storedPhotos){
   if(!isCurrentAccount(userId,generation))return;
   if(!photo||!photo.startsWith("storage:"))continue;
@@ -715,29 +896,34 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
  if(!Array.isArray(result.data))throw new Error("Supabase devolvió una respuesta de datos inválida.");
  const rows=result.data;
  const cloudMap=Object.fromEntries(rows.map(row=>[row.data_key,row]));
- if(rows.length===0){
-  const state=getDataState();
-  for(const key of dataKeys)if(state[key].length&&!pendingDataKeys.has(key)){pendingDataKeys.add(key);cloudVersions[key]=null}
- }else{
-  const currentState=getDataState(),data={};
-  for(const key of dataKeys){
-   const row=cloudMap[key];
-   if(pendingDataKeys.has(key)){
-    data[key]=currentState[key];
-    if(!Object.prototype.hasOwnProperty.call(cloudVersions,key))cloudVersions[key]=null;
-   }else{
-    if(row){
-     data[key]=Array.isArray(row.data)?row.data:[];
-     cloudVersions[key]=row.updated_at||null;
-    }else{
-     data[key]=currentState[key];
-     cloudVersions[key]=null;
-     if(currentState[key].length)pendingDataKeys.add(key);
-    }
+ const currentState=getDataState(),data={},initialBaseTombstones=Array.isArray(cloudDataSnapshot.syncTombstones)?cloudDataSnapshot.syncTombstones:[];
+ for(const key of dataKeys){
+  const row=cloudMap[key],remoteData=Array.isArray(row?.data)?row.data:[],remoteVersion=row?.updated_at||null;
+  const localTombstones=data.syncTombstones||currentState.syncTombstones||[],remoteTombstones=key==="syncTombstones"?remoteData:(Array.isArray(cloudMap.syncTombstones?.data)?cloudMap.syncTombstones.data:[]),baseTombstones=initialBaseTombstones;
+  if(key==="syncTombstones"){
+   const base=Object.prototype.hasOwnProperty.call(cloudDataSnapshot,key)?cloudDataSnapshot[key]:undefined,tombstoneMerge=mergeSyncCategory(currentState[key],remoteData,base);
+   data[key]=tombstoneMerge.merged;cloudVersions[key]=remoteVersion;
+   cloudDataSnapshot[key]=remoteData;
+   if(tombstoneMerge.conflicts.length)pendingSyncConflicts[key]={remoteVersion,remoteData,baseData:base,localData:tombstoneMerge.merged,merged:tombstoneMerge.merged,records:tombstoneMerge.conflicts};
+   else if(JSON.stringify(tombstoneMerge.merged)!==JSON.stringify(remoteData))pendingDataKeys.add(key);
+   else pendingDataKeys.delete(key);
+  }else if(pendingDataKeys.has(key)||(!Array.isArray(cloudDataSnapshot[key])&&currentState[key].length)){
+   pendingDataKeys.add(key);
+   const base=Object.prototype.hasOwnProperty.call(cloudDataSnapshot,key)?cloudDataSnapshot[key]:undefined;
+   const merge=mergeSyncCategory(currentState[key],remoteData,base,key,localTombstones,remoteTombstones,baseTombstones);
+   data[key]=merge.merged;cloudVersions[key]=remoteVersion;
+   if(merge.conflicts.length)pendingSyncConflicts[key]={remoteVersion,remoteData,baseData:base,localData:merge.merged,merged:merge.merged,records:merge.conflicts,localTombstones,remoteTombstones,baseTombstones};
+   else{
+    cloudDataSnapshot[key]=remoteData;
+    delete pendingSyncConflicts[key];
+    if(JSON.stringify(merge.merged)===JSON.stringify(remoteData))pendingDataKeys.delete(key);
    }
+  }else{
+   data[key]=filterDeletedRecords(key,remoteData,[...localTombstones,...remoteTombstones]);cloudVersions[key]=remoteVersion;cloudDataSnapshot[key]=remoteData;
+   delete pendingSyncConflicts[key];
   }
-  setDataState(data);
  }
+ setDataState(data);
  if(!isCurrentAccount(user.id,generation))return;
  await refreshPiecePhotoUrls(user.id,generation);
  if(!isCurrentAccount(user.id,generation))return;
@@ -748,8 +934,9 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
  setCloudStatus(pendingDataKeys.size?"Guardando cambios pendientes…":"☁ Sincronizado");
  startCloudRefresh(user,generation);
  refreshSelects();capacityCheck();calcMoney();
+ renderAll();renderSyncConflictPanel();
  if(legacySeatExtensionsMigrated)save();
- else{renderAll();if(pendingDataKeys.size)queueCloudSync()}
+ else if(pendingDataKeys.size)queueCloudSync();
 }
 function stopCloudRefresh(){
  if(cloudRefreshTimer){clearInterval(cloudRefreshTimer);cloudRefreshTimer=null}
@@ -767,24 +954,43 @@ async function refreshCloudData(user=currentUser,generation=accountGeneration){
   if(!isCurrentAccount(user.id,generation))return;
   if(!Array.isArray(result.data))throw new Error("Supabase devolvió una respuesta de sincronización inválida.");
   const remoteRows=Object.fromEntries(result.data.filter(row=>dataKeys.includes(row.data_key)).map(row=>[row.data_key,row]));
-  const changed=[],remoteConflicts=[];
+  const changed=[],remoteConflicts=[],baseTombstones=Array.isArray(cloudDataSnapshot.syncTombstones)?cloudDataSnapshot.syncTombstones:[],remoteTombstones=Array.isArray(remoteRows.syncTombstones?.data)?remoteRows.syncTombstones.data:[];let tombstonesChanged=false;
   for(const key of dataKeys){
    const row=remoteRows[key];
-   if(!row)continue;
-   const remoteVersion=row.updated_at||null;
-   if(remoteVersion===(cloudVersions[key]||null))continue;
-   if(pendingDataKeys.has(key)){remoteConflicts.push(key);continue}
-   if(!Array.isArray(row.data))throw new Error("Supabase devolvió datos inválidos para "+key+".");
-   setDataCategory(key,row.data);
+   if(!row&&!pendingDataKeys.has(key)&&!tombstonesChanged)continue;
+   const remoteVersion=row?.updated_at||null;
+   if(remoteVersion===(cloudVersions[key]||null)&&!tombstonesChanged)continue;
+   const remoteData=Array.isArray(row?.data)?row.data:[];
+   if(row&&!Array.isArray(row.data))throw new Error("Supabase devolvió datos inválidos para "+key+".");
+   if(key==="syncTombstones"){
+    const localTombstones=getDataState().syncTombstones||[],base=Object.prototype.hasOwnProperty.call(cloudDataSnapshot,key)?cloudDataSnapshot[key]:undefined,merge=mergeSyncCategory(localTombstones,remoteData,base);
+    tombstonesChanged=JSON.stringify(merge.merged)!==JSON.stringify(localTombstones);
+    setDataCategory(key,merge.merged);cloudDataSnapshot[key]=remoteData;
+    if(merge.conflicts.length){pendingSyncConflicts[key]={remoteVersion,remoteData,baseData:base,localData:merge.merged,merged:merge.merged,records:merge.conflicts};remoteConflicts.push(key)}
+    else if(JSON.stringify(merge.merged)!==JSON.stringify(remoteData))pendingDataKeys.add(key);
+    else{pendingDataKeys.delete(key);delete pendingSyncConflicts[key]}
+   }else if(pendingDataKeys.has(key)){
+    const base=Object.prototype.hasOwnProperty.call(cloudDataSnapshot,key)?cloudDataSnapshot[key]:undefined;
+    const merge=mergeSyncCategory(getDataState()[key],remoteData,base,key,getDataState().syncTombstones,remoteTombstones,baseTombstones);
+    setDataCategory(key,merge.merged);
+    if(merge.conflicts.length){
+     pendingSyncConflicts[key]={remoteVersion,remoteData,baseData:base,localData:merge.merged,merged:merge.merged,records:merge.conflicts,localTombstones:getDataState().syncTombstones,remoteTombstones,baseTombstones};
+     remoteConflicts.push(key);
+    }else{
+     cloudDataSnapshot[key]=remoteData;
+     delete pendingSyncConflicts[key];
+     if(JSON.stringify(merge.merged)===JSON.stringify(remoteData))pendingDataKeys.delete(key);
+    }
+   }else{setDataCategory(key,filterDeletedRecords(key,remoteData,[...(getDataState().syncTombstones||[]),...remoteTombstones]));cloudDataSnapshot[key]=remoteData}
    cloudVersions[key]=remoteVersion;
-   dataSnapshot[key]=JSON.stringify(row.data);
+   dataSnapshot[key]=JSON.stringify(getDataState()[key]);
    changed.push(key);
   }
   if(!isCurrentAccount(user.id,generation))return;
   if(changed.some(key=>key==="bookings"||key==="pieces"))await refreshPiecePhotoUrls(user.id,generation);
   if(!isCurrentAccount(user.id,generation))return;
-  if(changed.length){localSave(user.id);persistPendingData(user.id);renderAll()}
-  if(remoteConflicts.length)setCloudStatus("Conflicto en otro dispositivo · cambios locales conservados");
+  if(changed.length){localSave(user.id);persistPendingData(user.id);renderAll();renderSyncConflictPanel();if(pendingDataKeys.size&&!remoteConflicts.length)queueCloudSync()}
+  if(remoteConflicts.length)setCloudStatus("Conflictos por resolver · "+remoteConflicts.join(", "));
   else if(changed.length)setCloudStatus("☁ Actualizado desde otro dispositivo");
   else if(pendingDataKeys.size)setCloudStatus("Cambios pendientes de sincronizar");
   else setCloudStatus("☁ Sincronizado");
@@ -1253,15 +1459,15 @@ function openBookingDetails(id){
 function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>item.name===booking.workshop);if(workshopIndex>=0)$("guidedWorkshop").value=String(workshopIndex);$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";$("receipt").value="";$("receiptHint").textContent=booking.receiptName?"Comprobante actual: "+booking.receiptName+". Selecciona otro archivo solo si deseas reemplazarlo.":"No hay un comprobante adjunto.";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
 function cancelBookingEdit(){$("bookingForm").reset();bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("bookingDate").value=dateToday();$("amount").value="0";$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("guidedFields").hidden=true;$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;calcMoney();setBookingView("calendar");capacityCheck()}
 function renderBookings(){const arr=bookings.slice().reverse();$("bookingList").innerHTML=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</p><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button></div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>'}
-function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderBookings()}}
+function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){deleteSyncRecord("bookings",id);save();renderBookings()}}
 $("workshopForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("workshopGuide").value)];workshops.push({id:Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideId:g?.id||null,guideName:g?.name||"",guidePhone:g?.phone||"",materials:$("workshopMaterials").value.trim(),details:$("workshopDetails").value.trim()});save();e.target.reset();$("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;renderWorkshops()});
 function renderWorkshops(){$("workshopList").innerHTML=workshops.map((w,i)=>'<div class="item"><div class="row"><h3>'+esc(w.name)+'</h3><span class="pill">'+money(w.price)+'/persona</span></div><p class="muted">'+w.duration+' horas · '+w.people+' personas incluidas</p><p>'+esc(w.materials||"Materiales por definir")+'</p><p class="muted">'+esc(w.details||"Sin descripción")+'</p><div class="divider"></div><p><b>Guía / planner:</b> '+esc(w.guideName||"Sin asignar")+'</p><p class="muted">'+esc(w.guidePhone||"")+'</p><button class="btn small danger" onclick="deleteWorkshop('+w.id+')">Eliminar</button></div>').join("")||'<div class="empty"><div class="emoji">✿</div>Agrega aquí los talleres que ofrece STAIN.</div>';refreshSelects()}
-function deleteWorkshop(id){if(confirm("¿Eliminar este taller del catálogo?")){workshops=workshops.filter(w=>w.id!==id);save();renderWorkshops()}}
+function deleteWorkshop(id){if(confirm("¿Eliminar este taller del catálogo?")){deleteSyncRecord("workshops",id);save();renderWorkshops()}}
 $("guideForm").addEventListener("submit",e=>{e.preventDefault();guides.push({id:Date.now(),name:$("guideName").value.trim(),phone:$("guidePhone").value.trim(),role:$("guideRole").value,notes:$("guideNotes").value.trim()});save();e.target.reset();renderGuides()});
 function renderGuides(){$("guideList").innerHTML=guides.map(g=>'<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+esc(g.role)+'</span></div><p>☎ '+esc(g.phone)+'</p><p class="muted">'+esc(g.notes||"")+'</p><p class="muted">Talleres asignados: '+workshops.filter(w=>w.guideName===g.name).map(w=>esc(w.name)).join(", ")+'</p><button class="btn small danger" onclick="deleteGuide('+g.id+')">Eliminar</button></div>').join("")||'<div class="empty">Agrega los datos de tus guías y planners.</div>';refreshSelects()}
-function deleteGuide(id){if(confirm("¿Eliminar esta persona? Los talleres ya guardados conservarán el nombre asignado.")){guides=guides.filter(g=>g.id!==id);save();renderGuides()}}
+function deleteGuide(id){if(confirm("¿Eliminar esta persona? Los talleres ya guardados conservarán el nombre asignado.")){deleteSyncRecord("guides",id);save();renderGuides()}}
 $("groupForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("groupGuide").value)];groups.push({id:Date.now(),name:$("groupName").value.trim(),date:$("groupDate").value,time:$("groupTime").value,price:Number($("groupPrice").value),minimum:Math.max(6,Number($("groupMinimum").value)),guideName:g?.name||"",guidePhone:g?.phone||"",details:$("groupDetails").value.trim(),participants:[]});save();e.target.reset();$("groupPrice").value=25;$("groupMinimum").value=6;renderGroups()});
-function deleteGroup(id){if(confirm("¿Eliminar este taller grupal y su lista?")){groups=groups.filter(g=>g.id!==id);save();renderGroups()}}
+function deleteGroup(id){if(confirm("¿Eliminar este taller grupal y su lista?")){deleteSyncRecord("groups",id);save();renderGroups()}}
 function guideMatches(record,guide){return record.guideId===guide.id||(!record.guideId&&record.guideName===guide.name)}
 function isGroupCompleted(group){return group.status==="Realizado"||group.completed===true}
 function groupStatusPill(group){return isGroupCompleted(group)?'<span class="pill completed completed-text">Realizado</span>':'<span class="pill">Pendiente</span>'}
@@ -1270,7 +1476,7 @@ function groupReservationCard(group){const count=groupParticipantCount(group),es
 function markBookingRealized(id){const booking=bookings.find(b=>String(b.id)===String(id));if(!booking)return;booking.status=booking.status==="Realizada"?"Registrada":"Realizada";save();renderBookings();renderGuides()}
 function renderBookings(){const arr=bookings.slice().reverse(),bookingHtml=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill '+(b.status==="Realizada"?'completed':'')+'">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+esc(formatStartTime(b.time))+' (2 horas)</p><p>'+assignedSpaces(b).map(space=>esc(SPACES[space].name)).join(" + ")+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small" onclick="openBookingInMap('+b.id+')">Cambiar mesas en el mapa</button> '+(b.activity==="Taller guiado"?'<button class="btn small" onclick="markBookingRealized('+b.id+')">'+(b.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button> ':'')+(b.status==="Realizada"?'':'<button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button>')+'</div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>',groupHtml=groups.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(groupReservationCard).join("");$("bookingList").innerHTML=bookingHtml+(groupHtml?'<h3 class="guide-section-title">Talleres grupales vinculados</h3>'+groupHtml:"")}
 function openBookingInMap(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();$("agendaDate").value=booking.date;$("tableMapTime").value=booking.time;calendarMonth=new Date(booking.date+"T12:00:00");show("reservas");refreshTableMapBookings();$("tableMapBooking").value=String(id);selectMapBooking(booking);setBookingView("map");$("tableMap").scrollIntoView({behavior:"smooth",block:"center"})}
-function deleteBooking(id){const booking=bookings.find(b=>b.id===id);if(booking?.status==="Realizada")return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar esta reserva?")){bookings=bookings.filter(b=>b.id!==id);save();renderBookings()}}
+function deleteBooking(id){const booking=bookings.find(b=>String(b.id)===String(id));if(booking?.status==="Realizada")return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar esta reserva?")){deleteSyncRecord("bookings",id);save();renderBookings()}}
 function renderGuideActivityItem(activity){const realized=activity.realized,status=realized?'<span class="pill completed completed-text">Realizado</span>':'<span class="pill">Pendiente</span>';return '<div class="item"><div class="row"><b class="'+(realized?'completed-text':'')+'">'+esc(activity.name)+'</b>'+status+'</div><p class="muted">'+esc(activity.when||"Sin fecha reservada")+(activity.time?' · '+esc(activity.time):'')+'</p><p>'+esc(activity.details||"")+'</p>'+(activity.button||'')+'</div>'}
 function renderGuides(){const guideCards=guides.map(g=>{const assignedWorkshops=workshops.filter(w=>guideMatches(w,g)),activities=[];for(const w of assignedWorkshops){const sessions=bookings.filter(b=>b.activity==="Taller guiado"&&(b.workshop===w.name)&&(b.guideName===g.name||guideMatches(w,g)));if(sessions.length)sessions.forEach(b=>activities.push({name:w.name,when:b.date,time:SLOTS.find(s=>s.time===b.time)?.label||b.time,details:(b.people||0)+" participante"+(Number(b.people)===1?"":"s")+(b.status?" · "+b.status:""),realized:b.status==="Realizada",button:'<button class="btn small" onclick="markBookingRealized('+b.id+')">'+(b.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>'}));else activities.push({name:w.name,details:money(w.price)+"/persona · "+(w.duration||"—")+" horas",realized:false})}groups.filter(group=>guideMatches(group,g)).forEach(group=>activities.push({name:group.name,when:group.date,time:group.time,details:(group.participants||[]).length+" participante"+((group.participants||[]).length===1?"":"s")+" · Cupos estimados: "+(Number(group.capacityEstimate)>0?group.capacityEstimate:"No definido"),realized:isGroupCompleted(group),button:'<button class="btn small" onclick="markGroupRealized('+group.id+')">'+(isGroupCompleted(group)?"Marcar pendiente":"Marcar realizado")+'</button>'}));const pending=activities.filter(a=>!a.realized).map(renderGuideActivityItem).join("")||'<div class="empty">No hay talleres próximos o pendientes asignados.</div>',completed=activities.filter(a=>a.realized).map(renderGuideActivityItem).join("")||'<div class="empty">Todavía no hay talleres realizados.</div>';return '<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+esc(g.role||"Guía")+'</span></div><p>☎ '+esc(g.phone||"")+'</p><p class="muted">'+esc(g.notes||"")+'</p><h4 class="guide-section-title">Próximos y pendientes</h4>'+pending+'<h4 class="guide-section-title">Talleres realizados</h4>'+completed+'<button class="btn small danger" onclick="deleteGuide('+g.id+')">Eliminar</button></div>'}).join("");$("guideList").innerHTML=guideCards||'<div class="empty">Agrega los datos de tus guías y planners.</div>';refreshSelects()}
 function resetGroupForm(){groupEditingId=null;$("groupForm").reset();$("groupPrice").value=25;$("groupMinimum").value=6;$("groupSubmit").textContent="Agregar taller";$("groupCancelEdit").hidden=true}
@@ -1319,7 +1525,7 @@ function openGroupCategory(id){
  const category=document.getElementById("group-category-"+String(id));
  if(category){category.open=true;category.scrollIntoView({behavior:"smooth",block:"center"})}
 }
-function deleteGroup(id){const group=groups.find(g=>g.id===id);if(isGroupCompleted(group||{}))return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar este taller grupal y su lista?")){groups=groups.filter(g=>g.id!==id);save();renderAll()}}
+function deleteGroup(id){const group=groups.find(g=>String(g.id)===String(id));if(isGroupCompleted(group||{}))return alert("Los talleres realizados se conservan en el historial.");if(confirm("¿Eliminar este taller grupal y su lista?")){deleteSyncRecord("groups",id);save();renderAll()}}
 function compressPiecePhoto(file,done){const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement("canvas");const scale=Math.min(1,1200/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);let quality=.82;let data=canvas.toDataURL("image/jpeg",quality);while(data.length>400000&&quality>.35){quality-=.1;data=canvas.toDataURL("image/jpeg",quality)}done(data)};img.onerror=()=>{alert("No pude leer esa foto. Prueba con otra imagen.");done("")};img.src=reader.result};reader.onerror=()=>{alert("No pude abrir esa foto. Prueba otra vez.");done("")};reader.readAsDataURL(file)}
 $("pieceForm").addEventListener("submit",e=>{e.preventDefault();const userId=currentUser?.id,generation=accountGeneration;if(!userId)return;const source=$("pieceSource").value,booking=source==="booking"?bookings.find(item=>String(item.id)===String($("pieceBooking").value)):null;if(source==="booking"&&!booking)return alert("Selecciona la reserva relacionada o cambia el tipo a registro manual.");const file=$("piecePhoto").files[0];const add=photo=>{if(!isCurrentAccount(userId,generation))return;pieces.push({id:Date.now(),name:$("pieceName").value.trim(),client:$("pieceClient").value.trim(),phone:$("piecePhone").value.trim(),date:$("pieceDate").value,status:$("pieceStatus").value,notes:$("pieceNotes").value.trim(),photo:photo||"",source,bookingId:booking?.id||null});save();e.target.reset();$("pieceDate").value=dateToday();updatePieceSourceFields();renderPieces()};if(file)compressPiecePhoto(file,add);else add("")});
 function renderPieceBookingResults(query=$("pieceBookingSearch").value){
@@ -1347,7 +1553,7 @@ function loadSelectedPieceBooking(){const booking=bookings.find(item=>String(ite
 $("pieceSource").addEventListener("change",updatePieceSourceFields);
 $("pieceBookingSearch").addEventListener("input",()=>{$("pieceBooking").value="";renderPieceBookingResults()});
 $("loadPieceBooking").addEventListener("click",loadSelectedPieceBooking);
-function openPiecePhoto(id){const p=pieces.find(x=>String(x.id)===String(id));if(!p)return;const src=photoSrc(p.photo);if(!src){alert("La foto no está disponible todavía. Revisa la conexión de la nube.");return} $("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
+function openPiecePhoto(id){const p=pieces.find(x=>String(x.id)===String(id));if(!p)return;const src=photoSrc(p.photo||(Array.isArray(p.photos)?p.photos[0]:""));if(!src){alert("La foto no está disponible todavía. Revisa la conexión de la nube.");return} $("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
 function openBookingReceipt(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;const src=photoSrc(booking.receiptPhoto);if(!src){alert("El comprobante no está disponible todavía. Revisa la conexión de la nube.");return}$("piecePhotoLarge").src=src;$("piecePhotoModal").classList.add("open")}
 function closePiecePhoto(){$("piecePhotoModal").classList.remove("open");$("piecePhotoLarge").src=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePiecePhoto()});
@@ -1358,8 +1564,8 @@ const status=p.status||"En horno";
 const ready=status==="Lista para retirar"||status==="Avisado · esperando retiro";
 const notified=status==="Avisado · esperando retiro";
 const delivered=status==="Entregada";
-const contact=getPieceContact(p),phone=contact.phone?normalizeWhatsAppNumber(contact.phone):"";
-return '<div class="item"><div class="row"><div style="display:flex;align-items:center;gap:9px;min-width:0">'+(p.photo&&photoSrc(p.photo)?'<button type="button" class="piece-photo-btn" onclick="openPiecePhoto('+p.id+')" aria-label="Ampliar foto de la pieza"><img class="piece-thumb" src="'+esc(photoSrc(p.photo))+'" alt="Foto pequeña de '+esc(p.name)+'"></button>':'')+'<h3 style="margin:0">'+esc(p.name)+'</h3></div><span class="pill '+(delivered?'':ready?'':'gold')+'">'+esc(status)+'</span></div><p class="muted">'+esc(contact.client||"Sin cliente")+' · Pintada el '+esc(p.date||"Sin fecha")+'</p>'+(contact.phone?'<p class="muted">☎ WhatsApp: '+esc(contact.phone)+(contact.fromBooking?' · tomado de la reserva':'')+'</p>':'<p class="muted">'+(contact.ambiguous?'Hay varias reservas con este nombre y distintos teléfonos':'Sin teléfono registrado')+'</p>')+'<p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(!ready&&!delivered?'<button class="btn primary small" onclick="markPieceReady('+p.id+')">Marcar lista para retirar</button>':'')+(ready&&!delivered?'<button class="btn primary small" onclick="sendPieceWhatsApp('+p.id+')">'+(notified?'Volver a avisar por WhatsApp':'Avisar por WhatsApp')+'</button>':'')+(ready&&!notified&&!delivered?'<button class="btn small" onclick="markPieceNotified('+p.id+')">Marcar aviso enviado</button>':'')+(notified?'<button class="btn small" onclick="deliverPiece('+p.id+')">Marcar como entregada</button>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
+const contact=getPieceContact(p),phone=contact.phone?normalizeWhatsAppNumber(contact.phone):"",mainPhoto=p.photo||(Array.isArray(p.photos)?p.photos[0]:"");
+return '<div class="item"><div class="row"><div style="display:flex;align-items:center;gap:9px;min-width:0">'+(mainPhoto&&photoSrc(mainPhoto)?'<button type="button" class="piece-photo-btn" onclick="openPiecePhoto('+p.id+')" aria-label="Ampliar foto de la pieza"><img class="piece-thumb" src="'+esc(photoSrc(mainPhoto))+'" alt="Foto pequeña de '+esc(p.name)+'"></button>':'')+'<h3 style="margin:0">'+esc(p.name)+'</h3></div><span class="pill '+(delivered?'':ready?'':'gold')+'">'+esc(status)+'</span></div><p class="muted">'+esc(contact.client||"Sin cliente")+' · Pintada el '+esc(p.date||"Sin fecha")+'</p>'+(contact.phone?'<p class="muted">☎ WhatsApp: '+esc(contact.phone)+(contact.fromBooking?' · tomado de la reserva':'')+'</p>':'<p class="muted">'+(contact.ambiguous?'Hay varias reservas con este nombre y distintos teléfonos':'Sin teléfono registrado')+'</p>')+'<p class="muted">'+esc(p.notes||"")+'</p><div class="btnrow">'+(!ready&&!delivered?'<button class="btn primary small" onclick="markPieceReady('+p.id+')">Marcar lista para retirar</button>':'')+(ready&&!delivered?'<button class="btn primary small" onclick="sendPieceWhatsApp('+p.id+')">'+(notified?'Volver a avisar por WhatsApp':'Avisar por WhatsApp')+'</button>':'')+(ready&&!notified&&!delivered?'<button class="btn small" onclick="markPieceNotified('+p.id+')">Marcar aviso enviado</button>':'')+(notified?'<button class="btn small" onclick="deliverPiece('+p.id+')">Marcar como entregada</button>':'')+'<button class="btn small danger" onclick="deletePiece('+p.id+')">Eliminar</button></div></div>'
 }).join("")||'<div class="empty">Aquí verás las piezas de tus clientes.</div>'
 }
 function getPieceContact(piece){
@@ -1388,13 +1594,13 @@ window.open(url,"_blank","noopener,noreferrer")
 }
 function markPieceNotified(id){const p=pieces.find(x=>x.id===id);if(p?.status==="Lista para retirar"){p.status="Avisado · esperando retiro";save();renderPieces()}}
 function deliverPiece(id){const p=pieces.find(x=>x.id===id);if(p){p.status="Entregada";save();renderPieces()}}
-function deletePiece(id){if(confirm("¿Eliminar esta pieza?")){pieces=pieces.filter(p=>p.id!==id);save();renderPieces()}}
+function deletePiece(id){if(confirm("¿Eliminar esta pieza?")){deleteSyncRecord("pieces",id);save();renderPieces()}}
 $("inventoryForm").addEventListener("submit",e=>{e.preventDefault();inventory.push({id:Date.now(),name:$("invName").value.trim(),qty:Number($("invQty").value),unit:$("invUnit").value.trim(),min:Number($("invMin").value)});save();e.target.reset();$("invQty").value=1;$("invUnit").value="unidades";$("invMin").value=2;renderInventory()});
 function renderInventory(){$("inventoryList").innerHTML=inventory.map(i=>'<div class="item"><div class="row"><h3>'+esc(i.name)+'</h3><span class="pill '+(i.qty<=i.min?'gold':'')+'">'+(i.qty<=i.min?'Reponer':'En stock')+'</span></div><p>'+i.qty+' '+esc(i.unit)+'</p><p class="muted">Stock mínimo: '+i.min+'</p><div class="btnrow"><button class="btn small" onclick="changeStock('+i.id+',-1)">− 1</button><button class="btn small" onclick="changeStock('+i.id+',1)">＋ 1</button><button class="btn small danger" onclick="deleteStock('+i.id+')">Eliminar</button></div></div>').join("")||'<div class="empty">Tu inventario aparecerá aquí.</div>'}
 function changeStock(id,n){const i=inventory.find(x=>x.id===id);if(i){i.qty=Math.max(0,i.qty+n);save();renderInventory()}}
-function deleteStock(id){if(confirm("¿Eliminar artículo del inventario?")){inventory=inventory.filter(i=>i.id!==id);save();renderInventory()}}
+function deleteStock(id){if(confirm("¿Eliminar artículo del inventario?")){deleteSyncRecord("inventory",id);save();renderInventory()}}
 function copySummary(){const text=bookings.map(b=>b.client+" — "+b.date+" "+b.time+" — "+SPACES[b.space].name+" — "+b.people+" personas — "+b.activity+" — Total "+money(b.amount)+" — Abono "+money(b.deposit)+" — Saldo "+money(b.balance)).join("\n")||"No hay reservas registradas.";if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert("Resumen copiado."),()=>prompt("Copia el resumen:",text));else prompt("Copia el resumen:",text)}
-function exportData(){const data={bookings,workshops,guides,groups,pieces:pieces.map(({photo,...p})=>p),inventory,seatExtensions};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="STAIN-respaldo.json";a.click();URL.revokeObjectURL(url)}
+function exportData(){const data={syncTombstones,bookings,workshops,guides,groups,pieces:pieces.map(({photo,photos,...piece})=>piece),inventory,seatExtensions};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="STAIN-respaldo.json";a.click();URL.revokeObjectURL(url)}
 function renderHome(){ $("statBookings").textContent=bookings.length;$("statWorkshops").textContent=workshops.length;$("statPieces").textContent=pieces.length;$("statInventory").textContent=inventory.length;const today=dateToday(),arr=bookings.filter(b=>b.date===today);$("homeBookings").innerHTML=arr.map(b=>'<div class="row"><div><b>'+esc(b.client)+'</b><p class="muted">'+esc(b.time)+' · '+esc(SPACES[b.space].name)+'</p></div><span class="pill">'+b.people+' pers.</span></div>').join("")||'<div class="empty">No hay reservas para hoy. Un espacio listo para crear ✿</div>'}
 function renderAll(){renderHome();renderCalendar();renderBookings();renderWorkshops();renderGroups();renderPieces();renderInventory();renderGuides()}
 const renderBookingsCore=renderBookings,renderGroupsCore=renderGroups,renderGuidesCore=renderGuides,renderGuideActivityCore=renderGuideActivityItem;
