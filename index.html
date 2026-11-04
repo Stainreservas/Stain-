@@ -187,7 +187,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 const SUPABASE_URL="https://xhhmggrusriywvvrkmqr.supabase.co";
 const SUPABASE_PUBLIC_KEY="sb_publishable_fV3Z2RSJuU1bCe-2Sr0DZg_9o9uKszp";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY);
-let currentUser=null,cloudReady=false,syncing=false,syncPending=false,accountGeneration=0,loginRequest=null;
+let currentUser=null,cloudReady=false,syncing=false,syncPending=false,accountGeneration=0,loginRequest=null,cloudRefreshTimer=null,cloudRefreshing=false;
 const piecePhotoUrlCache={};
 const SLOTS=Array.from({length:9},(_,index)=>{const hour=9+index,endHour=hour+2,labelHour=hour%12||12,endDisplay=endHour%12||12;return {time:String(hour).padStart(2,"0")+":00",label:labelHour+":00 "+(hour<12?"a. m.":"p. m.")+" – "+endDisplay+":00 "+(endHour<12?"a. m.":"p. m.")}});
 const BOOKING_DURATION_MINUTES=120,BOOKING_OPEN_MINUTES=9*60,BOOKING_CLOSE_MINUTES=19*60;
@@ -216,8 +216,18 @@ function pendingStorageKey(userId){return accountStorageKey(userId,"pending")}
 function pendingVersionsStorageKey(userId){return accountStorageKey(userId,"pending_versions")}
 function isCurrentAccount(userId,generation){return Boolean(currentUser&&currentUser.id===userId&&accountGeneration===generation)}
 function setDataState(data){bookings=data.bookings||[];workshops=data.workshops||[];guides=data.guides||[];groups=data.groups||[];pieces=data.pieces||[];inventory=data.inventory||[];seatExtensions=data.seatExtensions||[]}
+function setDataCategory(key,value){
+ if(!dataKeys.includes(key)||!Array.isArray(value))throw new Error("Categoría de sincronización no válida: "+key);
+ if(key==="bookings")bookings=value;
+ else if(key==="workshops")workshops=value;
+ else if(key==="guides")guides=value;
+ else if(key==="groups")groups=value;
+ else if(key==="pieces")pieces=value;
+ else if(key==="inventory")inventory=value;
+ else seatExtensions=value;
+}
 function getDataState(){return {bookings,workshops,guides,groups,pieces,inventory,seatExtensions}}
-function clearAccountData(){setDataState({});pendingDataKeys=new Set();dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0]));cloudVersions={};dataSnapshot={};Object.keys(piecePhotoUrlCache).forEach(path=>delete piecePhotoUrlCache[path])}
+function clearAccountData(){stopCloudRefresh();setDataState({});pendingDataKeys=new Set();dataRevisions=Object.fromEntries(dataKeys.map(key=>[key,0]));cloudVersions={};dataSnapshot={};Object.keys(piecePhotoUrlCache).forEach(path=>delete piecePhotoUrlCache[path])}
 function readLocalData(userId,key){try{const value=JSON.parse(localStorage.getItem(accountStorageKey(userId,key))||"[]");return Array.isArray(value)?value:[]}catch{return []}}
 function loadLocalData(userId){const data={};for(const key of dataKeys)data[key]=readLocalData(userId,key);setDataState(data);try{const pending=JSON.parse(localStorage.getItem(pendingStorageKey(userId))||"[]");pendingDataKeys=new Set(Array.isArray(pending)?pending.filter(key=>dataKeys.includes(key)):[])}catch{pendingDataKeys=new Set()}try{const versions=JSON.parse(localStorage.getItem(pendingVersionsStorageKey(userId))||"{}");cloudVersions=versions&&typeof versions==="object"&&!Array.isArray(versions)?versions:{}}catch{cloudVersions={}}dataSnapshot=Object.fromEntries(dataKeys.map(key=>[key,JSON.stringify(data[key])]))}
 function localSave(userId=currentUser?.id){if(!userId)return;for(const [k,v] of Object.entries({bookings,workshops,guides,groups,pieces,inventory,seatExtensions}))localStorage.setItem(accountStorageKey(userId,k),JSON.stringify(v))}
@@ -336,7 +346,7 @@ async function queueCloudSync(){
  if(syncing){syncPending=true;return}
  syncing=true;
  try{do{syncPending=false;await syncAllToCloud(user,generation)}while(syncPending&&isCurrentAccount(user.id,generation))}
- catch(err){console.error(err);if(isCurrentAccount(user.id,generation))setCloudStatus(err?.message?.startsWith("Conflicto de sillas en la nube")?err.message:err?.message?.startsWith("Conflicto de sincronización")?"Conflicto: cambios locales conservados":"Error al guardar · cambios conservados en este dispositivo");}
+ catch(err){console.error(err);if(isCurrentAccount(user.id,generation))setCloudStatus(err?.message?.startsWith("Conflicto de sillas en la nube")?err.message:err?.message?.startsWith("Conflicto de sincronización")?"Conflicto: cambios locales conservados":"Error al guardar: "+String(err?.message||"error desconocido").slice(0,90)+" · cambios locales conservados");}
  finally{const pending=syncPending;syncPending=false;syncing=false;if(pending&&currentUser)queueCloudSync()}
 }
 function save(){
@@ -699,7 +709,7 @@ async function refreshPiecePhotoUrls(userId=currentUser?.id,generation=accountGe
 }
 async function loadCloudData(user=currentUser,generation=accountGeneration){
  if(!user||!isCurrentAccount(user.id,generation))return;
- const result=await supabaseClient.from("stain_data").select("data_key,data").eq("user_id",user.id);
+ const result=await supabaseClient.from("stain_data").select("data_key,data,updated_at").eq("user_id",user.id);
  if(result.error)throw result.error;
  if(!isCurrentAccount(user.id,generation))return;
  if(!Array.isArray(result.data))throw new Error("Supabase devolvió una respuesta de datos inválida.");
@@ -714,7 +724,7 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
    const row=cloudMap[key];
    if(pendingDataKeys.has(key)){
     data[key]=currentState[key];
-    if(!Object.prototype.hasOwnProperty.call(cloudVersions,key))cloudVersions[key]=row?.updated_at||null;
+    if(!Object.prototype.hasOwnProperty.call(cloudVersions,key))cloudVersions[key]=null;
    }else{
     if(row){
      data[key]=Array.isArray(row.data)?row.data:[];
@@ -736,10 +746,55 @@ async function loadCloudData(user=currentUser,generation=accountGeneration){
  localSave(user.id);persistPendingData(user.id);
  cloudReady=true;
  setCloudStatus(pendingDataKeys.size?"Guardando cambios pendientes…":"☁ Sincronizado");
+ startCloudRefresh(user,generation);
  refreshSelects();capacityCheck();calcMoney();
  if(legacySeatExtensionsMigrated)save();
  else{renderAll();if(pendingDataKeys.size)queueCloudSync()}
 }
+function stopCloudRefresh(){
+ if(cloudRefreshTimer){clearInterval(cloudRefreshTimer);cloudRefreshTimer=null}
+}
+function startCloudRefresh(user=currentUser,generation=accountGeneration){
+ stopCloudRefresh();
+ cloudRefreshTimer=setInterval(()=>{if(!document.hidden)refreshCloudData(user,generation)},15000);
+}
+async function refreshCloudData(user=currentUser,generation=accountGeneration){
+ if(!user||!cloudReady||!isCurrentAccount(user.id,generation)||cloudRefreshing)return;
+ cloudRefreshing=true;
+ try{
+  const result=await supabaseClient.from("stain_data").select("data_key,data,updated_at").eq("user_id",user.id);
+  if(result.error)throw result.error;
+  if(!isCurrentAccount(user.id,generation))return;
+  if(!Array.isArray(result.data))throw new Error("Supabase devolvió una respuesta de sincronización inválida.");
+  const remoteRows=Object.fromEntries(result.data.filter(row=>dataKeys.includes(row.data_key)).map(row=>[row.data_key,row]));
+  const changed=[],remoteConflicts=[];
+  for(const key of dataKeys){
+   const row=remoteRows[key];
+   if(!row)continue;
+   const remoteVersion=row.updated_at||null;
+   if(remoteVersion===(cloudVersions[key]||null))continue;
+   if(pendingDataKeys.has(key)){remoteConflicts.push(key);continue}
+   if(!Array.isArray(row.data))throw new Error("Supabase devolvió datos inválidos para "+key+".");
+   setDataCategory(key,row.data);
+   cloudVersions[key]=remoteVersion;
+   dataSnapshot[key]=JSON.stringify(row.data);
+   changed.push(key);
+  }
+  if(!isCurrentAccount(user.id,generation))return;
+  if(changed.some(key=>key==="bookings"||key==="pieces"))await refreshPiecePhotoUrls(user.id,generation);
+  if(!isCurrentAccount(user.id,generation))return;
+  if(changed.length){localSave(user.id);persistPendingData(user.id);renderAll()}
+  if(remoteConflicts.length)setCloudStatus("Conflicto en otro dispositivo · cambios locales conservados");
+  else if(changed.length)setCloudStatus("☁ Actualizado desde otro dispositivo");
+  else if(pendingDataKeys.size)setCloudStatus("Cambios pendientes de sincronizar");
+  else setCloudStatus("☁ Sincronizado");
+ }catch(error){
+  console.error("STAIN cross-device refresh error:",error);
+  if(isCurrentAccount(user.id,generation))setCloudStatus("Error al actualizar · revisa la conexión");
+ }finally{cloudRefreshing=false}
+}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&currentUser&&cloudReady)refreshCloudData()});
+window.addEventListener("online",()=>{if(currentUser&&cloudReady){refreshCloudData();if(pendingDataKeys.size)queueCloudSync()}});
 function showAuthenticatedApp(){document.body.classList.add("authenticated");$("loginScreen").hidden=true}
 async function initializeAccount(user,timeoutMs=20000){
  accountGeneration++;
