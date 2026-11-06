@@ -25,6 +25,25 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 .sync-conflict-row label{font-size:12px;font-weight:650}.sync-conflict-row select{max-width:210px;padding:7px;border:1px solid #e6d7cd;border-radius:9px;background:white;color:var(--ink);font-size:12px}
 .sync-conflict-card .btn{margin-top:10px}
 @media(max-width:600px){.sync-conflict-panel{padding:0 10px}.sync-conflict-row{align-items:flex-start;flex-direction:column}.sync-conflict-row select{width:100%;max-width:none}}
+.guided-preview{border:1px solid #dfe8d8;background:linear-gradient(145deg,#fffefa,#f6f8f1)}
+.guided-preview-banner{display:inline-flex;align-items:center;gap:6px;border-radius:99px;background:#f4e3e5;color:#854b52;padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:.4px}
+.guided-preview-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.guided-preview-subcard{border:1px solid var(--line);border-radius:14px;background:#fffefa;padding:12px;margin:9px 0}
+.guided-preview-subcard h4{font-size:13px;margin:0 0 8px}
+.guided-preview-material-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:8px 0;font-size:12px}
+.guided-preview-material-add{display:flex;align-items:center;gap:7px;margin-top:8px}
+.guided-preview-material-add input{flex:1;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px}
+.guided-preview-empty{border:1px dashed var(--line);border-radius:12px;padding:13px;color:var(--muted);font-size:12px}
+.guided-material-summary{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:#fbfcf8}
+.guided-material-summary h4{margin:0 0 6px;font-size:12px}.guided-material-list{display:flex;gap:6px;flex-wrap:wrap}
+.guided-material-total{display:inline-flex;gap:4px;align-items:center;border-radius:99px;background:var(--sage);padding:5px 9px;color:var(--green2);font-size:11px}
+.guided-material-remove{border:0;border-radius:50%;width:27px;height:27px;background:var(--rose);color:#854b52;font-weight:800}
+.guided-material-list-row{display:flex;align-items:center;justify-content:space-between;gap:9px;border-top:1px solid var(--line);padding:6px 0;font-size:12px}
+@media(max-width:600px){.guided-preview-title{display:block}.guided-preview-title .guided-preview-banner{margin-top:7px}}
+body:not(.guided-preview-only) .guided-preview--demo{display:none!important}
+body.guided-preview-only .nav,body.guided-preview-only #syncConflictPanel,body.guided-preview-only #loginScreen{display:none!important}
+body.guided-preview-only .view{display:none!important}body.guided-preview-only #guidedPreviewOnlyView.active{display:block!important}
+body.guided-preview-only #logoutBtn{display:none}
 </style>
 <style>
 .booking-card-receipt{width:48px;height:48px;flex:0 0 48px;object-fit:cover;border:1px solid var(--line);border-radius:10px}.booking-card-receipt-button{border:0;background:transparent;padding:0;cursor:zoom-in}.booking-card-receipt-unavailable{max-width:76px;color:#8a555a;font-size:9px;line-height:1.2}.piece-booking-results{display:grid;gap:6px;margin-top:8px}.piece-booking-result{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-radius:11px;background:#fffefa;padding:9px 11px;color:var(--ink)}.piece-booking-result:hover,.piece-booking-result[aria-selected="true"]{border-color:var(--sage2);background:#f4f7ef}.piece-booking-result small{display:block;color:var(--muted);font-size:10px}.piece-booking-no-results{border:1px dashed var(--line);border-radius:11px;padding:10px;color:var(--muted);font-size:11px}
@@ -95,6 +114,10 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <button class="active" data-view="inicio">Inicio</button><button data-view="reservas">Reservas</button><button data-view="grupales">Grupales</button><button data-view="piezas">Piezas</button><button data-view="mas">Más ···</button>
 </nav>
 <main>
+<section id="guidedPreviewOnlyView" class="view">
+<div class="headrow"><div><div class="eyebrow">Vista previa aislada</div><h2 class="heading">Talleres guiados y preparación</h2><p class="desc">Demostración con datos ficticios. No inicia sesión ni escribe en Supabase o en tus datos locales.</p></div></div>
+<div id="guidedPreviewOnlyContent"></div>
+</section>
 <section id="inicio" class="view active">
 <div class="headrow"><div><div class="eyebrow">Tu estudio, organizado</div><h2 class="heading">Hola, bienvenida a STAIN ✿</h2><p class="desc">Todo lo que necesitas para que tu día fluya bonito.</p></div></div>
 <div class="stats"><div class="stat"><div class="ico">▦</div><strong id="statBookings">0</strong><span>Reservas registradas</span></div><div class="stat"><div class="ico">✿</div><strong id="statWorkshops">0</strong><span>Talleres en catálogo</span></div><div class="stat"><div class="ico">♧</div><strong id="statPieces">0</strong><span>Piezas en seguimiento</span></div><div class="stat"><div class="ico">▤</div><strong id="statInventory">0</strong><span>Artículos de inventario</span></div></div>
@@ -108,7 +131,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div id="bookingToolbar" class="booking-toolbar"><div class="booking-view-switch"><button id="bookingCalendarButton" type="button" class="active" onclick="setBookingView('calendar')">▦ Agenda</button><button id="bookingMapButton" type="button" onclick="setBookingView('map')">⌘ Plano</button></div><button class="btn primary" type="button" onclick="startNewBooking()">＋ Agregar reserva</button></div>
 <div id="bookingCalendarPanel">
 <div class="calendar"><div class="cal-head"><button class="cal-arrow" type="button" onclick="changeMonth(-1)" aria-label="Mes anterior">‹</button><div class="cal-title" id="calendarTitle">Calendario</div><button class="cal-arrow" type="button" onclick="changeMonth(1)" aria-label="Mes siguiente">›</button></div><div class="cal-grid" id="calendarGrid"></div><div class="muted" style="margin-top:10px">Los puntitos verdes indican días con reservas o talleres grupales.</div></div>
-<div class="card"><div class="row"><div><div class="eyebrow">Agenda del día</div><h3 id="selectedDayTitle" style="margin:5px 0">Reservas del día</h3></div><button class="btn small" type="button" onclick="goToday()">Hoy</button></div><div class="field"><label for="agendaDate">Fecha</label><input id="agendaDate" type="date"></div><div id="daySummary" class="day-summary"></div><div id="dayBookings"></div></div>
+<div class="card"><div class="row"><div><div class="eyebrow">Agenda del día</div><h3 id="selectedDayTitle" style="margin:5px 0">Reservas del día</h3></div><button class="btn small" type="button" onclick="goToday()">Hoy</button></div><div class="field"><label for="agendaDate">Fecha</label><input id="agendaDate" type="date"></div><div id="daySummary" class="day-summary"></div><div id="dayBookings"></div><section id="guidedPrepPreview" class="guided-material-summary" hidden aria-live="polite"></section></div>
 </div>
 <div id="bookingMapPanel" hidden>
 <div class="card"><h3>Plano de mesas</h3><p class="muted">Vista desde arriba: conserva la distribución y selecciona las sillas disponibles para cada reserva.</p><div class="grid"><div class="field"><label>Reserva</label><select id="tableMapBooking"></select></div><div class="field"><label for="tableMapTime">Horario a consultar (9:00 a. m. – 7:00 p. m.)</label><input id="tableMapTime" type="time" min="09:00" max="19:00" step="60"></div></div><div id="tableMap"></div><div id="tableMapHint" class="hint"></div><div class="btnrow"><button id="saveTableMap" type="button" class="btn primary small" onclick="saveTableMapAssignment()">Guardar asignación</button><button type="button" class="btn small" onclick="recommendMapAssignment()">Recomendar distribución</button><button type="button" class="btn small" onclick="prepareBooking('A',document.getElementById('tableMapTime').value)">Nueva reserva a esta hora</button></div></div>
@@ -123,7 +146,7 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div class="card"><h3>Asignación de sillas</h3><div class="seat-assignment-controls"><div class="field"><label for="bookingAssignmentMode">Modalidad</label><select id="bookingAssignmentMode"><option value="automatic">Automática · recomendar mesas y sillas</option><option value="manual">Manual · elegir cada silla</option></select></div><button id="recalculateBookingSeats" class="btn small" type="button" onclick="recalculateBookingSeats()">Recalcular recomendación</button></div><p id="bookingAllocationHint" class="muted">Elige fecha, hora y personas para ver disponibilidad.</p><div id="bookingAllocationChoices"></div></div>
 <div id="approvalBox" class="approval" hidden><b>♡ Autorización especial necesaria</b><p class="muted">El área B admite cómodamente 12 personas. Para grupos mayores que usen esa área, confirma personalmente la distribución y capacidad.</p><label><input id="approved" type="checkbox"> Confirmo esta distribución especial de mesas.</label></div>
 <div class="field"><label>Tipo de actividad *</label><select id="activity"><option value="Pintura libre">Pintura libre</option><option value="Taller guiado">Taller guiado</option><option value="Taller grupal">Taller grupal</option><option value="Celebración">Celebración</option><option value="Otro">Otro</option></select></div>
-<div id="guidedFields" hidden><div class="field"><label>Elige un taller guiado *</label><select id="guidedWorkshop"></select><p class="hint">Se cargarán el precio y los datos del guía desde tu catálogo.</p></div><div class="field"><label>Guía / planner asignado</label><div id="bookingGuideInfo" class="muted">Selecciona un taller del catálogo.</div></div></div>
+<div id="guidedFields" hidden><div class="field"><label>Elige un taller guiado *</label><select id="guidedWorkshop"></select><p class="hint">Se cargarán el precio y los datos del guía desde tu catálogo.</p></div><div class="field"><label>Guía / planner asignado</label><div id="bookingGuideInfo" class="muted">Selecciona un taller del catálogo.</div><div id="bookingWorkshopMaterials" class="hint"></div></div></div>
 <div class="field"><label>Precio total de la reserva ($)</label><input id="amount" type="number" min="0" step=".01" value="0" required><p class="hint">En talleres guiados se calcula desde el precio del catálogo × participantes; puedes ajustar el total si es un paquete.</p></div>
 <div class="moneybox"><div class="moneyline total"><span>Total</span><strong id="totalAmount">$0.00</strong></div><div class="moneyline"><span>Abono del 30%</span><strong id="deposit">$0.00</strong></div><div class="moneyline"><span>Saldo pendiente del 70%</span><strong id="balance">$0.00</strong></div></div>
 <div class="field"><label>Comprobante del abono</label><input id="receipt" type="file" accept="image/*,.pdf"><p id="receiptHint" class="hint">Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.</p></div>
@@ -137,13 +160,16 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 
 <section id="talleres" class="view">
 <div class="headrow"><div><div class="eyebrow">Tu catálogo de experiencias</div><h2 class="heading">Talleres guiados</h2><p class="desc">Crea tus talleres una vez y selecciónalos al reservar.</p></div></div>
+<div class="card guided-preview guided-preview--demo"><div class="guided-preview-title"><div><div class="eyebrow">Propuesta de flujo</div><h3 style="margin:5px 0">Materiales del taller</h3><p class="muted">Se asocia a cada reserva guiada y se resume por día.</p></div><span class="guided-preview-banner">VISTA PREVIA · DATOS DE EJEMPLO</span></div><div id="guidedTemplatePreview"></div></div>
 <form id="workshopForm" class="card">
-<h3>＋ Agregar taller guiado</h3>
+<h3 id="workshopFormTitle">＋ Agregar taller guiado</h3>
 <div class="field"><label>Nombre del taller *</label><input id="workshopName" required placeholder="Ej. Tote bag, lienzo, taza"></div>
 <div class="grid"><div class="field"><label>Precio por persona ($) *</label><input id="workshopPrice" type="number" min="0" step=".01" value="25" required></div><div class="field"><label>Personas incluidas</label><input id="workshopPeople" type="number" min="1" value="1" required></div></div>
 <div class="grid"><div class="field"><label>Duración (horas)</label><input id="workshopDuration" type="number" min="1" value="2" required></div><div class="field"><label>Guía / planner</label><select id="workshopGuide"></select></div></div>
-<div class="field"><label>Materiales incluidos</label><input id="workshopMaterials" placeholder="Piezas, pinturas, sellador…"></div><div class="field"><label>Descripción y notas</label><textarea id="workshopDetails" rows="2" placeholder="Qué incluye la experiencia"></textarea></div>
-<button class="btn primary full" type="submit">Guardar en el catálogo</button>
+<div class="field"><label>Materiales incluidos</label><input id="workshopMaterials" placeholder="Piezas, pinturas, sellador…"></div>
+<div class="field"><label>Materiales o piezas que se utilizan</label><div class="guided-preview-material-add"><input id="workshopPieceMaterialInput" placeholder="Ej. Toba, lienzo, platito"><button class="btn small" type="button" onclick="addWorkshopPieceMaterial()">＋ Agregar</button></div><div id="workshopPieceMaterialList" aria-live="polite"></div><p class="hint">Agrega solo el nombre de cada pieza o material; se contará una unidad por participante.</p></div>
+<div class="field"><label>Descripción y notas</label><textarea id="workshopDetails" rows="2" placeholder="Qué incluye la experiencia"></textarea></div>
+<button id="workshopSubmit" class="btn primary full" type="submit">Guardar en el catálogo</button><button id="workshopCancelEdit" class="btn full" type="button" hidden onclick="cancelWorkshopEdit()">Cancelar edición</button>
 </form><div id="workshopList"></div>
 </section>
 
@@ -192,9 +218,10 @@ body:not(.authenticated) header.top,body:not(.authenticated) nav.nav,body:not(.a
 <div id="piecePhotoModal" class="photo-modal" role="dialog" aria-modal="true" aria-label="Foto ampliada" onclick="if(event.target===this)closePiecePhoto()"><button type="button" class="photo-modal-close" onclick="closePiecePhoto()" aria-label="Cerrar">×</button><img id="piecePhotoLarge" alt="Foto ampliada de la pieza"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const guidedPreviewOnlyMode=new URLSearchParams(window.location.search).get("preview")==="guided-workshops";
 const SUPABASE_URL="https://xhhmggrusriywvvrkmqr.supabase.co";
 const SUPABASE_PUBLIC_KEY="sb_publishable_fV3Z2RSJuU1bCe-2Sr0DZg_9o9uKszp";
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY);
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY,{auth:{persistSession:!guidedPreviewOnlyMode,autoRefreshToken:!guidedPreviewOnlyMode,detectSessionInUrl:!guidedPreviewOnlyMode}});
 let currentUser=null,cloudReady=false,syncing=false,syncPending=false,accountGeneration=0,loginRequest=null,cloudRefreshTimer=null,cloudRefreshing=false;
 const piecePhotoUrlCache={};
 const SLOTS=Array.from({length:9},(_,index)=>{const hour=9+index,endHour=hour+2,labelHour=hour%12||12,endDisplay=endHour%12||12;return {time:String(hour).padStart(2,"0")+":00",label:labelHour+":00 "+(hour<12?"a. m.":"p. m.")+" – "+endDisplay+":00 "+(endHour<12?"a. m.":"p. m.")}});
@@ -211,7 +238,7 @@ const PHYSICAL_TABLES=[
 const BASE_AREA_SEATS={A:8,B:12,C:4},MAX_AREA_SEATS={A:10,B:16,C:4};
 const ALL_SEAT_IDS=PHYSICAL_TABLES.flatMap(table=>table.seatIds),SEAT_TABLE_BY_ID=new Map(PHYSICAL_TABLES.flatMap(table=>table.seatIds.map(id=>[id,table])));
 let bookingFormSpaces=[],bookingMapSpaces=[],bookingFormSeatIds=[],bookingMapSeatIds=[],bookingMapMode="manual",bookingEditingId=null,bookingView="calendar";
-let syncTombstones=[],bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[],seatExtensions=[];
+let syncTombstones=[],bookings=[],workshops=[],guides=[],groups=[],pieces=[],inventory=[],seatExtensions=[],workshopPieceMaterialsDraft=[],workshopEditingId=null;
 const $=id=>document.getElementById(id),money=n=>"$"+(Number(n)||0).toFixed(2);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 const dataKeys=["syncTombstones","bookings","workshops","guides","groups","pieces","inventory","seatExtensions"];
@@ -1079,7 +1106,7 @@ $("logoutBtn").addEventListener("click",async()=>{
  document.body.classList.remove("authenticated");$("loginScreen").hidden=false;$("loginPassword").value="";setCloudStatus("✿ Un espacio para crear");
  await supabaseClient.auth.signOut();
 });
-supabaseClient.auth.onAuthStateChange((event,session)=>{
+if(!guidedPreviewOnlyMode)supabaseClient.auth.onAuthStateChange((event,session)=>{
  if(event==="SIGNED_OUT"&&currentUser){
   accountGeneration++;cloudReady=false;syncPending=false;currentUser=null;clearAccountData();
   document.body.classList.remove("authenticated");$("loginScreen").hidden=false;$("loginPassword").value="";setCloudStatus("✿ Un espacio para crear");
@@ -1325,6 +1352,65 @@ function selectMapBooking(booking){
 function refreshTableMapBookings(){const selected=String($("tableMapBooking").value||"");$("tableMapBooking").innerHTML='<option value="">Consultar disponibilidad</option>'+bookings.map(item=>'<option value="'+item.id+'">'+esc(item.client)+' · '+esc(item.date)+' '+formatStartTime(item.time)+' · '+(item.people||0)+' pers.</option>').join("");if(bookings.some(item=>String(item.id)===selected))$("tableMapBooking").value=selected;else{$("tableMapBooking").value="";selectMapBooking(null)}}
 function assignGroupTables(id,manual=false,persist=true){const group=groups.find(item=>item.id===id);if(!group)return false;const options=groupSpaceOptions(group);if(!options.length){group.assignedSpaces=[];group.assignmentNotice="No hay una combinación disponible que cubra la cantidad de participantes, o falta una fecha y hora válidas. Libera espacio, ajusta la reserva o completa el horario para asignar mesas.";alert("No se pudo asignar una combinación segura para “"+group.name+"”. Se requiere revisión manual: verifica fecha, hora, reservas y capacidad disponible.");if(persist){save();renderAll()}return false}let choice=options[0];if(manual){const choices=options.map((option,index)=>(index+1)+") "+option.spaces.join(" + ")+" · capacidad "+option.capacity).join("\n"),answer=prompt("Elige una combinación disponible para “"+group.name+"”:\n"+choices+"\nEscribe el número de la opción.");if(answer===null)return false;const index=Number(answer)-1;if(!Number.isInteger(index)||!options[index]){alert("La opción no es válida; no se modificó la asignación.");return false}choice=options[index]}group.assignedSpaces=choice.spaces;group.assignmentNotice="";if(persist){save();renderAll()}return true}
 let calendarMonth=new Date();
+function previewDateOffset(offset){const date=new Date();date.setDate(date.getDate()+offset);return date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0")}
+function guidedWorkshopForBooking(booking,workshopList=workshops){
+ if(booking?.workshopId!==undefined&&booking?.workshopId!==null){
+  const linked=workshopList.find(workshop=>String(workshop.id)===String(booking.workshopId));
+  if(linked)return linked;
+ }
+ return workshopList.find(workshop=>String(workshop.name||"").trim()===String(booking?.workshop||"").trim())||null;
+}
+function summarizeGuidedMaterials(date,bookingList=bookings,workshopList=workshops){
+ const totals=new Map();
+ for(const booking of bookingList){
+  if(booking.date!==date||booking.activity!=="Taller guiado"||String(booking.status||"").trim().toLocaleLowerCase().startsWith("cancel"))continue;
+  const workshop=guidedWorkshopForBooking(booking,workshopList),people=Math.max(0,Number(booking.people)||0),hasMaterialsSnapshot=Array.isArray(booking.workshopMaterials);
+  if((!workshop&&!hasMaterialsSnapshot)||!people)continue;
+  const materials=hasMaterialsSnapshot?booking.workshopMaterials:workshopPieceMaterials(workshop);
+  for(const name of materials){
+   const key=name.trim().toLocaleLowerCase(),item=totals.get(key)||{name,quantity:0};
+   item.quantity+=people;totals.set(key,item);
+  }
+ }
+ return [...totals.values()];
+}
+const guidedPreviewToday=previewDateOffset(0),guidedPreviewSampleMaterials=["Toba","Lienzo","Platito"];
+const guidedPreviewSampleBookings=[{date:guidedPreviewToday,activity:"Taller guiado",workshop:"Paquete de cumpleaños",workshopId:"guided-preview-sample",people:20,status:"Registrada"}];
+const guidedPreviewSampleWorkshops=[{id:"guided-preview-sample",name:"Paquete de cumpleaños",price:22,pieceMaterials:guidedPreviewSampleMaterials}];
+let guidedPreviewMaterialDraft=guidedPreviewSampleMaterials.slice();
+function renderGuidedMaterialsSummary(date){
+ const root=$("guidedPrepPreview");if(!root)return;
+ const totals=guidedPreviewOnlyMode&&date===guidedPreviewToday?summarizeGuidedMaterials(date,guidedPreviewSampleBookings,guidedPreviewSampleWorkshops):guidedPreviewOnlyMode?[]:summarizeGuidedMaterials(date);
+ if(!totals.length){
+  root.hidden=!guidedPreviewOnlyMode;
+  if(guidedPreviewOnlyMode)root.innerHTML='<div class="guided-preview-title"><div><div class="eyebrow">Agenda del día</div><h3 style="margin:5px 0">Materiales del taller</h3></div><span class="guided-preview-banner">VISTA PREVIA · DATOS DE EJEMPLO</span></div><p class="muted">No hay reservas demostrativas para esta fecha.</p>';
+  return;
+ }
+ root.hidden=false;
+ root.innerHTML='<div class="row"><h4>Materiales para preparar</h4>'+(guidedPreviewOnlyMode?'<span class="guided-preview-banner">VISTA PREVIA · DATOS DE EJEMPLO</span>':'')+'</div>'+(guidedPreviewOnlyMode?'<p class="muted">Paquete de cumpleaños · 20 personas · '+money(22)+' por persona</p>':'')+'<div class="guided-material-list">'+totals.map(item=>'<span class="guided-material-total"><b>'+item.quantity+'</b> '+esc(item.name)+'</span>').join("")+'</div>';
+}
+function renderGuidedTemplatePreview(){
+ const root=$("guidedTemplatePreview");if(!root)return;
+ const materials=guidedPreviewMaterialDraft;
+ root.innerHTML='<div class="guided-preview-subcard"><div class="row"><b>Paquete de cumpleaños</b><span class="pill">$22 por persona</span></div><div class="field"><label>Materiales o piezas que se utilizan</label>'+(materials.length?materials.map((name,index)=>'<div class="guided-preview-material-row"><span>'+esc(name)+'</span><button type="button" class="guided-material-remove" data-preview-remove="'+index+'" aria-label="Quitar '+esc(name)+'">×</button></div>').join(""):'<div class="guided-preview-empty">Agrega los nombres de las piezas.</div>')+'<div class="guided-preview-material-add"><input id="guidedPreviewMaterialInput" placeholder="Ej. Toba"><button type="button" class="btn small" data-preview-add>＋ Agregar</button></div></div></div><p class="hint">Los nombres y cambios de esta vista previa son ficticios y no se guardan.</p>';
+}
+function addGuidedPreviewMaterial(){
+ const input=$("guidedPreviewMaterialInput"),name=String(input?.value||"").trim();
+ if(!name)return;
+ if(guidedPreviewMaterialDraft.some(item=>item.toLocaleLowerCase()===name.toLocaleLowerCase())){input.value="";return}
+ guidedPreviewMaterialDraft.push(name);guidedPreviewSampleMaterials.splice(0,guidedPreviewSampleMaterials.length,...guidedPreviewMaterialDraft);
+ renderGuidedTemplatePreview();renderGuidedMaterialsSummary($("agendaDate")?.value||guidedPreviewToday);
+}
+function setupMinimalGuidedPreview(){
+ const editor=$("guidedTemplatePreview");if(!editor)return;
+ editor.addEventListener("click",event=>{
+  if(event.target.closest("[data-preview-add]"))addGuidedPreviewMaterial();
+  const remove=event.target.closest("[data-preview-remove]");
+  if(remove){guidedPreviewMaterialDraft.splice(Number(remove.dataset.previewRemove),1);guidedPreviewSampleMaterials.splice(0,guidedPreviewSampleMaterials.length,...guidedPreviewMaterialDraft);renderGuidedTemplatePreview();renderGuidedMaterialsSummary($("agendaDate")?.value||guidedPreviewToday)}
+ });
+ editor.addEventListener("keydown",event=>{if(event.key==="Enter"&&event.target.id==="guidedPreviewMaterialInput"){event.preventDefault();addGuidedPreviewMaterial()}});
+ renderGuidedTemplatePreview();
+}
 function changeMonth(delta){calendarMonth=new Date(calendarMonth.getFullYear(),calendarMonth.getMonth()+delta,1);renderCalendar()}
 function goToday(){const d=dateToday();$("agendaDate").value=d;calendarMonth=new Date(d+"T12:00:00");renderBookingSchedule()}
 function selectCalendarDay(date){$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");renderBookingSchedule()}
@@ -1401,7 +1487,7 @@ function renderDayBookings(date){
   ...groupList.map(group=>({minutes:timeToMinutes(groupTimeForSlot(group))??Number.MAX_SAFE_INTEGER,html:'<div class="item group-reservation-card"><div class="row"><b>'+esc(group.name)+'</b><span class="pill">'+esc(formatStartTime(groupTimeForSlot(group))||group.time||"Horario pendiente")+'</span></div><p>'+groupParticipantCount(group)+' participante'+(groupParticipantCount(group)===1?'':'s')+' inscrito'+(groupParticipantCount(group)===1?'':'s')+' · van '+groupParticipantCount(group)+' personas</p><p class="muted">Mesas: '+(groupTables(group).length?groupTables(group).map(space=>esc(SPACES[space].name)).join(" + "):'asignación manual pendiente')+' · Guía: '+esc(group.guideName||"Sin asignar")+'</p><div class="btnrow"><button class="btn small" onclick="openGroupCategory('+group.id+')">Ver taller y participantes</button><button class="btn small" onclick="assignGroupTables('+group.id+',true)">Asignar mesas</button></div></div>'}))
  ].sort((a,b)=>a.minutes-b.minutes);
  $("dayBookings").innerHTML=timeline.map(item=>item.html).join("")||'<div class="empty"><div class="emoji">♡</div>No hay reservas para este día.</div>';
- updateBookingTimers();
+ updateBookingTimers();renderGuidedMaterialsSummary(date);
 }
 window.setInterval(updateBookingTimers,1000);
 function renderBookingSchedule(){renderCalendar();renderDayBookings($("agendaDate").value||dateToday())}
@@ -1429,7 +1515,9 @@ function refreshSelects(){const oldW=$("guidedWorkshop").value,oldG=$("workshopG
 function calcMoney(){const n=Math.max(0,Number($("amount").value)||0);$("totalAmount").textContent=money(n);$("deposit").textContent=money(n*.3);$("balance").textContent=money(n*.7)}
 $("amount").addEventListener("input",calcMoney);
 $("activity").addEventListener("change",()=>{$("guidedFields").hidden=$("activity").value!=="Taller guiado";if($("activity").value==="Taller guiado")applyWorkshop()});
-function applyWorkshop(){const w=workshops[Number($("guidedWorkshop").value)];if(!w){$("bookingGuideInfo").textContent="Agrega primero un taller y un guía si corresponde.";return}const n=Math.max(1,Number($("people").value)||1);$("amount").value=(w.price*n).toFixed(2);$("bookingGuideInfo").textContent=w.guideName?(w.guideName+" · "+w.guidePhone):"Este taller no tiene guía asignado.";calcMoney()}
+function workshopPieceMaterials(workshop){const names=new Map();for(const value of Array.isArray(workshop?.pieceMaterials)?workshop.pieceMaterials:[]){const name=String(value||"").trim(),key=name.toLocaleLowerCase();if(name&&!names.has(key))names.set(key,name)}return [...names.values()]}
+function selectedBookingWorkshop(){return workshops[Number($("guidedWorkshop").value)]||null}
+function applyWorkshop(){const w=selectedBookingWorkshop();if(!w){$("bookingGuideInfo").textContent="Agrega primero un taller y un guía si corresponde.";$("bookingWorkshopMaterials").textContent="";return}const n=Math.max(1,Number($("people").value)||1);$("amount").value=(w.price*n).toFixed(2);$("bookingGuideInfo").textContent=w.guideName?(w.guideName+" · "+w.guidePhone):"Este taller no tiene guía asignado.";const materials=workshopPieceMaterials(w);$("bookingWorkshopMaterials").textContent=materials.length?"Materiales vinculados: "+materials.join(", "):"Este taller no tiene piezas asociadas.";calcMoney()}
 $("guidedWorkshop").addEventListener("change",applyWorkshop);$("people").addEventListener("change",()=>{if($("activity").value==="Taller guiado")applyWorkshop()});
 async function compressReceiptPhoto(file){return new Promise(resolve=>compressPiecePhoto(file,resolve))}
 $("bookingForm").addEventListener("submit",async e=>{
@@ -1440,12 +1528,13 @@ $("bookingForm").addEventListener("submit",async e=>{
  const allocationError=validateSeatAllocation(date,time,n,bookingFormSeatIds,bookingEditingId,"booking");
  if(allocationError)return alert(allocationError);
  if(bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable&&!$("approved").checked)return alert("Confirma la distribución especial del área B antes de guardar.");
- const w=act==="Taller guiado"?workshops[Number($("guidedWorkshop").value)]:null;
+ const w=act==="Taller guiado"?selectedBookingWorkshop():null;
  if(act==="Taller guiado"&&!w&&!existing)return alert("Primero crea y selecciona un taller guiado.");
  const receiptFile=$("receipt").files[0];let receiptPhoto=receiptFile?(receiptFile.type.startsWith("image/")?await compressReceiptPhoto(receiptFile):""):(existing?.receiptPhoto||"");
  if(receiptFile&&receiptFile.type.startsWith("image/")&&!receiptPhoto)return;
  if(!isCurrentAccount(userId,generation))return;
- const amount=Number($("amount").value)||0,deposit=existing?(Number(existing.deposit)||0):amount*.3,record={id:existing?.id||Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space:bookingFormSpaces[0],spaces:bookingFormSpaces.slice(),seatIds:bookingFormSeatIds.slice(),assignmentMode:$("bookingAssignmentMode").value,time,people:n,activity:act,workshop:w?w.name:(act==="Taller guiado"?existing?.workshop||"":""),guideId:w?.guideId||(act==="Taller guiado"?existing?.guideId||null:null),guideName:w?w.guideName:(act==="Taller guiado"?existing?.guideName||"":""),guidePhone:w?w.guidePhone:(act==="Taller guiado"?existing?.guidePhone||"":""),amount,deposit,balance:Math.max(0,amount-deposit),receiptName:receiptFile?.name||existing?.receiptName||"",receiptPhoto,notes:$("notes").value.trim(),status:existing?.status||"Registrada",authorized:bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable};
+ const amount=Number($("amount").value)||0,deposit=existing?(Number(existing.deposit)||0):amount*.3,record={id:existing?.id||Date.now(),client:$("client").value.trim(),phone:$("phone").value.trim(),date,space:bookingFormSpaces[0],spaces:bookingFormSpaces.slice(),seatIds:bookingFormSeatIds.slice(),assignmentMode:$("bookingAssignmentMode").value,time,people:n,activity:act,workshop:w?w.name:(act==="Taller guiado"?existing?.workshop||"":""),workshopId:w?.id??(act==="Taller guiado"?existing?.workshopId??null:null),guideId:w?.guideId||(act==="Taller guiado"?existing?.guideId||null:null),guideName:w?w.guideName:(act==="Taller guiado"?existing?.guideName||"":""),guidePhone:w?w.guidePhone:(act==="Taller guiado"?existing?.guidePhone||"":""),amount,deposit,balance:Math.max(0,amount-deposit),receiptName:receiptFile?.name||existing?.receiptName||"",receiptPhoto,notes:$("notes").value.trim(),status:existing?.status||"Registrada",authorized:bookingFormSpaces.includes("B")&&n>SPACES.B.comfortable};
+ if(act==="Taller guiado")record.workshopMaterials=w?workshopPieceMaterials(w):(existing?.workshopMaterials||[]);
  if(existing)Object.assign(existing,record);else bookings.push(record);
  bookingEditingId=null;$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("agendaDate").value=date;calendarMonth=new Date(date+"T12:00:00");save();e.target.reset();$("bookingDate").value=$("agendaDate").value||dateToday();$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("amount").value="0";bookingFormSpaces=[];bookingFormSeatIds=[];$("guidedFields").hidden=true;calcMoney();capacityCheck();$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;setBookingView("calendar");show("reservas");
 });
@@ -1456,12 +1545,49 @@ function openBookingDetails(id){
  $("bookingDetailsContent").innerHTML='<button class="booking-details-close" type="button" aria-label="Cerrar" onclick="document.getElementById(\'bookingDetailsDialog\').close()">×</button><div class="eyebrow">Detalle de la reserva</div><h3>'+esc(booking.client||"Sin nombre")+'</h3><p class="muted">'+esc(booking.date)+' · '+esc(formatStartTime(booking.time))+' · '+esc(String(booking.people||0))+' personas</p><p><b>Zona:</b> '+spaces+'</p><p><b>Sillas:</b> '+esc(seats)+'</p><p><b>Actividad:</b> '+esc(booking.activity||"")+(booking.workshop?' · '+esc(booking.workshop):'')+'</p>'+(booking.phone?'<p><b>Teléfono:</b> '+esc(booking.phone)+'</p>':'')+(booking.guideName?'<p><b>Guía:</b> '+esc(booking.guideName)+' · '+esc(booking.guidePhone||"")+'</p>':'')+'<div class="moneyline"><span>Total '+money(booking.amount)+'</span><span>Abono '+money(booking.deposit)+'</span><span>Saldo '+money(booking.balance)+'</span></div><p class="muted">'+esc(booking.notes||"Sin observaciones")+'</p><p class="muted">Comprobante: '+esc(booking.receiptName||"No adjuntado")+'</p>'+receiptPreview+calendarActivityMarkup("booking",booking)+'<div class="btnrow"><button class="btn primary" type="button" onclick="editBooking('+bookingId+')">Editar reserva</button><button class="btn" type="button" onclick="openBookingInMap('+bookingId+')">Ver en el plano</button>'+(booking.activity==="Taller guiado"?'<button class="btn" type="button" onclick="markBookingRealized('+bookingId+');openBookingDetails('+bookingId+')">'+(booking.status==="Realizada"?"Marcar pendiente":"Marcar realizado")+'</button>':'')+'<button class="btn danger" type="button" onclick="deleteBooking('+bookingId+');document.getElementById(\'bookingDetailsDialog\').close()">Eliminar reserva</button></div>';
  $("bookingDetailsDialog").showModal();
 }
-function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>item.name===booking.workshop);if(workshopIndex>=0)$("guidedWorkshop").value=String(workshopIndex);$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";$("receipt").value="";$("receiptHint").textContent=booking.receiptName?"Comprobante actual: "+booking.receiptName+". Selecciona otro archivo solo si deseas reemplazarlo.":"No hay un comprobante adjunto.";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
+function editBooking(id){const booking=bookings.find(item=>String(item.id)===String(id));if(!booking)return;$("bookingDetailsDialog").close();bookingEditingId=booking.id;show("reservas");$("client").value=booking.client||"";$("phone").value=booking.phone||"";$("bookingDate").value=booking.date||dateToday();$("space").value=assignedSpaces(booking)[0]||"A";$("time").value=booking.time||"09:00";$("people").value=Number(booking.people)||1;$("bookingAssignmentMode").value=booking.assignmentMode==="manual"?"manual":"automatic";bookingFormSeatIds=recordSeatIds(booking);if(bookingFormSeatIds.length!==Number(booking.people)){const suggestion=recommendSeatAllocation(booking.date,booking.time,Number(booking.people)||1,booking.id,"booking",assignedSpaces(booking));bookingFormSeatIds=suggestion?.seatIds||[]}$("activity").value=booking.activity||"Pintura libre";$("guidedFields").hidden=$("activity").value!=="Taller guiado";refreshSelects();const workshopIndex=workshops.findIndex(item=>booking.workshopId!==undefined&&booking.workshopId!==null&&String(item.id)===String(booking.workshopId)),legacyWorkshopIndex=workshopIndex>=0?workshopIndex:workshops.findIndex(item=>item.name===booking.workshop);if(legacyWorkshopIndex>=0)$("guidedWorkshop").value=String(legacyWorkshopIndex);if(booking.activity==="Taller guiado")applyWorkshop();$("amount").value=Number(booking.amount)||0;$("notes").value=booking.notes||"";$("receipt").value="";$("receiptHint").textContent=booking.receiptName?"Comprobante actual: "+booking.receiptName+". Selecciona otro archivo solo si deseas reemplazarlo.":"No hay un comprobante adjunto.";bookingFormSpaces=seatSpaces(bookingFormSeatIds);$("bookingSubmit").textContent="Guardar cambios ♡";$("bookingCancelEdit").hidden=false;$("bookingFormTitle").textContent="Editar reserva";showBookingForm();capacityCheck();calcMoney();$("bookingFormPanel").scrollIntoView({behavior:"smooth",block:"start"})}
 function cancelBookingEdit(){$("bookingForm").reset();bookingEditingId=null;bookingFormSpaces=[];bookingFormSeatIds=[];$("bookingSubmit").textContent="Guardar reserva ♡";$("bookingCancelEdit").hidden=true;$("bookingDate").value=dateToday();$("amount").value="0";$("receiptHint").textContent="Las imágenes se guardan en la nube y se muestran en la tarjeta; los PDF conservan el nombre del archivo.";$("guidedFields").hidden=true;$("bookingFormPanel").hidden=true;$("bookingToolbar").hidden=false;calcMoney();setBookingView("calendar");capacityCheck()}
 function renderBookings(){const arr=bookings.slice().reverse();$("bookingList").innerHTML=arr.map(b=>'<div class="item"><div class="row"><b>'+esc(b.client)+'</b><span class="pill">'+esc(b.status)+'</span></div><p class="muted">'+esc(b.date)+' · '+(SLOTS.find(s=>s.time===b.time)?.label||b.time)+'</p><p>'+esc(SPACES[b.space]?.name||b.space)+' · '+b.people+' personas</p><p>'+esc(b.activity)+(b.workshop?' · '+esc(b.workshop):'')+'</p><p class="muted">'+(b.guideName?'Guía: '+esc(b.guideName)+' · '+esc(b.guidePhone):'')+'</p><div class="moneyline"><span>Total '+money(b.amount)+'</span><span>Abono '+money(b.deposit)+'</span><span>Saldo '+money(b.balance)+'</span></div><p class="muted">Comprobante seleccionado: '+esc(b.receiptName||"No adjuntado")+'</p><button class="btn small danger" onclick="deleteBooking('+b.id+')">Eliminar reserva</button></div>').join("")||'<div class="empty"><div class="emoji">♡</div>Todavía no hay reservas registradas.</div>'}
 function deleteBooking(id){if(confirm("¿Eliminar esta reserva?")){deleteSyncRecord("bookings",id);save();renderBookings()}}
-$("workshopForm").addEventListener("submit",e=>{e.preventDefault();const g=guides[Number($("workshopGuide").value)];workshops.push({id:Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideId:g?.id||null,guideName:g?.name||"",guidePhone:g?.phone||"",materials:$("workshopMaterials").value.trim(),details:$("workshopDetails").value.trim()});save();e.target.reset();$("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;renderWorkshops()});
-function renderWorkshops(){$("workshopList").innerHTML=workshops.map((w,i)=>'<div class="item"><div class="row"><h3>'+esc(w.name)+'</h3><span class="pill">'+money(w.price)+'/persona</span></div><p class="muted">'+w.duration+' horas · '+w.people+' personas incluidas</p><p>'+esc(w.materials||"Materiales por definir")+'</p><p class="muted">'+esc(w.details||"Sin descripción")+'</p><div class="divider"></div><p><b>Guía / planner:</b> '+esc(w.guideName||"Sin asignar")+'</p><p class="muted">'+esc(w.guidePhone||"")+'</p><button class="btn small danger" onclick="deleteWorkshop('+w.id+')">Eliminar</button></div>').join("")||'<div class="empty"><div class="emoji">✿</div>Agrega aquí los talleres que ofrece STAIN.</div>';refreshSelects()}
+function renderWorkshopPieceMaterialsDraft(){$("workshopPieceMaterialList").innerHTML=workshopPieceMaterialsDraft.map((name,index)=>'<div class="guided-preview-material-row"><span>'+esc(name)+'</span><button type="button" class="guided-material-remove" onclick="removeWorkshopPieceMaterial('+index+')" aria-label="Quitar '+esc(name)+'">×</button></div>').join("")}
+function addWorkshopPieceMaterial(){
+ const input=$("workshopPieceMaterialInput"),name=String(input.value||"").trim();if(!name)return;
+ if(workshopPieceMaterialsDraft.some(item=>item.toLocaleLowerCase()===name.toLocaleLowerCase())){input.value="";return}
+ workshopPieceMaterialsDraft.push(name);input.value="";renderWorkshopPieceMaterialsDraft();input.focus();
+}
+function removeWorkshopPieceMaterial(index){if(!Number.isInteger(Number(index))||!workshopPieceMaterialsDraft[Number(index)])return;workshopPieceMaterialsDraft.splice(Number(index),1);renderWorkshopPieceMaterialsDraft()}
+$("workshopPieceMaterialInput").addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();addWorkshopPieceMaterial()}});
+function resetWorkshopForm(){
+ $("workshopForm").reset();workshopEditingId=null;workshopPieceMaterialsDraft=[];
+ $("workshopPrice").value=25;$("workshopPeople").value=1;$("workshopDuration").value=2;
+ $("workshopFormTitle").textContent="＋ Agregar taller guiado";$("workshopSubmit").textContent="Guardar en el catálogo";$("workshopCancelEdit").hidden=true;
+ renderWorkshopPieceMaterialsDraft();
+}
+function editWorkshop(id){
+ const workshop=workshops.find(item=>String(item.id)===String(id));if(!workshop)return;
+ workshopEditingId=workshop.id;$("workshopName").value=workshop.name||"";$("workshopPrice").value=Number(workshop.price)||0;
+ $("workshopPeople").value=Number(workshop.people)||1;$("workshopDuration").value=Number(workshop.duration)||1;
+ $("workshopMaterials").value=workshop.materials||"";$("workshopDetails").value=workshop.details||"";
+ refreshSelects();
+ const guideIndex=guides.findIndex(guide=>workshop.guideId!==undefined&&workshop.guideId!==null&&String(guide.id)===String(workshop.guideId));
+ const legacyGuideIndex=guideIndex>=0?guideIndex:guides.findIndex(guide=>guide.name===workshop.guideName);
+ $("workshopGuide").value=legacyGuideIndex>=0?String(legacyGuideIndex):"";
+ workshopPieceMaterialsDraft=workshopPieceMaterials(workshop);renderWorkshopPieceMaterialsDraft();
+ $("workshopFormTitle").textContent="Editar taller guiado";$("workshopSubmit").textContent="Guardar cambios";$("workshopCancelEdit").hidden=false;
+ show("talleres");$("workshopForm").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function cancelWorkshopEdit(){resetWorkshopForm()}
+$("workshopForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const existing=workshopEditingId===null?null:workshops.find(item=>String(item.id)===String(workshopEditingId));
+ if(workshopEditingId!==null&&!existing){alert("No se encontró el taller para editar; no se guardaron cambios.");resetWorkshopForm();return}
+ const guideIndex=$("workshopGuide").value,guide=guideIndex===""?null:guides[Number(guideIndex)];
+ const record={...(existing||{}),id:existing?.id??Date.now(),name:$("workshopName").value.trim(),price:Number($("workshopPrice").value),people:Number($("workshopPeople").value),duration:Number($("workshopDuration").value),guideId:guide?.id||null,guideName:guide?.name||"",guidePhone:guide?.phone||"",materials:$("workshopMaterials").value.trim(),pieceMaterials:workshopPieceMaterialsDraft.slice(),details:$("workshopDetails").value.trim()};
+ if(existing)Object.assign(existing,record);else workshops.push(record);
+ save();resetWorkshopForm();renderWorkshops();
+});
+function renderWorkshops(){$("workshopList").innerHTML=workshops.map(w=>'<div class="item"><div class="row"><h3>'+esc(w.name)+'</h3><span class="pill">'+money(w.price)+'/persona</span></div><p class="muted">'+w.duration+' horas · '+w.people+' personas incluidas</p><p>'+esc(w.materials||"Materiales por definir")+'</p>'+(workshopPieceMaterials(w).length?'<p class="muted"><b>Materiales o piezas:</b> '+workshopPieceMaterials(w).map(esc).join(", ")+'</p>':'')+'<p class="muted">'+esc(w.details||"Sin descripción")+'</p><div class="divider"></div><p><b>Guía / planner:</b> '+esc(w.guideName||"Sin asignar")+'</p><p class="muted">'+esc(w.guidePhone||"")+'</p><div class="btnrow"><button class="btn small" type="button" data-workshop-edit="'+esc(String(w.id))+'">Editar</button><button class="btn small danger" type="button" data-workshop-delete="'+esc(String(w.id))+'">Eliminar</button></div></div>').join("")||'<div class="empty"><div class="emoji">✿</div>Agrega aquí los talleres que ofrece STAIN.</div>';refreshSelects()}
+$("workshopList").addEventListener("click",event=>{const editButton=event.target.closest("[data-workshop-edit]");if(editButton){editWorkshop(editButton.dataset.workshopEdit);return}const deleteButton=event.target.closest("[data-workshop-delete]");if(deleteButton)deleteWorkshop(deleteButton.dataset.workshopDelete)});
 function deleteWorkshop(id){if(confirm("¿Eliminar este taller del catálogo?")){deleteSyncRecord("workshops",id);save();renderWorkshops()}}
 $("guideForm").addEventListener("submit",e=>{e.preventDefault();guides.push({id:Date.now(),name:$("guideName").value.trim(),phone:$("guidePhone").value.trim(),role:$("guideRole").value,notes:$("guideNotes").value.trim()});save();e.target.reset();renderGuides()});
 function renderGuides(){$("guideList").innerHTML=guides.map(g=>'<div class="item"><div class="row"><h3>'+esc(g.name)+'</h3><span class="pill">'+esc(g.role)+'</span></div><p>☎ '+esc(g.phone)+'</p><p class="muted">'+esc(g.notes||"")+'</p><p class="muted">Talleres asignados: '+workshops.filter(w=>w.guideName===g.name).map(w=>esc(w.name)).join(", ")+'</p><button class="btn small danger" onclick="deleteGuide('+g.id+')">Eliminar</button></div>').join("")||'<div class="empty">Agrega los datos de tus guías y planners.</div>';refreshSelects()}
@@ -1628,9 +1754,22 @@ renderGuideActivityItem=function(activity){
  return renderGuideActivityCore(activity)+(record?calendarActivityMarkup(kind,record):"");
 };
 renderGuides=renderGuidesCore;
-loadCalendarSettings();
-setupScheduleControls();updatePieceSourceFields();refreshSelects();capacityCheck();calcMoney();renderAll();
-bootAuth().catch(err=>{console.error("STAIN cloud startup error:",err);$("loginError").textContent="Error de conexión: "+(err?.message||"No se pudo conectar con la nube")+(err?.code?" ("+err.code+")":"");});
+if(!guidedPreviewOnlyMode)loadCalendarSettings();
+if(guidedPreviewOnlyMode){
+ document.body.classList.add("authenticated","guided-preview-only");
+ $("loginScreen").hidden=true;
+ $("cloudStatus").textContent="Vista previa aislada · sin datos";
+ $("guidedPreviewOnlyView").classList.add("active");
+ const previewContent=$("guidedPreviewOnlyContent"),workshopPreview=document.querySelector("#talleres > .guided-preview"),agendaDateField=$("agendaDate").closest(".field");
+ previewContent.append(workshopPreview,agendaDateField,$("guidedPrepPreview"));
+}
+setupScheduleControls();setupMinimalGuidedPreview();renderWorkshopPieceMaterialsDraft();updatePieceSourceFields();refreshSelects();capacityCheck();calcMoney();renderAll();
+if(!guidedPreviewOnlyMode){
+ bootAuth().catch(err=>{
+  console.error("STAIN cloud startup error:",err);
+  $("loginError").textContent="Error de conexión: "+(err?.message||"No se pudo conectar con la nube")+(err?.code?" ("+err.code+")":"");
+ });
+}
 </script>
 </body>
 </html>
