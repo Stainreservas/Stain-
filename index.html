@@ -986,7 +986,10 @@ async function refreshCloudData(user=currentUser,generation=accountGeneration){
    const row=remoteRows[key];
    if(!row&&!pendingDataKeys.has(key)&&!tombstonesChanged)continue;
    const remoteVersion=row?.updated_at||null;
-   if(remoteVersion===(cloudVersions[key]||null)&&!tombstonesChanged)continue;
+   if(remoteVersion===(cloudVersions[key]||null)&&!tombstonesChanged){
+    if(pendingSyncConflicts[key])remoteConflicts.push(key);
+    if(!pendingDataKeys.has(key)||pendingSyncConflicts[key])continue;
+   }
    const remoteData=Array.isArray(row?.data)?row.data:[];
    if(row&&!Array.isArray(row.data))throw new Error("Supabase devolvió datos inválidos para "+key+".");
    if(key==="syncTombstones"){
